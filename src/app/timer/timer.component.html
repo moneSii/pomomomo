@@ -1,1 +1,38 @@
-<p>timer works!</p>
+<div class="timer-box">
+    <div>
+        <p>TIMER</p>
+    </div>
+    <div>
+        <button>Start</button>
+        <button>Pause</button>
+        <button>Reset</button>
+    </div>
+
+</div>
+<div class="form-box">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <p>Select Your Pomodoro timer Variables</p>
+
+        <div class="control">
+            <label>Minutes</label>
+            <input id="workMinutes" formControlName="minutes">
+        </div>
+
+        <div class="control" formGroupName="breaks">
+            <label>short break</label>
+            <input id="shortBreakMinutes" formControlName="short">
+
+            <label>long break</label>
+            <input id="longBreakMinutes" formControlName="long">
+        </div>
+
+        <div class="control">
+            <label>intervals</label>
+            <input id="workIntervals" formControlName="minutes">
+        </div>
+
+        <div>
+            <button type="submit" class="button">Submit</button>
+        </div>
+    </form>
+</div>
