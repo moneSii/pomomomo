@@ -9,18 +9,27 @@ import {
   FormsModule,
   Validators,
 } from '@angular/forms';
+import { Pipe } from '@angular/core';
+import { DatePipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
+import { timer,takeWhile,map, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-timer',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, DatePipe, AsyncPipe],
   templateUrl: './timer.component.html',
   styleUrl: './timer.component.css',
 })
-export class TimerComponent implements OnInit {
-  private timerService = inject(TimerService);
-
-  ngOnInit(): void {}
+export class TimerComponent {
+  // private timerService = inject(TimerService);
+  private subscription: Subscription = new Subscription();
+  counter:number=0
+  
+  constructor(private timerService: TimerService){
+    this.subscription.add(this.timerService.stopWatch$.subscribe((val:number)=> this.counter= val))
+    console.log(this.counter)
+  }
 
   form = new FormGroup({
     minutes: new FormControl(25, {
@@ -43,5 +52,15 @@ export class TimerComponent implements OnInit {
     };
 
     this.timerService.setPomoVariables(pomoVars);
+  }
+
+  onStart(){
+    this.timerService.startCount()
+  }
+  onPause(){
+    this.timerService.stopCount()
+  }
+  onReset(){
+    this.timerService.resetCount()
   }
 }

@@ -1,11 +1,12 @@
 <div class="timer-box">
     <div>
         <p>TIMER</p>
+        <p>{{this.counter*1000| date:'mm:ss'}}</p>
     </div>
     <div>
-        <button>Start</button>
-        <button>Pause</button>
-        <button>Reset</button>
+        <button (click)="onStart()">Start</button>
+        <button (click)="onPause()">Pause</button>
+        <button (click)="onReset()">Reset</button>
     </div>
 
 </div>
