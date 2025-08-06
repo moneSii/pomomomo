@@ -38,6 +38,33 @@ export class TimerService {
     return this.pomoVars.timer.pipe(map((val) => val));
   }
 
+  setPomoVars(type: string, val: number) {
+    if (this.pomoVars.status) {
+      return;
+    }
+
+    switch (type) {
+      case 'minutes':
+        console.log('minutes');
+        this.pomoVars.startTime = val;
+        break;
+      case 'shortBreak':
+        console.log('shortBreak');
+        this.pomoVars.shortBreak = val;
+        break;
+      case 'longBreak':
+        console.log('longBreak');
+        this.pomoVars.longBreak = val;
+        break;
+      case 'intervals':
+        console.log('intervals');
+        this.pomoVars.intervalCount = val;
+        break;
+    }
+
+    console.log(this.pomoVars);
+  }
+
   startCount(): void {
     if (this.pomoVars.status) {
       return;
@@ -68,7 +95,6 @@ export class TimerService {
   }
 
   cycleTimer() {
-    console.log(this.pomoVars.timer.value);
     this.pomoVars.timerSubscription.unsubscribe();
     this.pomoVars.status = false;
 

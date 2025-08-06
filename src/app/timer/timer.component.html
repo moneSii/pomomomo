@@ -12,29 +12,26 @@
 
 </div>
 <div class="form-box">
-    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <form [formGroup]="form">
         <p>Select Your Pomodoro timer Variables</p>
 
         <div class="control">
             <label>Minutes</label>
-            <input id="workMinutes" formControlName="minutes">
+            <input id="workMinutes" formControlName="minutes" (keypress)="($event.charCode >= 48 && $event.charCode < 58)">
         </div>
 
         <div class="control" formGroupName="breaks">
             <label>short break</label>
-            <input id="shortBreakMinutes" formControlName="short">
+            <input id="shortBreakMinutes" formControlName="short" (keypress)="($event.charCode >= 48 && $event.charCode < 58)">
 
             <label>long break</label>
-            <input id="longBreakMinutes" formControlName="long">
+            <input id="longBreakMinutes" formControlName="long" (keypress)="($event.charCode >= 48 && $event.charCode < 58)">
         </div>
 
         <div class="control">
             <label>intervals</label>
-            <input id="workIntervals" formControlName="minutes">
+            <input id="workIntervals" formControlName="intervals" (keypress)="($event.charCode >= 48 && $event.charCode < 58)">
         </div>
 
-        <div>
-            <button type="submit" class="button">Submit</button>
-        </div>
     </form>
 </div>
