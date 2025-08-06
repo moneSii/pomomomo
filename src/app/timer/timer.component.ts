@@ -12,23 +12,37 @@ import {
 import { Pipe } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { AsyncPipe } from '@angular/common';
-import { timer,takeWhile,map, Subscription } from 'rxjs';
+import { timer, takeWhile, map, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-timer',
   standalone: true,
-  imports: [ReactiveFormsModule, DatePipe, AsyncPipe],
+  imports: [ReactiveFormsModule, DatePipe],
   templateUrl: './timer.component.html',
   styleUrl: './timer.component.css',
 })
 export class TimerComponent {
-  // private timerService = inject(TimerService);
   private subscription: Subscription = new Subscription();
-  counter:number=0
-  
-  constructor(private timerService: TimerService){
-    this.subscription.add(this.timerService.stopWatch$.subscribe((val:number)=> this.counter= val))
-    console.log(this.counter)
+  counter: number = 0;
+
+  constructor(private timerService: TimerService) {
+    this.subscription.add(
+      this.timerService.stopWatch.subscribe((val) => {
+        this.counter = val;
+        console.log(
+          val,
+          'Working:' + this.timerService.pomoVars.timeType,
+          this.timerService.pomoVars.currentInterval +
+            ':' +
+            this.timerService.pomoVars.intervalCount
+        );
+        setTimeout(() => {
+          if (val === 0) {
+            this.onCycle();
+          }
+        }, 1000);
+      })
+    );
   }
 
   form = new FormGroup({
@@ -43,24 +57,24 @@ export class TimerComponent {
     intervals: new FormControl<number>(4, { nonNullable: true }),
   });
 
-  onSubmit() {
-    const pomoVars: pomoVariables = {
-      pomoMinutes: this.form.controls.minutes.value,
-      pomoShortBreak: this.form.controls.breaks.controls.short.value,
-      pomoLongBreak: this.form.controls.breaks.controls.long.value,
-      pomoIntervals: this.form.controls.intervals.value,
-    };
+  onSubmit() {}
 
-    this.timerService.setPomoVariables(pomoVars);
+  onStart() {
+    this.timerService.startCount();
+  }
+  onPause() {
+    this.timerService.stopCount();
+  }
+  onReset() {
+    this.timerService.resetCount();
   }
 
-  onStart(){
-    this.timerService.startCount()
+  onCycle() {
+    console.log('CYCLE TIMER');
+    this.timerService.cycleTimer();
   }
-  onPause(){
-    this.timerService.stopCount()
-  }
-  onReset(){
-    this.timerService.resetCount()
+
+  onDebugCheck() {
+    console.log(this.timerService.pomoVars);
   }
 }
