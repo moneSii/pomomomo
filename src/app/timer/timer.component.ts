@@ -26,17 +26,18 @@ export class TimerComponent {
   private destroyRef = inject(DestroyRef);
   counter: number = 0;
 
+  workTime: any;
+  breakTimeS: any;
+  breakTimeL: any;
+  maxInterval: any;
+  curInterval: any;
+  autoCycle: any;
+
   constructor(private timerService: TimerService) {
     this.subscription.add(
       this.timerService.stopWatch.subscribe((val) => {
         this.counter = val;
-        console.log(
-          val,
-          'Working:' + this.timerService.timeType,
-          this.timerService.currentInterval +
-            ':' +
-            this.timerService.intervalCount
-        );
+        console.log('Ticking');
         setTimeout(() => {
           if (val === 0) {
             this.onCycle();
@@ -82,6 +83,13 @@ export class TimerComponent {
       longBreakSub?.unsubscribe();
       intervalSub?.unsubscribe();
     });
+
+    this.workTime = this.timerService.workTime;
+    this.breakTimeS = this.timerService.breakTimeS;
+    this.breakTimeL = this.timerService.breakTimeL;
+    this.maxInterval = this.timerService.maxInterval;
+    this.curInterval = this.timerService.curInterval;
+    this.autoCycle = this.timerService.autoCycle;
   }
 
   form = new FormGroup({

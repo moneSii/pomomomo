@@ -19,50 +19,74 @@ export class TimerService {
 
   setPomoVariables(pomoVars: pomoVariables) {}
 
-  startTime = 5;
-  pauseTime = 5;
-  shortBreak = 3;
-  longBreak = 10;
-  intervalCount = 4;
-  currentInterval = 1;
-  timeType = true;
-  status = false;
-  timer = new BehaviorSubject(5);
-  timerSubscription = new Subscription();
+  private startTime = signal(5);
+  private pauseTime = 5;
+  private shortBreak = signal(3);
+  private longBreak = signal(10);
+  private intervalCount = signal(4);
+  private currentInterval = signal(1);
+  private timeType = signal(true);
+  private status = signal(false);
+  private timer = new BehaviorSubject(5);
+  private timerSubscription = new Subscription();
 
-  autoStartCycles = true;
+  private autoStartCycles = signal(true);
+  ///
+  get workTime() {
+    return this.startTime.asReadonly();
+  }
 
-  public get stopWatch(): Observable<number> {
+  get breakTimeS() {
+    return this.shortBreak.asReadonly();
+  }
+
+  get breakTimeL() {
+    return this.longBreak.asReadonly();
+  }
+
+  get maxInterval() {
+    return this.intervalCount.asReadonly();
+  }
+
+  get curInterval() {
+    return this.currentInterval.asReadonly();
+  }
+
+  get autoCycle() {
+    return this.autoStartCycles.asReadonly();
+  }
+  ////
+  get stopWatch(): Observable<number> {
     return this.timer.pipe(map((val) => val));
   }
 
   setPomoVars(type: string, val: number) {
-    if (this.status) {
+    if (this.status()) {
       return;
     }
 
     switch (type) {
       case 'minutes':
         console.log('minutes');
-        this.startTime = val;
+        this.startTime.set(val);
         break;
       case 'shortBreak':
         console.log('shortBreak');
-        this.shortBreak = val;
+        this.shortBreak.set(val);
         break;
       case 'longBreak':
         console.log('longBreak');
-        this.longBreak = val;
+        this.longBreak.set(val);
         break;
       case 'intervals':
         console.log('intervals');
-        this.intervalCount = val;
+        this.intervalCount.set(val);
         break;
     }
   }
 
   startCount(): void {
-    if (this.status) {
+    if (this.status()) {
       return;
     }
 
@@ -74,51 +98,51 @@ export class TimerService {
       )
       .subscribe(this.timer);
 
-    this.status = true;
+    this.status.set(true);
   }
 
   stopCount(): void {
     this.pauseTime = this.timer.value;
     this.timerSubscription.unsubscribe();
-    this.status = false;
+    this.status.set(false);
   }
 
   resetCount(): void {
     this.timerSubscription.unsubscribe();
-    this.pauseTime = this.startTime;
+    this.pauseTime = this.startTime();
     this.timer.next(this.pauseTime);
-    this.status = false;
+    this.status.set(false);
   }
 
   cycleTimer() {
     this.timerSubscription.unsubscribe();
-    this.status = false;
+    this.status.set(false);
 
-    this.timeType = !this.timeType; // alternate work/break
+    this.timeType.update((val) => !val); // alternate work/break
 
     // WORK => BREAK
-    if (this.timeType === false) {
-      if (this.currentInterval === this.intervalCount) {
-        this.pauseTime = this.longBreak; //*60;
-        this.timer.next(this.longBreak);
-        this.currentInterval = 1;
+    if (this.timeType() === false) {
+      if (this.currentInterval() === this.intervalCount()) {
+        this.pauseTime = this.longBreak(); //*60;
+        this.timer.next(this.longBreak());
+        this.currentInterval.set(1);
         console.log('STARTING LONG BREAK');
       } else {
-        this.pauseTime = this.shortBreak; //*60;
-        this.timer.next(this.shortBreak);
-        this.currentInterval++;
+        this.pauseTime = this.shortBreak(); //*60;
+        this.timer.next(this.shortBreak());
+        this.currentInterval.update((val) => val + 1);
         console.log('STARTING SHORT BREAK');
       }
     }
 
     // BREAK => WORK
     else {
-      this.pauseTime = this.startTime; //*60;
-      this.timer.next(this.startTime);
+      this.pauseTime = this.startTime(); //*60;
+      this.timer.next(this.startTime());
       console.log('STARTING WORK');
     }
 
-    if (this.autoStartCycles == true) {
+    if (this.autoStartCycles() == true) {
       this.startCount();
     }
 

@@ -1,7 +1,19 @@
 <div class="timer-box">
     <div>
         <p>TIMER</p>
-        <p>{{this.counter*1000| date:'mm:ss'}}</p>
+        <p class="timer">{{this.counter*1000| date:'mm:ss'}}</p>
+    </div>
+    <div>
+        <label></label>
+            <p>{{this.workTime()}} Work Time</p>
+        <label></label>
+            <p>{{this.breakTimeS()}} Short Break</p>
+        <label></label>
+            <p>{{this.breakTimeL()}} Long Break</p>
+        <label></label>
+            <p>{{this.curInterval()+"/"+this.maxInterval()}} Work Intervals</p>
+        <label></label>
+            <p>{{this.autoCycle()}} Autocycling</p>
     </div>
     <div>
         <button (click)="onStart()">Start</button>
