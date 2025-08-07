@@ -27,7 +27,7 @@ export class TimerService {
   private currentInterval = signal(1);
   private timeType = signal(true);
   private status = signal(false);
-  private timer = new BehaviorSubject(5);
+  private timer = new BehaviorSubject(this.startTime());
   private timerSubscription = new Subscription();
 
   private autoStartCycles = signal(true);
@@ -60,28 +60,33 @@ export class TimerService {
     return this.timer.pipe(map((val) => val));
   }
 
-  setPomoVars(type: string, val: number) {
+  setPomoVars(type: string, val: number | boolean) {
     if (this.status()) {
       return;
     }
 
-    switch (type) {
-      case 'minutes':
-        console.log('minutes');
-        this.startTime.set(val);
-        break;
-      case 'shortBreak':
-        console.log('shortBreak');
-        this.shortBreak.set(val);
-        break;
-      case 'longBreak':
-        console.log('longBreak');
-        this.longBreak.set(val);
-        break;
-      case 'intervals':
-        console.log('intervals');
-        this.intervalCount.set(val);
-        break;
+    if (typeof val === 'number') {
+      switch (type) {
+        case 'minutes':
+          console.log('minutes');
+          this.startTime.set(val);
+          break;
+        case 'shortBreak':
+          console.log('shortBreak');
+          this.shortBreak.set(val);
+          break;
+        case 'longBreak':
+          console.log('longBreak');
+          this.longBreak.set(val);
+          break;
+        case 'intervals':
+          console.log('intervals');
+          this.intervalCount.set(val);
+          break;
+      }
+    } else {
+      console.log('cycle');
+      this.autoStartCycles.set(val);
     }
   }
 

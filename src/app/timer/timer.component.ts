@@ -34,6 +34,13 @@ export class TimerComponent {
   autoCycle: any;
 
   constructor(private timerService: TimerService) {
+    this.workTime = this.timerService.workTime;
+    this.breakTimeS = this.timerService.breakTimeS;
+    this.breakTimeL = this.timerService.breakTimeL;
+    this.maxInterval = this.timerService.maxInterval;
+    this.curInterval = this.timerService.curInterval;
+    this.autoCycle = this.timerService.autoCycle;
+
     this.subscription.add(
       this.timerService.stopWatch.subscribe((val) => {
         this.counter = val;
@@ -77,19 +84,19 @@ export class TimerComponent {
         }
       });
 
+    const cycleSub = this.form.controls['cycle'].valueChanges
+      .pipe(debounceTime(100))
+      .subscribe((val) => {
+        this.timerService.setPomoVars('cycle', val);
+      });
+
     this.destroyRef.onDestroy(() => {
       minuteSub?.unsubscribe();
       shortBreakSub?.unsubscribe();
       longBreakSub?.unsubscribe();
       intervalSub?.unsubscribe();
+      cycleSub?.unsubscribe();
     });
-
-    this.workTime = this.timerService.workTime;
-    this.breakTimeS = this.timerService.breakTimeS;
-    this.breakTimeL = this.timerService.breakTimeL;
-    this.maxInterval = this.timerService.maxInterval;
-    this.curInterval = this.timerService.curInterval;
-    this.autoCycle = this.timerService.autoCycle;
   }
 
   form = new FormGroup({
@@ -110,6 +117,10 @@ export class TimerComponent {
     intervals: new FormControl<number>(4, {
       nonNullable: true,
       validators: [Validators.required, Validators.pattern('^[0-9]*$')],
+    }),
+    cycle: new FormControl<boolean>(true, {
+      nonNullable: true,
+      validators: [Validators.required],
     }),
   });
 
