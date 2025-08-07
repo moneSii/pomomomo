@@ -32,10 +32,10 @@ export class TimerComponent {
         this.counter = val;
         console.log(
           val,
-          'Working:' + this.timerService.pomoVars.timeType,
-          this.timerService.pomoVars.currentInterval +
+          'Working:' + this.timerService.timeType,
+          this.timerService.currentInterval +
             ':' +
-            this.timerService.pomoVars.intervalCount
+            this.timerService.intervalCount
         );
         setTimeout(() => {
           if (val === 0) {
@@ -121,6 +121,6 @@ export class TimerComponent {
   }
 
   onDebugCheck() {
-    console.log(this.timerService.pomoVars);
+    console.log('DEBUG');
   }
 }

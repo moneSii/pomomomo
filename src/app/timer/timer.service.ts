@@ -19,106 +19,102 @@ export class TimerService {
 
   setPomoVariables(pomoVars: pomoVariables) {}
 
-  public pomoVars: pomoVariables = {
-    startTime: 5,
-    pauseTime: 5,
-    shortBreak: 3,
-    longBreak: 10,
-    intervalCount: 4,
-    currentInterval: 1,
-    timeType: true,
-    status: false,
-    timer: new BehaviorSubject(5),
-    timerSubscription: new Subscription(),
-  };
+  startTime = 5;
+  pauseTime = 5;
+  shortBreak = 3;
+  longBreak = 10;
+  intervalCount = 4;
+  currentInterval = 1;
+  timeType = true;
+  status = false;
+  timer = new BehaviorSubject(5);
+  timerSubscription = new Subscription();
 
   autoStartCycles = true;
 
   public get stopWatch(): Observable<number> {
-    return this.pomoVars.timer.pipe(map((val) => val));
+    return this.timer.pipe(map((val) => val));
   }
 
   setPomoVars(type: string, val: number) {
-    if (this.pomoVars.status) {
+    if (this.status) {
       return;
     }
 
     switch (type) {
       case 'minutes':
         console.log('minutes');
-        this.pomoVars.startTime = val;
+        this.startTime = val;
         break;
       case 'shortBreak':
         console.log('shortBreak');
-        this.pomoVars.shortBreak = val;
+        this.shortBreak = val;
         break;
       case 'longBreak':
         console.log('longBreak');
-        this.pomoVars.longBreak = val;
+        this.longBreak = val;
         break;
       case 'intervals':
         console.log('intervals');
-        this.pomoVars.intervalCount = val;
+        this.intervalCount = val;
         break;
     }
-
-    console.log(this.pomoVars);
   }
 
   startCount(): void {
-    if (this.pomoVars.status) {
+    if (this.status) {
       return;
     }
 
-    this.pomoVars.timerSubscription = timer(0, 1000)
+    this.timerSubscription = timer(0, 1000)
       .pipe(
         map((val) => {
-          return this.pomoVars.pauseTime - val;
+          return this.pauseTime - val;
         })
       )
-      .subscribe(this.pomoVars.timer);
+      .subscribe(this.timer);
 
-    this.pomoVars.status = true;
+    this.status = true;
   }
 
   stopCount(): void {
-    this.pomoVars.pauseTime = this.pomoVars.timer.value;
-    this.pomoVars.timerSubscription.unsubscribe();
-    this.pomoVars.status = false;
+    this.pauseTime = this.timer.value;
+    this.timerSubscription.unsubscribe();
+    this.status = false;
   }
 
   resetCount(): void {
-    this.pomoVars.timerSubscription.unsubscribe();
-    this.pomoVars.pauseTime = this.pomoVars.startTime;
-    this.pomoVars.timer.next(this.pomoVars.pauseTime);
-    this.pomoVars.status = false;
+    this.timerSubscription.unsubscribe();
+    this.pauseTime = this.startTime;
+    this.timer.next(this.pauseTime);
+    this.status = false;
   }
 
   cycleTimer() {
-    this.pomoVars.timerSubscription.unsubscribe();
-    this.pomoVars.status = false;
+    this.timerSubscription.unsubscribe();
+    this.status = false;
 
-    this.pomoVars.timeType = !this.pomoVars.timeType; // alternate work/break
+    this.timeType = !this.timeType; // alternate work/break
 
     // WORK => BREAK
-    if (this.pomoVars.timeType === false) {
-      if (this.pomoVars.currentInterval === this.pomoVars.intervalCount) {
-        this.pomoVars.pauseTime = this.pomoVars.longBreak; //*60;
-        this.pomoVars.timer.next(this.pomoVars.longBreak);
-        this.pomoVars.currentInterval = 1;
+    if (this.timeType === false) {
+      if (this.currentInterval === this.intervalCount) {
+        this.pauseTime = this.longBreak; //*60;
+        this.timer.next(this.longBreak);
+        this.currentInterval = 1;
         console.log('STARTING LONG BREAK');
       } else {
-        this.pomoVars.pauseTime = this.pomoVars.shortBreak; //*60;
-        this.pomoVars.timer.next(this.pomoVars.shortBreak);
-        this.pomoVars.currentInterval++;
+        this.pauseTime = this.shortBreak; //*60;
+        this.timer.next(this.shortBreak);
+        this.currentInterval++;
         console.log('STARTING SHORT BREAK');
       }
     }
 
     // BREAK => WORK
     else {
-      this.pomoVars.pauseTime = this.pomoVars.startTime; //*60;
-      this.pomoVars.timer.next(this.pomoVars.startTime);
+      this.pauseTime = this.startTime; //*60;
+      this.timer.next(this.startTime);
       console.log('STARTING WORK');
     }
 
@@ -127,8 +123,8 @@ export class TimerService {
     }
 
     this.destroyRef.onDestroy(() => {
-      this.pomoVars.timerSubscription.unsubscribe();
-      this.pomoVars.timer.unsubscribe();
+      this.timerSubscription.unsubscribe();
+      this.timer.unsubscribe();
     });
   }
 }
