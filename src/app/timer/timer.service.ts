@@ -85,6 +85,7 @@ export class TimerService {
         case 'minutes':
           console.log('minutes');
           this.startTime.set(val);
+          this.timer.next(val);
           break;
         case 'short':
           console.log('shortBreak');

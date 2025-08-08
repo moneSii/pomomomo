@@ -33,6 +33,7 @@ import {
 })
 export class TimerComponent {
   private destroyRef = inject(DestroyRef);
+
   counter: number = 0;
 
   workTime: any;
@@ -62,7 +63,7 @@ export class TimerComponent {
 
     const formSubscription = this.form.valueChanges
       .pipe(
-        debounceTime(1000),
+        debounceTime(500),
         startWith({
           minutes: this.workTime(),
           short: this.breakTimeS(),
