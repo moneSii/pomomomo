@@ -19,7 +19,6 @@
         <button (click)="onStart()">Start</button>
         <button (click)="onPause()">Pause</button>
         <button (click)="onReset()">Reset</button>
-        <button (click)="onDebugCheck()">Check</button>
     </div>
 
 </div>
@@ -29,20 +28,20 @@
 
         <div class="control">
             <label>Minutes</label>
-            <input id="workMinutes" formControlName="minutes" (keypress)="($event.charCode >= 48 && $event.charCode < 58)">
+            <input id="workMinutes" formControlName="minutes" >
         </div>
 
-        <div class="control" formGroupName="breaks">
+        <div class="control">
             <label>short break</label>
-            <input id="shortBreakMinutes" formControlName="short" (keypress)="($event.charCode >= 48 && $event.charCode < 58)">
+            <input id="shortBreakMinutes" formControlName="short">
 
             <label>long break</label>
-            <input id="longBreakMinutes" formControlName="long" (keypress)="($event.charCode >= 48 && $event.charCode < 58)">
+            <input id="longBreakMinutes" formControlName="long">
         </div>
 
         <div class="control">
             <label>intervals</label>
-            <input id="workIntervals" formControlName="intervals" (keypress)="($event.charCode >= 48 && $event.charCode < 58)">
+            <input id="workIntervals" formControlName="intervals" >
         </div>
 
         <div class="control">
@@ -50,5 +49,14 @@
             <input type="checkbox" formControlName="cycle">
         </div>
 
+        @if (minutesIsInvalid) {
+            <p>Invalid minutes</p>
+        }
+        @if (intervalsIsInvalid) {
+            <p>Invalid interval</p>
+        }
+
     </form>
 </div>
+
+<!-- (keypress)="($event.charCode >= 48 && $event.charCode < 58)" -->

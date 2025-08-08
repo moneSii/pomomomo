@@ -12,7 +12,17 @@ import {
 import { Pipe } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { AsyncPipe } from '@angular/common';
-import { timer, takeWhile, map, Subscription, debounceTime } from 'rxjs';
+import {
+  timer,
+  takeWhile,
+  map,
+  Subscription,
+  debounceTime,
+  pairwise,
+  merge,
+  zip,
+  startWith,
+} from 'rxjs';
 
 @Component({
   selector: 'app-timer',
@@ -22,7 +32,6 @@ import { timer, takeWhile, map, Subscription, debounceTime } from 'rxjs';
   styleUrl: './timer.component.css',
 })
 export class TimerComponent {
-  private subscription: Subscription = new Subscription();
   private destroyRef = inject(DestroyRef);
   counter: number = 0;
 
@@ -41,78 +50,69 @@ export class TimerComponent {
     this.curInterval = this.timerService.curInterval;
     this.autoCycle = this.timerService.autoCycle;
 
-    this.subscription.add(
-      this.timerService.stopWatch.subscribe((val) => {
-        this.counter = val;
-        console.log('Ticking');
-        setTimeout(() => {
-          if (val === 0) {
-            this.onCycle();
-          }
-        }, 1000);
-      })
-    );
+    const subscription = this.timerService.stopWatch.subscribe((val) => {
+      this.counter = val;
+      console.log('Ticking');
+      setTimeout(() => {
+        if (val === 0) {
+          this.onCycle();
+        }
+      }, 1000);
+    });
 
-    const minuteSub = this.form.controls['minutes'].valueChanges
-      .pipe(debounceTime(1000))
-      .subscribe((val) => {
-        if (val) {
-          this.timerService.setPomoVars('minutes', +val);
-        }
-      });
-    const shortBreakSub = this.form.controls.breaks.controls[
-      'short'
-    ].valueChanges
-      .pipe(debounceTime(1000))
-      .subscribe((val) => {
-        if (val) {
-          this.timerService.setPomoVars('shortBreak', +val);
-        }
-      });
-    const longBreakSub = this.form.controls.breaks.controls['long'].valueChanges
-      .pipe(debounceTime(1000))
-      .subscribe((val) => {
-        if (val) {
-          this.timerService.setPomoVars('longBreak', +val);
-        }
-      });
-    const intervalSub = this.form.controls['intervals'].valueChanges
-      .pipe(debounceTime(1000))
-      .subscribe((val) => {
-        if (val) {
-          this.timerService.setPomoVars('intervals', +val);
-        }
-      });
-
-    const cycleSub = this.form.controls['cycle'].valueChanges
-      .pipe(debounceTime(100))
-      .subscribe((val) => {
-        this.timerService.setPomoVars('cycle', val);
+    const formSubscription = this.form.valueChanges
+      .pipe(
+        debounceTime(1000),
+        startWith({
+          minutes: this.workTime(),
+          short: this.breakTimeS(),
+          long: this.breakTimeL(),
+          intervals: this.maxInterval(),
+          cycle: this.autoCycle(),
+        }),
+        pairwise()
+      )
+      .subscribe({
+        next: (val) => {
+          Object.keys(this.form.controls).forEach((field) => {
+            if (
+              val[0][field as keyof (typeof val)[0]] !==
+              val[1][field as keyof (typeof val)[0]]
+            ) {
+              if (field !== 'cycle') {
+                return this.timerService.setPomoVars(
+                  field,
+                  +val[1][field as keyof (typeof val)[0]]
+                );
+              } else {
+                return this.timerService.setPomoVars(
+                  field,
+                  val[1][field as keyof (typeof val)[0]]
+                );
+              }
+            }
+          });
+        },
       });
 
     this.destroyRef.onDestroy(() => {
-      minuteSub?.unsubscribe();
-      shortBreakSub?.unsubscribe();
-      longBreakSub?.unsubscribe();
-      intervalSub?.unsubscribe();
-      cycleSub?.unsubscribe();
+      subscription?.unsubscribe();
+      formSubscription.unsubscribe();
     });
   }
 
   form = new FormGroup({
-    minutes: new FormControl(5, {
+    minutes: new FormControl<number>(5, {
       nonNullable: true,
       validators: [Validators.required, Validators.pattern('^[0-9]*$')],
     }),
-    breaks: new FormGroup({
-      short: new FormControl<number>(3, {
-        nonNullable: true,
-        validators: [Validators.required, Validators.pattern('^[0-9]*$')],
-      }),
-      long: new FormControl<number>(10, {
-        nonNullable: true,
-        validators: [Validators.required, Validators.pattern('^[0-9]*$')],
-      }),
+    short: new FormControl<number>(3, {
+      nonNullable: true,
+      validators: [Validators.required, Validators.pattern('^[0-9]*$')],
+    }),
+    long: new FormControl<number>(10, {
+      nonNullable: true,
+      validators: [Validators.required, Validators.pattern('^[0-9]*$')],
     }),
     intervals: new FormControl<number>(4, {
       nonNullable: true,
@@ -124,6 +124,17 @@ export class TimerComponent {
     }),
   });
 
+  get minutesIsInvalid() {
+    return (
+      this.form.controls.minutes.touched && this.form.controls.minutes.invalid
+    );
+  }
+  get intervalsIsInvalid() {
+    return (
+      this.form.controls.intervals.touched &&
+      this.form.controls.intervals.invalid
+    );
+  }
   onStart() {
     this.timerService.startCount();
   }
@@ -137,9 +148,5 @@ export class TimerComponent {
   onCycle() {
     console.log('CYCLE TIMER');
     this.timerService.cycleTimer();
-  }
-
-  onDebugCheck() {
-    console.log('DEBUG');
   }
 }

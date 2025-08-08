@@ -17,16 +17,18 @@ export class TimerService {
   private destroyRef = inject(DestroyRef);
   constructor() {}
 
-  setPomoVariables(pomoVars: pomoVariables) {}
-
   private startTime = signal(5);
   private pauseTime = 5;
+
   private shortBreak = signal(3);
   private longBreak = signal(10);
+
   private intervalCount = signal(4);
   private currentInterval = signal(1);
+
   private timeType = signal(true);
   private status = signal(false);
+
   private timer = new BehaviorSubject(this.startTime());
   private timerSubscription = new Subscription();
 
@@ -56,6 +58,19 @@ export class TimerService {
     return this.autoStartCycles.asReadonly();
   }
   ////
+
+  get pomoVars() {
+    return [
+      {
+        minutes: this.startTime.asReadonly()(),
+        breaks: {
+          short: this.shortBreak.asReadonly()(),
+          long: this.longBreak.asReadonly()(),
+        },
+        intervals: this.intervalCount.asReadonly()(),
+      },
+    ];
+  }
   get stopWatch(): Observable<number> {
     return this.timer.pipe(map((val) => val));
   }
@@ -71,11 +86,11 @@ export class TimerService {
           console.log('minutes');
           this.startTime.set(val);
           break;
-        case 'shortBreak':
+        case 'short':
           console.log('shortBreak');
           this.shortBreak.set(val);
           break;
-        case 'longBreak':
+        case 'long':
           console.log('longBreak');
           this.longBreak.set(val);
           break;
@@ -156,4 +171,6 @@ export class TimerService {
       this.timer.unsubscribe();
     });
   }
+
+  convertToMinutes() {}
 }
