@@ -37,7 +37,7 @@ export class TimerComponent {
       console.log('Ticking', val);
       setTimeout(() => {
         if (val === 0) {
-          this.onCycle();
+          this.timerService.cycleTimer();
         }
       }, 1000);
     });
@@ -131,8 +131,8 @@ export class TimerComponent {
     this.timerService.resetCount();
   }
 
-  onCycle() {
-    console.log('CYCLE TIMER');
+  onSkip() {
+    console.log('SKIP');
     this.timerService.cycleTimer();
   }
 }
