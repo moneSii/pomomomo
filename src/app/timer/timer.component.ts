@@ -20,27 +20,21 @@ import { TimerService } from './timer.service';
 })
 export class TimerComponent {
   private destroyRef = inject(DestroyRef);
+  private timerService = inject(TimerService);
 
   counter: number = 0;
 
-  workTime: any;
-  breakTimeS: any;
-  breakTimeL: any;
-  maxInterval: any;
-  curInterval: any;
-  autoCycle: any;
+  workTime = this.timerService.workTime;
+  breakTimeS = this.timerService.breakTimeS;
+  breakTimeL = this.timerService.breakTimeL;
+  maxInterval = this.timerService.maxInterval;
+  curInterval = this.timerService.curInterval;
+  autoCycle = this.timerService.autoCycle;
 
-  constructor(private timerService: TimerService) {
-    this.workTime = this.timerService.workTime;
-    this.breakTimeS = this.timerService.breakTimeS;
-    this.breakTimeL = this.timerService.breakTimeL;
-    this.maxInterval = this.timerService.maxInterval;
-    this.curInterval = this.timerService.curInterval;
-    this.autoCycle = this.timerService.autoCycle;
-
+  constructor() {
     const subscription = this.timerService.stopWatch.subscribe((val) => {
       this.counter = val;
-      console.log('Ticking');
+      console.log('Ticking', val);
       setTimeout(() => {
         if (val === 0) {
           this.onCycle();

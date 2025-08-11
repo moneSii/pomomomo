@@ -1,13 +1,26 @@
-import { Injectable, inject, signal, DestroyRef } from '@angular/core';
+import {
+  Injectable,
+  inject,
+  signal,
+  DestroyRef,
+  OnDestroy,
+} from '@angular/core';
 
 import { Subscription, BehaviorSubject, Observable, timer, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
-export class TimerService {
+export class TimerService implements OnDestroy {
   private destroyRef = inject(DestroyRef);
   constructor() {}
+
+  ngOnDestroy() {
+    this.destroyRef.onDestroy(() => {
+      this.timerSubscription.unsubscribe();
+      this.timer.unsubscribe();
+    });
+  }
 
   private startTime = signal(5);
   private pauseTime = 5;
@@ -49,20 +62,7 @@ export class TimerService {
   get autoCycle() {
     return this.autoStartCycles.asReadonly();
   }
-  ////
 
-  get pomoVars() {
-    return [
-      {
-        minutes: this.startTime.asReadonly()(),
-        breaks: {
-          short: this.shortBreak.asReadonly()(),
-          long: this.longBreak.asReadonly()(),
-        },
-        intervals: this.intervalCount.asReadonly()(),
-      },
-    ];
-  }
   get stopWatch(): Observable<number> {
     return this.timer.pipe(map((val) => val));
   }
@@ -77,6 +77,7 @@ export class TimerService {
         case 'minutes':
           console.log('minutes');
           this.startTime.set(val);
+          this.pauseTime = val;
           this.timer.next(val);
           break;
         case 'short':
@@ -158,11 +159,6 @@ export class TimerService {
     if (this.autoStartCycles() == true) {
       this.startCount();
     }
-
-    this.destroyRef.onDestroy(() => {
-      this.timerSubscription.unsubscribe();
-      this.timer.unsubscribe();
-    });
   }
 
   convertToMinutes() {}
