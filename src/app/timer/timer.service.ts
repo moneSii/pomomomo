@@ -1,14 +1,6 @@
-import { Injectable, signal, Pipe, PipeTransform } from '@angular/core';
-import {
-  Subscription,
-  timer,
-  map,
-  takeWhile,
-  BehaviorSubject,
-  Observable,
-} from 'rxjs';
-import { pomoVariables } from './pomo-variables/pomo-variables.module';
-import { DestroyRef, inject } from '@angular/core';
+import { Injectable, inject, signal, DestroyRef } from '@angular/core';
+
+import { Subscription, BehaviorSubject, Observable, timer, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',

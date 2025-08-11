@@ -1,28 +1,15 @@
-import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
-import { TimerService } from './timer.service';
-import { pomoVariables } from './pomo-variables/pomo-variables.module';
+import { Component, DestroyRef, inject } from '@angular/core';
+import { DatePipe } from '@angular/common';
 import {
   FormGroup,
   FormControl,
-  FormArray,
   ReactiveFormsModule,
-  FormsModule,
   Validators,
 } from '@angular/forms';
-import { Pipe } from '@angular/core';
-import { DatePipe } from '@angular/common';
-import { AsyncPipe } from '@angular/common';
-import {
-  timer,
-  takeWhile,
-  map,
-  Subscription,
-  debounceTime,
-  pairwise,
-  merge,
-  zip,
-  startWith,
-} from 'rxjs';
+
+import { debounceTime, pairwise, startWith } from 'rxjs';
+
+import { TimerService } from './timer.service';
 
 @Component({
   selector: 'app-timer',
