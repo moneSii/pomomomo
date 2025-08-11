@@ -22,11 +22,11 @@ export class TimerService implements OnDestroy {
     });
   }
 
-  private startTime = signal(5);
-  private pauseTime = 5;
+  private startTime = signal(1500);
+  private pauseTime = 1500;
 
-  private shortBreak = signal(3);
-  private longBreak = signal(10);
+  private shortBreak = signal(300);
+  private longBreak = signal(600);
 
   private intervalCount = signal(4);
   private currentInterval = signal(1);
@@ -160,6 +160,4 @@ export class TimerService implements OnDestroy {
       this.startCount();
     }
   }
-
-  convertToMinutes() {}
 }

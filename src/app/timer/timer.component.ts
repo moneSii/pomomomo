@@ -67,6 +67,11 @@ export class TimerComponent {
               valSource.source,
               valSource.val
             );
+          } else if (valSource.source != 'intervals') {
+            return this.timerService.setPomoVars(
+              valSource.source,
+              +valSource.val * 60
+            );
           } else {
             return this.timerService.setPomoVars(
               valSource.source,
@@ -83,11 +88,11 @@ export class TimerComponent {
   }
 
   form = new FormGroup({
-    minutes: new FormControl<number>(5, {
+    minutes: new FormControl<number>(25, {
       nonNullable: true,
       validators: [Validators.required, Validators.pattern('^[0-9]*$')],
     }),
-    short: new FormControl<number>(3, {
+    short: new FormControl<number>(5, {
       nonNullable: true,
       validators: [Validators.required, Validators.pattern('^[0-9]*$')],
     }),
