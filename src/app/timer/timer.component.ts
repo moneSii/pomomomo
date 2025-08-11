@@ -7,7 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 
-import { debounceTime, pairwise, startWith } from 'rxjs';
+import { debounceTime, pairwise, startWith, merge, map } from 'rxjs';
 
 import { TimerService } from './timer.service';
 
@@ -48,38 +48,37 @@ export class TimerComponent {
       }, 1000);
     });
 
-    const formSubscription = this.form.valueChanges
-      .pipe(
-        debounceTime(500),
-        startWith({
-          minutes: this.workTime(),
-          short: this.breakTimeS(),
-          long: this.breakTimeL(),
-          intervals: this.maxInterval(),
-          cycle: this.autoCycle(),
-        }),
-        pairwise()
+    const formSubscription = merge(
+      this.form.controls.minutes.valueChanges.pipe(
+        map((val) => ({ source: 'minutes', val }))
+      ),
+      this.form.controls.short.valueChanges.pipe(
+        map((val) => ({ source: 'short', val }))
+      ),
+      this.form.controls.long.valueChanges.pipe(
+        map((val) => ({ source: 'long', val }))
+      ),
+      this.form.controls.intervals.valueChanges.pipe(
+        map((val) => ({ source: 'intervals', val }))
+      ),
+      this.form.controls.cycle.valueChanges.pipe(
+        map((val) => ({ source: 'cycle', val }))
       )
+    )
+      .pipe(debounceTime(500))
       .subscribe({
-        next: (val) => {
-          Object.keys(this.form.controls).forEach((field) => {
-            if (
-              val[0][field as keyof (typeof val)[0]] !==
-              val[1][field as keyof (typeof val)[0]]
-            ) {
-              if (field !== 'cycle') {
-                return this.timerService.setPomoVars(
-                  field,
-                  +val[1][field as keyof (typeof val)[0]]
-                );
-              } else {
-                return this.timerService.setPomoVars(
-                  field,
-                  val[1][field as keyof (typeof val)[0]]
-                );
-              }
-            }
-          });
+        next: (valSource) => {
+          if (valSource.source == 'cycle') {
+            return this.timerService.setPomoVars(
+              valSource.source,
+              valSource.val
+            );
+          } else {
+            return this.timerService.setPomoVars(
+              valSource.source,
+              +valSource.val
+            );
+          }
         },
       });
 
