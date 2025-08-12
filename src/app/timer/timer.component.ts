@@ -31,6 +31,8 @@ export class TimerComponent {
   curInterval = this.timerService.curInterval;
   autoCycle = this.timerService.autoCycle;
 
+  private displayVars = false;
+
   constructor() {
     const subscription = this.timerService.stopWatch.subscribe((val) => {
       this.counter = val * 1000;
@@ -124,5 +126,13 @@ export class TimerComponent {
   onSkip() {
     console.log('SKIP');
     this.timerService.cycleTimer();
+  }
+
+  onToggleVars() {
+    this.displayVars = !this.displayVars;
+  }
+
+  get displayVariables() {
+    return this.displayVars;
   }
 }

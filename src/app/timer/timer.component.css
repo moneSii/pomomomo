@@ -1,3 +1,49 @@
 .timer {
-    font-size: 43px;
+    font-size: 5rem;
 }
+
+.timer-box {
+    display:flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin: auto;
+    width: 30rem;
+    text-align: center;
+    border: 3px solid red;
+    padding: 10px;
+}
+
+.timer-display {
+    padding: 10px;
+    margin:10px;
+    border: 3px solid orange;
+    border-style:groove;
+}
+
+.timer-variables {
+    padding: 10px;
+    margin:10px;
+    border: 3px solid orange;
+    display:flex;
+    justify-content: space-evenly;
+}
+.timer-var-item{
+    border: 3px solid brown;
+    width: 4.5rem;
+}
+.timer-buttons {
+    display: flex;
+    padding: 10px;
+    margin: 10px;
+    border: 3px solid orange;
+
+}
+
+button{
+    margin: 5px;
+    padding: 5px;
+    width:3cm;
+}
+
+
+
