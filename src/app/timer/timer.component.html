@@ -50,12 +50,5 @@
             <input type="checkbox" formControlName="cycle" (keypress)="($event.charCode >= 48 && $event.charCode < 58)">
         </div>
 
-        @if (minutesIsInvalid) {
-            <p>Invalid minutes</p>
-        }
-        @if (intervalsIsInvalid) {
-            <p>Invalid interval</p>
-        }
-
     </form>
 </div>

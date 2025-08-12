@@ -38,7 +38,6 @@ export class TimerService implements OnDestroy {
   private timerSubscription = new Subscription();
 
   private autoStartCycles = signal(true);
-  ///
   get workTime() {
     return this.startTime.asReadonly();
   }
@@ -76,26 +75,26 @@ export class TimerService implements OnDestroy {
       const numVal = +val * 60;
       switch (type) {
         case 'minutes':
-          console.log('minutes');
+          console.log('minutes Changed');
           this.startTime.set(numVal);
           this.pauseTime = numVal;
           this.timer.next(numVal);
           break;
         case 'short':
-          console.log('shortBreak');
+          console.log('shortBreak Changed');
           this.shortBreak.set(numVal);
           break;
         case 'long':
-          console.log('longBreak');
+          console.log('longBreak Changed');
           this.longBreak.set(numVal);
           break;
         case 'intervals':
-          console.log('intervals');
+          console.log('intervals Changed');
           this.intervalCount.set(+val);
           break;
       }
     } else if (typeof val === 'boolean') {
-      console.log('cycle');
+      console.log('cycle Changed');
       this.autoStartCycles.set(val);
     }
   }
@@ -133,17 +132,17 @@ export class TimerService implements OnDestroy {
     this.timerSubscription.unsubscribe();
     this.status.set(false);
 
-    this.timeType.update((val) => !val); // alternate work/break
+    this.timeType.update((val) => !val); // alternate WORK/BREAK
 
     // WORK => BREAK
     if (this.timeType() === false) {
       if (this.currentInterval() === this.intervalCount()) {
-        this.pauseTime = this.longBreak(); //*60;
+        this.pauseTime = this.longBreak();
         this.timer.next(this.longBreak());
         this.currentInterval.set(1);
         console.log('STARTING LONG BREAK');
       } else {
-        this.pauseTime = this.shortBreak(); //*60;
+        this.pauseTime = this.shortBreak();
         this.timer.next(this.shortBreak());
         this.currentInterval.update((val) => val + 1);
         console.log('STARTING SHORT BREAK');
@@ -152,7 +151,7 @@ export class TimerService implements OnDestroy {
 
     // BREAK => WORK
     else {
-      this.pauseTime = this.startTime(); //*60;
+      this.pauseTime = this.startTime();
       this.timer.next(this.startTime());
       console.log('STARTING WORK');
     }

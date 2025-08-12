@@ -7,7 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 
-import { debounceTime, pairwise, tap, merge, map } from 'rxjs';
+import { debounceTime, tap, merge, map } from 'rxjs';
 
 import { TimerService } from './timer.service';
 
@@ -34,7 +34,6 @@ export class TimerComponent {
   constructor() {
     const subscription = this.timerService.stopWatch.subscribe((val) => {
       this.counter = val * 1000;
-      console.log('Ticking', val, this.counter);
       setTimeout(() => {
         if (val === 0) {
           this.timerService.cycleTimer();
@@ -62,7 +61,6 @@ export class TimerComponent {
       .pipe(
         debounceTime(500),
         tap((valSource) => {
-          console.log(this.form.status, 'wat');
           if (this.form.status == 'INVALID') {
             this.form.controls[
               valSource.source as keyof typeof this.form.controls
@@ -72,8 +70,6 @@ export class TimerComponent {
       )
       .subscribe({
         next: (valSource) => {
-          console.log(valSource, 'here');
-          console.log(this.form.status);
           if (this.form.status != 'INVALID') {
             return this.timerService.setPomoVars(
               valSource.source,
@@ -107,17 +103,6 @@ export class TimerComponent {
     }),
   });
 
-  get minutesIsInvalid() {
-    return (
-      this.form.controls.minutes.touched && this.form.controls.minutes.invalid
-    );
-  }
-  get intervalsIsInvalid() {
-    return (
-      this.form.controls.intervals.touched &&
-      this.form.controls.intervals.invalid
-    );
-  }
   onStart() {
     this.timerService.startCount();
   }
@@ -133,15 +118,3 @@ export class TimerComponent {
     this.timerService.cycleTimer();
   }
 }
-
-/*
-Form Validation:
-  Minutes / Short / Long:
-    - Less than 60
-      - 2 Digits
-      - <60 NUM
-  Interval:
-    - 2 Digits
-
-
-*/
