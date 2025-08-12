@@ -61,7 +61,11 @@ export class TimerComponent {
       .pipe(
         debounceTime(500),
         tap((valSource) => {
-          if (this.form.status == 'INVALID') {
+          if (
+            this.form.controls[
+              valSource.source as keyof typeof this.form.controls
+            ].status == 'INVALID'
+          ) {
             this.form.controls[
               valSource.source as keyof typeof this.form.controls
             ].reset(null, { emitEvent: false });
@@ -70,7 +74,11 @@ export class TimerComponent {
       )
       .subscribe({
         next: (valSource) => {
-          if (this.form.status != 'INVALID') {
+          if (
+            this.form.controls[
+              valSource.source as keyof typeof this.form.controls
+            ].status != 'INVALID'
+          ) {
             return this.timerService.setPomoVars(
               valSource.source,
               valSource.val
