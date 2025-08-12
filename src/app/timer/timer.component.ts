@@ -1,4 +1,4 @@
-import { Component, DestroyRef, inject } from '@angular/core';
+import { Component, DestroyRef, EventEmitter, inject } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import {
   FormGroup,
@@ -7,7 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 
-import { debounceTime, pairwise, startWith, merge, map } from 'rxjs';
+import { debounceTime, pairwise, tap, merge, map } from 'rxjs';
 
 import { TimerService } from './timer.service';
 
@@ -33,8 +33,8 @@ export class TimerComponent {
 
   constructor() {
     const subscription = this.timerService.stopWatch.subscribe((val) => {
-      this.counter = val;
-      console.log('Ticking', val);
+      this.counter = val * 1000;
+      console.log('Ticking', val, this.counter);
       setTimeout(() => {
         if (val === 0) {
           this.timerService.cycleTimer();
@@ -59,23 +59,25 @@ export class TimerComponent {
         map((val) => ({ source: 'cycle', val }))
       )
     )
-      .pipe(debounceTime(500))
+      .pipe(
+        debounceTime(500),
+        tap((valSource) => {
+          console.log(this.form.status, 'wat');
+          if (this.form.status == 'INVALID') {
+            this.form.controls[
+              valSource.source as keyof typeof this.form.controls
+            ].reset(null, { emitEvent: false });
+          }
+        })
+      )
       .subscribe({
         next: (valSource) => {
-          if (valSource.source == 'cycle') {
+          console.log(valSource, 'here');
+          console.log(this.form.status);
+          if (this.form.status != 'INVALID') {
             return this.timerService.setPomoVars(
               valSource.source,
               valSource.val
-            );
-          } else if (valSource.source != 'intervals') {
-            return this.timerService.setPomoVars(
-              valSource.source,
-              +valSource.val * 60
-            );
-          } else {
-            return this.timerService.setPomoVars(
-              valSource.source,
-              +valSource.val
             );
           }
         },
@@ -88,24 +90,19 @@ export class TimerComponent {
   }
 
   form = new FormGroup({
-    minutes: new FormControl<number>(25, {
-      nonNullable: true,
+    minutes: new FormControl('25', {
       validators: [Validators.required, Validators.pattern('^[0-9]*$')],
     }),
-    short: new FormControl<number>(5, {
-      nonNullable: true,
+    short: new FormControl('5', {
       validators: [Validators.required, Validators.pattern('^[0-9]*$')],
     }),
-    long: new FormControl<number>(10, {
-      nonNullable: true,
+    long: new FormControl('10', {
       validators: [Validators.required, Validators.pattern('^[0-9]*$')],
     }),
-    intervals: new FormControl<number>(4, {
-      nonNullable: true,
+    intervals: new FormControl('4', {
       validators: [Validators.required, Validators.pattern('^[0-9]*$')],
     }),
     cycle: new FormControl<boolean>(true, {
-      nonNullable: true,
       validators: [Validators.required],
     }),
   });
@@ -136,3 +133,15 @@ export class TimerComponent {
     this.timerService.cycleTimer();
   }
 }
+
+/*
+Form Validation:
+  Minutes / Short / Long:
+    - Less than 60
+      - 2 Digits
+      - <60 NUM
+  Interval:
+    - 2 Digits
+
+
+*/

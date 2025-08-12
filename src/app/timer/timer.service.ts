@@ -67,33 +67,34 @@ export class TimerService implements OnDestroy {
     return this.timer.pipe(map((val) => val));
   }
 
-  setPomoVars(type: string, val: number | boolean) {
+  setPomoVars(type: string, val: string | boolean | null) {
     if (this.status()) {
       return;
     }
 
-    if (typeof val === 'number') {
+    if (typeof val === 'string') {
+      const numVal = +val * 60;
       switch (type) {
         case 'minutes':
           console.log('minutes');
-          this.startTime.set(val);
-          this.pauseTime = val;
-          this.timer.next(val);
+          this.startTime.set(numVal);
+          this.pauseTime = numVal;
+          this.timer.next(numVal);
           break;
         case 'short':
           console.log('shortBreak');
-          this.shortBreak.set(val);
+          this.shortBreak.set(numVal);
           break;
         case 'long':
           console.log('longBreak');
-          this.longBreak.set(val);
+          this.longBreak.set(numVal);
           break;
         case 'intervals':
           console.log('intervals');
-          this.intervalCount.set(val);
+          this.intervalCount.set(+val);
           break;
       }
-    } else {
+    } else if (typeof val === 'boolean') {
       console.log('cycle');
       this.autoStartCycles.set(val);
     }
