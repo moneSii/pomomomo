@@ -1,10 +1,18 @@
 <div class="timer-box">
   <div class="timer-display">
-    <p>TIMER</p>
+    <p class="title">TIMER</p>
     <p class="timer">{{ this.counter | date : "mm:ss" }}</p>
-    <p>{{ this.curInterval() + "/" + this.maxInterval() }} Intervals</p>
+    <p class="intervalWAT">{{ this.curInterval() + "/" + this.maxInterval() }} Intervals</p>
   </div>
-  @if (this.displayVariables){
+  <div class="timer-buttons">
+    <button class="start-button" (click)="onStart()">Start</button>
+    <button class="pause-button" (click)="onPause()">Pause</button>
+    <button class="reset-button" (click)="onReset()">Reset</button>
+    <button class="skip-button" (click)="onSkip()">Skip</button>
+    <button class="skip-button" (click)="onToggleVars()">Show</button>
+    <button class="skip-button" (click)="onToggleVars()">Change</button>
+  </div>
+    @if (this.displayVariables){
       <div class="timer-variables">
     <p class="timer-var-item">{{ this.workTime() * 1000 | date : "mm:ss" }} Work Time</p>
 
@@ -17,14 +25,6 @@
     <p class="timer-var-item">{{ this.autoCycle() }} Autocycling</p>
   </div>
   }
-  <div class="timer-buttons">
-    <button class="start-button" (click)="onStart()">Start</button>
-    <button class="pause-button" (click)="onPause()">Pause</button>
-    <button class="reset-button" (click)="onReset()">Reset</button>
-    <button class="skip-button" (click)="onSkip()">Skip</button>
-    <button class="skip-button" (click)="onToggleVars()">Show</button>
-    <button class="skip-button" (click)="onToggleVars()">Change</button>
-  </div>
 </div>
 <div class="form-box">
   <form [formGroup]="form">
