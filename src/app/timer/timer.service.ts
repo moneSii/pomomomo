@@ -125,6 +125,7 @@ export class TimerService implements OnDestroy {
     this.timerSubscription.unsubscribe();
     this.pauseTime = this.startTime();
     this.timer.next(this.pauseTime);
+    this.currentInterval.set(1);
     this.status.set(false);
   }
 
