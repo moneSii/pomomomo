@@ -1,0 +1,48 @@
+<div class="form-box">
+  <form [formGroup]="form">
+    <p>Select Your Pomodoro timer Variables</p>
+
+    <div class="control">
+      <label>Minutes</label>
+      <input
+        id="workMinutes"
+        formControlName="minutes"
+        (keypress)="($event.charCode >= 48 && $event.charCode < 58)"
+      />
+    </div>
+
+    <div class="control">
+      <label>short break</label>
+      <input
+        id="shortBreakMinutes"
+        formControlName="short"
+        (keypress)="($event.charCode >= 48 && $event.charCode < 58)"
+      />
+
+      <label>long break</label>
+      <input
+        id="longBreakMinutes"
+        formControlName="long"
+        (keypress)="($event.charCode >= 48 && $event.charCode < 58)"
+      />
+    </div>
+
+    <div class="control">
+      <label>intervals</label>
+      <input
+        id="workIntervals"
+        formControlName="intervals"
+        (keypress)="($event.charCode >= 48 && $event.charCode < 58)"
+      />
+    </div>
+
+    <div class="control">
+      <label>AutoCycle</label>
+      <input
+        type="checkbox"
+        formControlName="cycle"
+        (keypress)="($event.charCode >= 48 && $event.charCode < 58)"
+      />
+    </div>
+  </form>
+</div>

@@ -62,6 +62,10 @@ export class TimerService implements OnDestroy {
     return this.autoStartCycles.asReadonly();
   }
 
+  get curStatus() {
+    return this.status.asReadonly();
+  }
+
   get stopWatch(): Observable<number> {
     return this.timer.pipe(map((val) => val));
   }

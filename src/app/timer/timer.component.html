@@ -9,8 +9,8 @@
     <button class="pause-button" (click)="onPause()">Pause</button>
     <button class="reset-button" (click)="onReset()">Reset</button>
     <button class="skip-button" (click)="onSkip()">Skip</button>
-    <button class="skip-button" (click)="onToggleVars()">Show</button>
-    <button class="skip-button" (click)="onToggleVars()">Change</button>
+    <button class="toggle-button" (click)="onToggleVars()">Show</button>
+    <button class="form-button" (click)="onOpenForm()">Change</button>
   </div>
     @if (this.displayVariables){
       <div class="timer-variables">
@@ -25,52 +25,4 @@
     <p class="timer-var-item">{{ this.autoCycle() }} Autocycling</p>
   </div>
   }
-</div>
-<div class="form-box">
-  <form [formGroup]="form">
-    <p>Select Your Pomodoro timer Variables</p>
-
-    <div class="control">
-      <label>Minutes</label>
-      <input
-        id="workMinutes"
-        formControlName="minutes"
-        (keypress)="($event.charCode >= 48 && $event.charCode < 58)"
-      />
-    </div>
-
-    <div class="control">
-      <label>short break</label>
-      <input
-        id="shortBreakMinutes"
-        formControlName="short"
-        (keypress)="($event.charCode >= 48 && $event.charCode < 58)"
-      />
-
-      <label>long break</label>
-      <input
-        id="longBreakMinutes"
-        formControlName="long"
-        (keypress)="($event.charCode >= 48 && $event.charCode < 58)"
-      />
-    </div>
-
-    <div class="control">
-      <label>intervals</label>
-      <input
-        id="workIntervals"
-        formControlName="intervals"
-        (keypress)="($event.charCode >= 48 && $event.charCode < 58)"
-      />
-    </div>
-
-    <div class="control">
-      <label>AutoCycle</label>
-      <input
-        type="checkbox"
-        formControlName="cycle"
-        (keypress)="($event.charCode >= 48 && $event.charCode < 58)"
-      />
-    </div>
-  </form>
 </div>
