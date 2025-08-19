@@ -43,25 +43,4 @@ export class TimerComponent {
   get displayVariables() {
     return this.displayVars;
   }
-
-  onStart() {
-    this.timerService.startCount();
-  }
-  onPause() {
-    this.timerService.stopCount();
-  }
-  onReset() {
-    this.timerService.resetCount();
-  }
-
-  onSkip() {
-    console.log('SKIP');
-    this.timerService.cycleTimer();
-  }
-
-  onToggleVars() {
-    this.displayVars = !this.displayVars;
-  }
-
-  onOpenForm() {}
 }

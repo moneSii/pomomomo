@@ -4,14 +4,7 @@
     <p class="timer">{{ this.counter | date : "mm:ss" }}</p>
     <p class="intervalWAT">{{ this.curInterval() + "/" + this.maxInterval() }} Intervals</p>
   </div>
-  <div class="timer-buttons">
-    <button class="start-button" (click)="onStart()">Start</button>
-    <button class="pause-button" (click)="onPause()">Pause</button>
-    <button class="reset-button" (click)="onReset()">Reset</button>
-    <button class="skip-button" (click)="onSkip()">Skip</button>
-    <button class="toggle-button" (click)="onToggleVars()">Show</button>
-    <button class="form-button" (click)="onOpenForm()">Change</button>
-  </div>
+  <ng-content></ng-content>
     @if (this.displayVariables){
       <div class="timer-variables">
     <p class="timer-var-item">{{ this.workTime() * 1000 | date : "mm:ss" }} Work Time</p>

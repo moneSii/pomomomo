@@ -1,0 +1,12 @@
+.timer-buttons {
+    display: flex;
+    padding: 10px;
+    margin: 10px;
+    border: 3px solid orange;
+    justify-content: space-evenly;
+}
+button{
+    margin: 5px;
+    padding: 5px;
+    width:3cm;
+}
