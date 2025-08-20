@@ -1,12 +1,8 @@
-<div class="timer-box">
-  <div class="timer-display">
-    <h1 class="title">TIMER</h1>
-    <p class="timer">{{ this.counter | date : "mm:ss" }}</p>
-    <h2 class="intervalCount">
-      {{ this.curInterval() + "/" + this.maxInterval() }} Intervals
-    </h2>
-    <h2 class="status">
-      {{ this.status() + " Running /" + this.timeType() + " Working?" }}
+<div class="timer">
+  <div class="timer__display">
+    <p class="timer--stopwatch">{{ this.counter | date : "mm:ss" }}</p>
+    <h2 class="timer--intervalCount">
+      {{ this.curInterval() + "/" + this.maxInterval() }}
     </h2>
   </div>
   <ng-content select="app-buttons"></ng-content>

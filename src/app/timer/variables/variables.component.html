@@ -1,5 +1,5 @@
-@if (!this.displayVars()){
-<div class="timer-variables">
+@if (this.displayVars()){
+<div class="timer__variables">
   <p class="timer-var-item">
     {{ this.workTime() * 1000 | date : "mm:ss" }} Work Time
   </p>
@@ -16,7 +16,10 @@
 
   <p class="timer-var-item">{{ this.autoCycle() }} Autocycling</p>
 </div>
-<button class="form-button" (click)="onOpenForm()">
-  <img src="/icons/settings.png" />
-</button>
+<div class="timer__settings">
+  <button class="form-button" (click)="onOpenForm()">
+    <img src="/icons/settings.png" />
+  </button>
+</div>
+
 }
