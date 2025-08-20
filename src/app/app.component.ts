@@ -1,7 +1,7 @@
-import { Component, signal } from '@angular/core';
+import { Component } from '@angular/core';
 import { TimerComponent } from './timer/timer.component';
 import { FormComponent } from './form/form.component';
-import { ButtonsComponent } from './buttons/buttons.component';
+import { ButtonsComponent } from './timer/buttons/buttons.component';
 import { VariablesComponent } from './timer/variables/variables.component';
 
 @Component({
