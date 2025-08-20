@@ -17,6 +17,9 @@ export class TimerComponent {
   maxInterval = this.timerService.maxInterval;
   curInterval = this.timerService.curInterval;
 
+  status = this.timerService.curStatus;
+  timeType = this.timerService.timeTypeStatus;
+
   counter: number = 0;
   constructor() {
     const subscription = this.timerService.stopWatch.subscribe((val) => {

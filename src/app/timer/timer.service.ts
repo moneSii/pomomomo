@@ -71,6 +71,10 @@ export class TimerService implements OnDestroy {
     return this.status.asReadonly();
   }
 
+  get timeTypeStatus() {
+    return this.timeType.asReadonly();
+  }
+
   get displayVariables() {
     return this.displayVars.asReadonly();
   }
