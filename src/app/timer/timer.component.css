@@ -5,7 +5,7 @@
   margin-top: 5vh;
   margin-left: auto;
   margin-right: auto;
-  width: 37rem;
+  width: 45rem;
   text-align: center;
   background-color: var(--main-color);
   padding: 3rem;
@@ -28,7 +28,7 @@
 .timer--stopwatch {
   color: white;
   text-shadow: 2px 4px 3px rgba(0, 0, 0, 0.3);
-  font-size: 12rem;
+  font-size: 10rem;
   font-family: monospace;
 
   margin: 0 auto;

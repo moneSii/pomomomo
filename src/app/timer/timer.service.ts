@@ -22,11 +22,11 @@ export class TimerService implements OnDestroy {
     });
   }
 
-  private startTime = signal(1500);
-  private pauseTime = 1500;
+  private startTime = signal(15000);
+  private pauseTime = this.startTime();
 
-  private shortBreak = signal(300);
-  private longBreak = signal(600);
+  private shortBreak = signal(3000);
+  private longBreak = signal(6000);
 
   private intervalCount = signal(4);
   private currentInterval = signal(1);
@@ -113,9 +113,10 @@ export class TimerService implements OnDestroy {
       return;
     }
 
-    this.timerSubscription = timer(0, 1000)
+    this.timerSubscription = timer(0, 100)
       .pipe(
         map((val) => {
+          console.log(this.pauseTime - val);
           return this.pauseTime - val;
         })
       )

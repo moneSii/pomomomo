@@ -1,6 +1,6 @@
 <div class="timer">
   <div class="timer__display">
-    <p class="timer--stopwatch">{{ this.counter | date : "mm:ss" }}</p>
+    <p class="timer--stopwatch">{{ this.counter | date : "mm:ss.S" }}</p>
     <h2 class="timer--intervalCount">
       {{ this.curInterval() + "/" + this.maxInterval() }}
     </h2>

@@ -23,12 +23,12 @@ export class TimerComponent {
   counter: number = 0;
   constructor() {
     const subscription = this.timerService.stopWatch.subscribe((val) => {
-      this.counter = val * 1000;
+      this.counter = val * 100;
       setTimeout(() => {
         if (val === 0) {
           this.timerService.cycleTimer();
         }
-      }, 1000);
+      }, 100);
     });
 
     this.destroyRef.onDestroy(() => {
