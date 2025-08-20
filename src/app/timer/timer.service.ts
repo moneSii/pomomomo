@@ -31,17 +31,13 @@ export class TimerService implements OnDestroy {
   private intervalCount = signal(4);
   private currentInterval = signal(1);
 
+  private autoStartCycles = signal(true);
+
   private timeType = signal(true);
   private status = signal(false);
 
   private timer = new BehaviorSubject(this.startTime());
   private timerSubscription = new Subscription();
-
-  private autoStartCycles = signal(true);
-
-  private displayVars = signal(false);
-
-  private displayForm = signal(false);
 
   get workTime() {
     return this.startTime.asReadonly();
@@ -73,14 +69,6 @@ export class TimerService implements OnDestroy {
 
   get timeTypeStatus() {
     return this.timeType.asReadonly();
-  }
-
-  get displayVariables() {
-    return this.displayVars.asReadonly();
-  }
-
-  get displayFormInputs() {
-    return this.displayForm.asReadonly();
   }
 
   get stopWatch(): Observable<number> {
@@ -118,14 +106,6 @@ export class TimerService implements OnDestroy {
       console.log('cycle Changed');
       this.autoStartCycles.set(val);
     }
-  }
-
-  alternateDisplayVariables() {
-    this.displayVars.set(!this.displayVars());
-  }
-
-  alternateDisplayForm() {
-    this.displayForm.set(!this.displayForm());
   }
 
   startCount(): void {

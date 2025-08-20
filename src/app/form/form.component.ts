@@ -9,6 +9,7 @@ import {
 import { debounceTime, tap, merge, map } from 'rxjs';
 
 import { TimerService } from '../timer/timer.service';
+import { DisplayService } from '../display.service';
 
 @Component({
   selector: 'app-form',
@@ -20,8 +21,9 @@ import { TimerService } from '../timer/timer.service';
 export class FormComponent implements OnInit {
   private destroyRef = inject(DestroyRef);
   private timerService = inject(TimerService);
+  private displayService = inject(DisplayService);
 
-  display = this.timerService.displayFormInputs;
+  display = this.displayService.displayFormInputs;
 
   ngOnInit() {
     const formSubscription = merge(
@@ -94,6 +96,6 @@ export class FormComponent implements OnInit {
   });
 
   closeForm() {
-    this.timerService.alternateDisplayForm();
+    this.displayService.alternateDisplayForm();
   }
 }

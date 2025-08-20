@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { TimerService } from '../timer.service';
+import { DisplayService } from '../../display.service';
 
 @Component({
   selector: 'app-buttons',
@@ -10,6 +11,7 @@ import { TimerService } from '../timer.service';
 })
 export class ButtonsComponent {
   private timerService = inject(TimerService);
+  private displayService = inject(DisplayService);
 
   onStart() {
     this.timerService.startCount();
@@ -21,14 +23,12 @@ export class ButtonsComponent {
     this.timerService.resetCount();
   }
   onSkip() {
-    console.log('SKIP');
     this.timerService.cycleTimer();
   }
   onToggleDisplayVars() {
-    this.timerService.alternateDisplayVariables();
-    console.log(this.timerService.displayVariables());
+    this.displayService.alternateDisplayVariables();
   }
   onOpenForm() {
-    this.timerService.alternateDisplayForm();
+    this.displayService.alternateDisplayForm();
   }
 }

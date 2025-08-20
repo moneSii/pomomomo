@@ -3,6 +3,7 @@ import { Component, inject } from '@angular/core';
 import { DatePipe } from '@angular/common';
 
 import { TimerService } from '../timer.service';
+import { DisplayService } from '../../display.service';
 
 @Component({
   selector: 'app-variables',
@@ -13,6 +14,7 @@ import { TimerService } from '../timer.service';
 })
 export class VariablesComponent {
   private timerService = inject(TimerService);
+  private displayService = inject(DisplayService);
 
   workTime = this.timerService.workTime;
   breakTimeS = this.timerService.breakTimeS;
@@ -21,5 +23,5 @@ export class VariablesComponent {
   curInterval = this.timerService.curInterval;
   autoCycle = this.timerService.autoCycle;
 
-  displayVars = this.timerService.displayVariables;
+  displayVars = this.displayService.displayVariables;
 }
