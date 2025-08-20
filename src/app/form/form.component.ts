@@ -21,6 +21,8 @@ export class FormComponent implements OnInit {
   private destroyRef = inject(DestroyRef);
   private timerService = inject(TimerService);
 
+  display = this.timerService.displayFormInputs;
+
   ngOnInit() {
     const formSubscription = merge(
       this.form.controls.minutes.valueChanges.pipe(
@@ -90,4 +92,8 @@ export class FormComponent implements OnInit {
       validators: [Validators.required],
     }),
   });
+
+  closeForm() {
+    this.timerService.alternateDisplayForm();
+  }
 }

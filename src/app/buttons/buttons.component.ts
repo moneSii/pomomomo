@@ -28,5 +28,7 @@ export class ButtonsComponent {
     this.timerService.alternateDisplayVariables();
     console.log(this.timerService.displayVariables());
   }
-  onOpenForm() {}
+  onOpenForm() {
+    this.timerService.alternateDisplayForm();
+  }
 }

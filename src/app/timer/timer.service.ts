@@ -41,6 +41,8 @@ export class TimerService implements OnDestroy {
 
   private displayVars = signal(false);
 
+  private displayForm = signal(false);
+
   get workTime() {
     return this.startTime.asReadonly();
   }
@@ -71,6 +73,10 @@ export class TimerService implements OnDestroy {
 
   get displayVariables() {
     return this.displayVars.asReadonly();
+  }
+
+  get displayFormInputs() {
+    return this.displayForm.asReadonly();
   }
 
   get stopWatch(): Observable<number> {
@@ -112,6 +118,10 @@ export class TimerService implements OnDestroy {
 
   alternateDisplayVariables() {
     this.displayVars.set(!this.displayVars());
+  }
+
+  alternateDisplayForm() {
+    this.displayForm.set(!this.displayForm());
   }
 
   startCount(): void {

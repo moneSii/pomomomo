@@ -1,4 +1,6 @@
-<div class="form-box">
+@if (this.display()){
+<div class="backdrop" (click)="closeForm()"></div>
+<dialog open class="form-box">
   <form [formGroup]="form">
     <p>Select Your Pomodoro timer Variables</p>
 
@@ -45,4 +47,5 @@
       />
     </div>
   </form>
-</div>
+</dialog>
+}

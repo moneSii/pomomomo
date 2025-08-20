@@ -2,8 +2,10 @@
   <div class="timer-display">
     <p class="title">TIMER</p>
     <p class="timer">{{ this.counter | date : "mm:ss" }}</p>
-    <p class="intervalWAT">{{ this.curInterval() + "/" + this.maxInterval() }} Intervals</p>
+    <p class="intervalWAT">
+      {{ this.curInterval() + "/" + this.maxInterval() }} Intervals
+    </p>
   </div>
   <ng-content select="app-buttons"></ng-content>
-  <ng-content select=""></ng-content>
+  <ng-content select="app-variables"></ng-content>
 </div>
