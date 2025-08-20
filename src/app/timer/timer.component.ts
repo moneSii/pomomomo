@@ -14,17 +14,10 @@ export class TimerComponent {
   private destroyRef = inject(DestroyRef);
   private timerService = inject(TimerService);
 
-  counter: number = 0;
-
-  workTime = this.timerService.workTime;
-  breakTimeS = this.timerService.breakTimeS;
-  breakTimeL = this.timerService.breakTimeL;
   maxInterval = this.timerService.maxInterval;
   curInterval = this.timerService.curInterval;
-  autoCycle = this.timerService.autoCycle;
 
-  private displayVars = false;
-
+  counter: number = 0;
   constructor() {
     const subscription = this.timerService.stopWatch.subscribe((val) => {
       this.counter = val * 1000;
@@ -38,9 +31,5 @@ export class TimerComponent {
     this.destroyRef.onDestroy(() => {
       subscription?.unsubscribe();
     });
-  }
-
-  get displayVariables() {
-    return this.displayVars;
   }
 }

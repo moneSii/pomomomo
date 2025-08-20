@@ -1,0 +1,13 @@
+@if (this.displayVars()){
+      <div class="timer-variables">
+    <p class="timer-var-item">{{ this.workTime() * 1000 | date : "mm:ss" }} Work Time</p>
+
+    <p class="timer-var-item">{{ this.breakTimeS() * 1000 | date : "mm:ss" }} Short Break</p>
+
+    <p class="timer-var-item">{{ this.breakTimeL() * 1000 | date : "mm:ss" }} Long Break</p>
+
+    <p class="timer-var-item">{{ this.maxInterval() }} Work Intervals</p>
+
+    <p class="timer-var-item">{{ this.autoCycle() }} Autocycling</p>
+  </div>
+  }

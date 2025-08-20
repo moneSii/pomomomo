@@ -38,6 +38,9 @@ export class TimerService implements OnDestroy {
   private timerSubscription = new Subscription();
 
   private autoStartCycles = signal(true);
+
+  private displayVars = signal(false);
+
   get workTime() {
     return this.startTime.asReadonly();
   }
@@ -64,6 +67,10 @@ export class TimerService implements OnDestroy {
 
   get curStatus() {
     return this.status.asReadonly();
+  }
+
+  get displayVariables() {
+    return this.displayVars.asReadonly();
   }
 
   get stopWatch(): Observable<number> {
@@ -101,6 +108,10 @@ export class TimerService implements OnDestroy {
       console.log('cycle Changed');
       this.autoStartCycles.set(val);
     }
+  }
+
+  alternateDisplayVariables() {
+    this.displayVars.set(!this.displayVars());
   }
 
   startCount(): void {

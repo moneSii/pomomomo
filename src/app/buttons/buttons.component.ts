@@ -10,6 +10,7 @@ import { TimerService } from '../timer/timer.service';
 })
 export class ButtonsComponent {
   private timerService = inject(TimerService);
+
   onStart() {
     this.timerService.startCount();
   }
@@ -19,13 +20,13 @@ export class ButtonsComponent {
   onReset() {
     this.timerService.resetCount();
   }
-
   onSkip() {
     console.log('SKIP');
     this.timerService.cycleTimer();
   }
-
-  onToggleVars() {}
-
+  onToggleDisplayVars() {
+    this.timerService.alternateDisplayVariables();
+    console.log(this.timerService.displayVariables());
+  }
   onOpenForm() {}
 }
