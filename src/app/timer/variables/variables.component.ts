@@ -24,4 +24,8 @@ export class VariablesComponent {
   autoCycle = this.timerService.autoCycle;
 
   displayVars = this.displayService.displayVariables;
+
+  onOpenForm() {
+    this.displayService.alternateDisplayForm();
+  }
 }

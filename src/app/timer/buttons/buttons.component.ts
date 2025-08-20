@@ -28,7 +28,4 @@ export class ButtonsComponent {
   onToggleDisplayVars() {
     this.displayService.alternateDisplayVariables();
   }
-  onOpenForm() {
-    this.displayService.alternateDisplayForm();
-  }
 }
