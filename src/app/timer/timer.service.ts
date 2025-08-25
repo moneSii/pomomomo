@@ -30,7 +30,7 @@ export class TimerService implements OnDestroy {
   private longBreak = signal(30);
 
   private intervalCount = signal(4);
-  private currentInterval = signal(1);
+  private currentInterval = signal(0);
 
   private autoStartCycles = signal(false);
 
@@ -144,6 +144,14 @@ export class TimerService implements OnDestroy {
     this.timerSubscription.unsubscribe();
     this.status.set(false);
 
+    // When finishing work increment
+    // When finishing long break reset to 0
+    if (this.timeType()) {
+      this.currentInterval.update((val) => val + 1);
+    } else if (this.currentInterval() === this.intervalCount()) {
+      this.currentInterval.set(0);
+    }
+
     this.timeType.update((val) => !val); // alternate WORK/BREAK
 
     // WORK => BREAK
@@ -151,12 +159,10 @@ export class TimerService implements OnDestroy {
       if (this.currentInterval() === this.intervalCount()) {
         this.pauseTime = this.longBreak() * 60000;
         this.timer.next(this.longBreak() * 60000);
-        this.currentInterval.set(1);
         console.log('STARTING LONG BREAK');
       } else {
         this.pauseTime = this.shortBreak() * 60000;
         this.timer.next(this.shortBreak() * 60000);
-        this.currentInterval.update((val) => val + 1);
         console.log('STARTING SHORT BREAK');
       }
     }
