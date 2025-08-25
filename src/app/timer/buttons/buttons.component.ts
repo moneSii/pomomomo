@@ -28,4 +28,8 @@ export class ButtonsComponent {
   onToggleDisplayVars() {
     this.displayService.alternateDisplayVariables();
   }
+
+  get timerStatus() {
+    return this.timerService.curStatus();
+  }
 }

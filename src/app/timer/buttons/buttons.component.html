@@ -1,9 +1,19 @@
 <div class="timer__buttons">
-  <button class="start-button" (click)="onStart()">Start</button>
-  <button class="pause-button" (click)="onPause()">Pause</button>
-  <button class="reset-button" (click)="onReset()">Reset</button>
-  <button class="skip-button" (click)="onSkip()">Skip</button>
+  @if (!this.timerStatus){
+  <button class="start-button" (click)="onStart()">
+    <img src="/icons/play.svg" />
+  </button>
+  } @else {
+  <button class="pause-button" (click)="onPause()">
+    <img src="/icons/pause.svg" /></button
+  >}
+  <button class="skip-button" (click)="onSkip()">
+    <img src="/icons/skip.svg" />
+  </button>
+  <button class="reset-button" (click)="onReset()">
+    <img src="/icons/reset.svg" />
+  </button>
   <button class="toggle-button" (click)="onToggleDisplayVars()">
-    Settings
+    <img src="/icons/settingBUTTON.svg" />
   </button>
 </div>
