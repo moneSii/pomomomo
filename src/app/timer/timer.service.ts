@@ -32,15 +32,13 @@ export class TimerService implements OnDestroy {
   private intervalCount = signal(4);
   private currentInterval = signal(1);
 
-  private autoStartCycles = signal(true);
+  private autoStartCycles = signal(false);
 
   private timeType = signal(true);
   private status = signal(false);
 
   private timer = new BehaviorSubject(this.pauseTime);
   private timerSubscription = new Subscription();
-
-  private currentDate = new Date();
 
   get workTime() {
     return this.startTime.asReadonly();
@@ -89,8 +87,8 @@ export class TimerService implements OnDestroy {
         case 'minutes':
           console.log('minutes Changed');
           this.startTime.set(numVal);
-          this.pauseTime = numVal;
-          this.timer.next(numVal);
+          this.pauseTime = numVal * 60000;
+          this.timer.next(this.pauseTime);
           break;
         case 'short':
           console.log('shortBreak Changed');
@@ -117,7 +115,7 @@ export class TimerService implements OnDestroy {
     }
     var timerDate = new Date(this.pauseTime + Date.now());
 
-    this.timerSubscription = timer(0, 200)
+    this.timerSubscription = timer(0, 20)
       .pipe(
         map(() => {
           return timerDate.getTime() - Date.now();
@@ -174,4 +172,6 @@ export class TimerService implements OnDestroy {
       this.startCount();
     }
   }
+
+  toMilliseconds() {}
 }

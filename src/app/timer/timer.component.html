@@ -2,7 +2,7 @@
   <div class="timer__display">
     <p class="timer--stopwatch">{{ this.counter | date : "mm:ss.S" }}</p>
     <h2 class="timer--intervalCount">
-      {{ this.curInterval() + "/" + this.maxInterval() }}
+      Work Cycle: {{ this.curInterval() + "/" + this.maxInterval() }}
     </h2>
   </div>
   <ng-content select="app-buttons"></ng-content>
