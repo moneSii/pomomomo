@@ -5,6 +5,7 @@ import {
   DestroyRef,
   OnDestroy,
 } from '@angular/core';
+import { DatePipe } from '@angular/common';
 
 import { Subscription, BehaviorSubject, Observable, timer, map } from 'rxjs';
 
@@ -22,11 +23,11 @@ export class TimerService implements OnDestroy {
     });
   }
 
-  private startTime = signal(15000);
-  private pauseTime = this.startTime();
+  private startTime = signal(25);
+  private pauseTime = this.startTime() * 60000;
 
-  private shortBreak = signal(3000);
-  private longBreak = signal(6000);
+  private shortBreak = signal(5);
+  private longBreak = signal(30);
 
   private intervalCount = signal(4);
   private currentInterval = signal(1);
@@ -36,8 +37,10 @@ export class TimerService implements OnDestroy {
   private timeType = signal(true);
   private status = signal(false);
 
-  private timer = new BehaviorSubject(this.startTime());
+  private timer = new BehaviorSubject(this.pauseTime);
   private timerSubscription = new Subscription();
+
+  private currentDate = new Date();
 
   get workTime() {
     return this.startTime.asReadonly();
@@ -81,7 +84,7 @@ export class TimerService implements OnDestroy {
     }
 
     if (typeof val === 'string') {
-      const numVal = +val * 60;
+      const numVal = +val;
       switch (type) {
         case 'minutes':
           console.log('minutes Changed');
@@ -112,12 +115,12 @@ export class TimerService implements OnDestroy {
     if (this.status()) {
       return;
     }
+    var timerDate = new Date(this.pauseTime + Date.now());
 
-    this.timerSubscription = timer(0, 100)
+    this.timerSubscription = timer(0, 200)
       .pipe(
-        map((val) => {
-          console.log(this.pauseTime - val);
-          return this.pauseTime - val;
+        map(() => {
+          return timerDate.getTime() - Date.now();
         })
       )
       .subscribe(this.timer);
@@ -133,7 +136,7 @@ export class TimerService implements OnDestroy {
 
   resetCount(): void {
     this.timerSubscription.unsubscribe();
-    this.pauseTime = this.startTime();
+    this.pauseTime = this.startTime() * 60000;
     this.timer.next(this.pauseTime);
     this.currentInterval.set(1);
     this.status.set(false);
@@ -148,13 +151,13 @@ export class TimerService implements OnDestroy {
     // WORK => BREAK
     if (this.timeType() === false) {
       if (this.currentInterval() === this.intervalCount()) {
-        this.pauseTime = this.longBreak();
-        this.timer.next(this.longBreak());
+        this.pauseTime = this.longBreak() * 60000;
+        this.timer.next(this.longBreak() * 60000);
         this.currentInterval.set(1);
         console.log('STARTING LONG BREAK');
       } else {
-        this.pauseTime = this.shortBreak();
-        this.timer.next(this.shortBreak());
+        this.pauseTime = this.shortBreak() * 60000;
+        this.timer.next(this.shortBreak() * 60000);
         this.currentInterval.update((val) => val + 1);
         console.log('STARTING SHORT BREAK');
       }
@@ -162,8 +165,8 @@ export class TimerService implements OnDestroy {
 
     // BREAK => WORK
     else {
-      this.pauseTime = this.startTime();
-      this.timer.next(this.startTime());
+      this.pauseTime = this.startTime() * 60000;
+      this.timer.next(this.startTime() * 60000);
       console.log('STARTING WORK');
     }
 
