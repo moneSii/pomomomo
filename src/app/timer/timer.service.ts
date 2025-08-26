@@ -36,6 +36,7 @@ export class TimerService implements OnDestroy {
 
   private timeType = signal(true);
   private status = signal(false);
+  private session = signal(false);
 
   private timer = new BehaviorSubject(this.pauseTime);
   private timerSubscription = new Subscription();
