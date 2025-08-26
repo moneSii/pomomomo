@@ -24,7 +24,7 @@ export class TimerService implements OnDestroy {
   }
 
   private startTime = signal(25);
-  private pauseTime = this.startTime() * 60000;
+  private pauseTime = this.toMilliseconds(this.startTime());
 
   private shortBreak = signal(5);
   private longBreak = signal(30);
@@ -92,7 +92,7 @@ export class TimerService implements OnDestroy {
 
           console.log(this.session());
           if (!this.session()) {
-            this.pauseTime = numVal * 60000;
+            this.pauseTime = this.toMilliseconds(numVal);
             this.timer.next(this.pauseTime);
           }
           break;
@@ -141,7 +141,7 @@ export class TimerService implements OnDestroy {
 
   resetCount(): void {
     this.timerSubscription.unsubscribe();
-    this.pauseTime = this.startTime() * 60000;
+    this.pauseTime = this.toMilliseconds(this.startTime());
     this.timer.next(this.pauseTime);
     this.currentInterval.set(0);
     this.status.set(false);
@@ -167,20 +167,20 @@ export class TimerService implements OnDestroy {
     // WORK => BREAK
     if (this.timeType() === false) {
       if (this.currentInterval() === this.intervalCount()) {
-        this.pauseTime = this.longBreak() * 60000;
-        this.timer.next(this.longBreak() * 60000);
+        this.pauseTime = this.toMilliseconds(this.longBreak());
+        this.timer.next(this.toMilliseconds(this.longBreak()));
         console.log('STARTING LONG BREAK');
       } else {
-        this.pauseTime = this.shortBreak() * 60000;
-        this.timer.next(this.shortBreak() * 60000);
+        this.pauseTime = this.toMilliseconds(this.shortBreak());
+        this.timer.next(this.toMilliseconds(this.shortBreak()));
         console.log('STARTING SHORT BREAK');
       }
     }
 
     // BREAK => WORK
     else {
-      this.pauseTime = this.startTime() * 60000;
-      this.timer.next(this.startTime() * 60000);
+      this.pauseTime = this.toMilliseconds(this.startTime());
+      this.timer.next(this.toMilliseconds(this.startTime()));
       console.log('STARTING WORK');
     }
 
@@ -189,5 +189,7 @@ export class TimerService implements OnDestroy {
     }
   }
 
-  toMilliseconds() {}
+  toMilliseconds(val: number): number {
+    return val * 60000;
+  }
 }
