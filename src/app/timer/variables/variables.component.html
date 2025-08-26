@@ -1,23 +1,36 @@
 @if (this.displayVars()){
 <div class="timer__variables">
-  <p class="timer-var-item">
-    {{ this.workTime() * 60000 | minuteTime : "mm:ss" }} Work Time
-  </p>
-
-  <p class="timer-var-item">
-    {{ this.breakTimeS() * 60000 | minuteTime : "mm:ss" }} Short Break
-  </p>
-
-  <p class="timer-var-item">
-    {{ this.breakTimeL() * 60000 | minuteTime : "mm:ss" }} Long Break
-  </p>
-
-  <p class="timer-var-item">{{ this.maxInterval() }} Work Intervals</p>
-
-  <p class="timer-var-item">{{ this.autoCycle() }} Autocycling</p>
-  <button class="form-button" (click)="onOpenForm()">
-    <img src="/icons/settings.png" />
-  </button>
+  <div class="timer-var-item">
+    <label>Work</label>
+    <p>
+      {{ this.workTime() * 60000 | minuteTime : "mm:ss" }}
+    </p>
+  </div>
+  <div class="timer-var-item">
+    <label>Break(S)</label>
+    <p>
+      {{ this.breakTimeS() * 60000 | minuteTime : "mm:ss" }}
+    </p>
+  </div>
+  <div class="timer-var-item">
+    <label>Break(L)</label>
+    <p>
+      {{ this.breakTimeL() * 60000 | minuteTime : "mm:ss" }}
+    </p>
+  </div>
+  <div class="timer-var-item">
+    <label>Intervals</label>
+    <p>{{ this.maxInterval() }}</p>
+  </div>
+  <div class="timer-var-item">
+    <label>Autocycling</label>
+    <input type="checkbox" disabled="true" [checked]="autoCycle()" />
+  </div>
+  <div class="timer-var-item">
+    <button class="form-button" (click)="onOpenForm()">
+      <img src="/icons/settings.png" />
+    </button>
+  </div>
 </div>
 <div class="timer__settings"></div>
 

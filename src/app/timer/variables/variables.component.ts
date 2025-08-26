@@ -1,5 +1,7 @@
 import { Component, inject } from '@angular/core';
 
+import { FormsModule } from '@angular/forms';
+
 import { TimerService } from '../timer.service';
 import { DisplayService } from '../../display.service';
 import { MinuteTimePipe } from '../minute-time.pipe';
@@ -7,7 +9,7 @@ import { MinuteTimePipe } from '../minute-time.pipe';
 @Component({
   selector: 'app-variables',
   standalone: true,
-  imports: [MinuteTimePipe],
+  imports: [MinuteTimePipe, FormsModule],
   templateUrl: './variables.component.html',
   styleUrl: './variables.component.css',
 })
@@ -20,6 +22,7 @@ export class VariablesComponent {
   breakTimeL = this.timerService.breakTimeL;
   maxInterval = this.timerService.maxInterval;
   curInterval = this.timerService.curInterval;
+
   autoCycle = this.timerService.autoCycle;
 
   displayVars = this.displayService.displayVariables;

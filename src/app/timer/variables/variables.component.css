@@ -10,15 +10,26 @@
   box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 7px 0px inset;
 
   color: white;
-  font-family: Impact;
+  font-family: monospace;
 }
 
 .timer-var-item {
-  width: 4.5rem;
+  padding-top: 1rem;
+  width: 5rem;
+  margin: 0 auto;
+}
+
+label,
+p {
+  text-shadow: 2px 4px 3px rgba(0, 0, 0, 0.3);
+}
+p {
+  font-size: 1rem;
 }
 
 img {
   width: 50px;
+  filter: brightness(0) invert(1);
 }
 
 img:hover {
@@ -26,8 +37,6 @@ img:hover {
 }
 
 button {
-  margin-top: 1.5rem;
-
   background: none;
   color: inherit;
   border: none;
