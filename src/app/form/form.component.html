@@ -1,9 +1,8 @@
 @if (this.display()){
 <div class="backdrop" (click)="closeForm()"></div>
 <dialog open class="form-box">
-  <form [formGroup]="form">
-    <p>Select Your Pomodoro timer Variables</p>
-
+  <h1>Adjust Timer!</h1>
+  <form class="form" [formGroup]="form">
     <div class="control">
       <label>Minutes</label>
       <input
@@ -18,7 +17,7 @@
     </div>
 
     <div class="control">
-      <label>short break</label>
+      <label>Short break</label>
       <input
         id="shortBreakMinutes"
         formControlName="short"
@@ -28,8 +27,9 @@
         [upperLimit]="60"
         [lowerLimit]="1"
       />
-
-      <label>long break</label>
+    </div>
+    <div class="control">
+      <label>Long break</label>
       <input
         id="longBreakMinutes"
         formControlName="long"
