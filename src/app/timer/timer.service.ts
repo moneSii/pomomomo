@@ -80,6 +80,7 @@ export class TimerService implements OnDestroy {
     if (this.status()) {
       return;
     }
+    console.log(type, val);
 
     if (typeof val === 'string') {
       const numVal = +val;
@@ -115,7 +116,7 @@ export class TimerService implements OnDestroy {
     }
     var timerDate = new Date(this.pauseTime + Date.now());
 
-    this.timerSubscription = timer(0, 20)
+    this.timerSubscription = timer(0, 100)
       .pipe(
         map(() => {
           return timerDate.getTime() - Date.now();

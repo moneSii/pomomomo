@@ -9,7 +9,11 @@
       <input
         id="workMinutes"
         formControlName="minutes"
-        (keypress)="($event.charCode >= 48 && $event.charCode < 58)"
+        appSelect
+        appNumbersOnly
+        appLessThan
+        [upperLimit]="60"
+        [lowerLimit]="1"
       />
     </div>
 
@@ -18,14 +22,23 @@
       <input
         id="shortBreakMinutes"
         formControlName="short"
-        (keypress)="($event.charCode >= 48 && $event.charCode < 58)"
+        appSelect
+        appNumbersOnly
+        appLessThan
+        [upperLimit]="60"
+        [lowerLimit]="1"
       />
 
       <label>long break</label>
       <input
         id="longBreakMinutes"
         formControlName="long"
-        (keypress)="($event.charCode >= 48 && $event.charCode < 58)"
+        appNumbersOnly
+        appSelect
+        appNumbersOnly
+        appLessThan
+        [upperLimit]="60"
+        [lowerLimit]="1"
       />
     </div>
 
@@ -34,17 +47,18 @@
       <input
         id="workIntervals"
         formControlName="intervals"
-        (keypress)="($event.charCode >= 48 && $event.charCode < 58)"
+        appNumbersOnly
+        appSelect
+        appNumbersOnly
+        appLessThan
+        [upperLimit]="60"
+        [lowerLimit]="1"
       />
     </div>
 
     <div class="control">
       <label>AutoCycle</label>
-      <input
-        type="checkbox"
-        formControlName="cycle"
-        (keypress)="($event.charCode >= 48 && $event.charCode < 58)"
-      />
+      <input type="checkbox" formControlName="cycle" />
     </div>
   </form>
 </dialog>

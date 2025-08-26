@@ -10,11 +10,19 @@ import { debounceTime, tap, merge, map } from 'rxjs';
 
 import { TimerService } from '../timer/timer.service';
 import { DisplayService } from '../display.service';
+import { NumbersOnlyDirective } from './numbers-only.directive';
+import { LessThanDirective } from './less-than.directive';
+import { SelectDirective } from './select.directive';
 
 @Component({
   selector: 'app-form',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [
+    ReactiveFormsModule,
+    NumbersOnlyDirective,
+    LessThanDirective,
+    SelectDirective,
+  ],
   templateUrl: './form.component.html',
   styleUrl: './form.component.css',
 })
@@ -43,22 +51,10 @@ export class FormComponent implements OnInit {
         map((val) => ({ source: 'cycle', val }))
       )
     )
-      .pipe(
-        debounceTime(500),
-        tap((valSource) => {
-          if (
-            this.form.controls[
-              valSource.source as keyof typeof this.form.controls
-            ].status == 'INVALID'
-          ) {
-            this.form.controls[
-              valSource.source as keyof typeof this.form.controls
-            ].reset(null, { emitEvent: false });
-          }
-        })
-      )
+      .pipe(debounceTime(250))
       .subscribe({
         next: (valSource) => {
+          console.log(valSource.val);
           if (
             this.form.controls[
               valSource.source as keyof typeof this.form.controls
