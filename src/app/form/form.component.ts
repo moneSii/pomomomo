@@ -87,7 +87,7 @@ export class FormComponent implements OnInit {
     intervals: new FormControl('4', {
       validators: [Validators.required, Validators.pattern('^[0-9]*$')],
     }),
-    cycle: new FormControl<boolean>(true, {
+    cycle: new FormControl<boolean>(false, {
       validators: [Validators.required],
     }),
   });

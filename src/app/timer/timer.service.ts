@@ -34,9 +34,9 @@ export class TimerService implements OnDestroy {
 
   private autoStartCycles = signal(false);
 
-  private timeType = signal(true);
-  private status = signal(false);
-  private session = signal(false);
+  private timeType = signal(true); // work=true : break=false
+  private status = signal(false); // running
+  private session = signal(false); // if currently in a session
 
   private timer = new BehaviorSubject(this.pauseTime);
   private timerSubscription = new Subscription();
@@ -89,8 +89,12 @@ export class TimerService implements OnDestroy {
         case 'minutes':
           console.log('minutes Changed');
           this.startTime.set(numVal);
-          this.pauseTime = numVal * 60000;
-          this.timer.next(this.pauseTime);
+
+          console.log(this.session());
+          if (!this.session()) {
+            this.pauseTime = numVal * 60000;
+            this.timer.next(this.pauseTime);
+          }
           break;
         case 'short':
           console.log('shortBreak Changed');
@@ -115,6 +119,7 @@ export class TimerService implements OnDestroy {
     if (this.status()) {
       return;
     }
+    this.session.set(true);
     var timerDate = new Date(this.pauseTime + Date.now());
 
     this.timerSubscription = timer(0, 100)
@@ -138,8 +143,10 @@ export class TimerService implements OnDestroy {
     this.timerSubscription.unsubscribe();
     this.pauseTime = this.startTime() * 60000;
     this.timer.next(this.pauseTime);
-    this.currentInterval.set(1);
+    this.currentInterval.set(0);
     this.status.set(false);
+    this.timeType.set(true);
+    this.session.set(false);
   }
 
   cycleTimer() {
@@ -152,6 +159,7 @@ export class TimerService implements OnDestroy {
       this.currentInterval.update((val) => val + 1);
     } else if (this.currentInterval() === this.intervalCount()) {
       this.currentInterval.set(0);
+      this.session.set(false);
     }
 
     this.timeType.update((val) => !val); // alternate WORK/BREAK

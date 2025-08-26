@@ -25,6 +25,10 @@ export class VariablesComponent {
   displayVars = this.displayService.displayVariables;
 
   onOpenForm() {
-    this.displayService.alternateDisplayForm();
+    if (!this.timerService.curStatus()) {
+      this.displayService.alternateDisplayForm();
+    } else {
+      alert('Timer is still running! Stop it first!');
+    }
   }
 }
