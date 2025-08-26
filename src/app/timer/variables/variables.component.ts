@@ -1,14 +1,13 @@
 import { Component, inject } from '@angular/core';
 
-import { DatePipe } from '@angular/common';
-
 import { TimerService } from '../timer.service';
 import { DisplayService } from '../../display.service';
+import { MinuteTimePipe } from '../minute-time.pipe';
 
 @Component({
   selector: 'app-variables',
   standalone: true,
-  imports: [DatePipe],
+  imports: [MinuteTimePipe],
   templateUrl: './variables.component.html',
   styleUrl: './variables.component.css',
 })

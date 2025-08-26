@@ -1,12 +1,12 @@
 import { Component, inject, DestroyRef } from '@angular/core';
-import { DatePipe } from '@angular/common';
 
 import { TimerService } from './timer.service';
+import { MinuteTimePipe } from './minute-time.pipe';
 
 @Component({
   selector: 'app-timer',
   standalone: true,
-  imports: [DatePipe],
+  imports: [MinuteTimePipe],
   templateUrl: './timer.component.html',
   styleUrl: './timer.component.css',
 })

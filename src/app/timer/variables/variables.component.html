@@ -1,15 +1,15 @@
 @if (this.displayVars()){
 <div class="timer__variables">
   <p class="timer-var-item">
-    {{ this.workTime() * 60000 | date : "mm:ss" }} Work Time
+    {{ this.workTime() * 60000 | minuteTime : "mm:ss" }} Work Time
   </p>
 
   <p class="timer-var-item">
-    {{ this.breakTimeS() * 60000 | date : "mm:ss" }} Short Break
+    {{ this.breakTimeS() * 60000 | minuteTime : "mm:ss" }} Short Break
   </p>
 
   <p class="timer-var-item">
-    {{ this.breakTimeL() * 60000 | date : "mm:ss" }} Long Break
+    {{ this.breakTimeL() * 60000 | minuteTime : "mm:ss" }} Long Break
   </p>
 
   <p class="timer-var-item">{{ this.maxInterval() }} Work Intervals</p>

@@ -58,7 +58,8 @@ export class FormComponent implements OnInit {
           if (
             this.form.controls[
               valSource.source as keyof typeof this.form.controls
-            ].status != 'INVALID'
+            ].status != 'INVALID' ||
+            !this.timerService.curStatus()
           ) {
             return this.timerService.setPomoVars(
               valSource.source,
