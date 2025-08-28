@@ -1,37 +1,36 @@
 @if (this.displayVars()){
-<div class="timer__variables">
-  <div class="timer-var-item">
+<div class="container">
+  <div class="item">
     <label>Work</label>
     <p>
       {{ this.workTime() * 60000 | minuteTime : "mm:ss" }}
     </p>
   </div>
-  <div class="timer-var-item">
+  <div class="item">
     <label>Break(S)</label>
     <p>
       {{ this.breakTimeS() * 60000 | minuteTime : "mm:ss" }}
     </p>
   </div>
-  <div class="timer-var-item">
+  <div class="item">
     <label>Break(L)</label>
     <p>
       {{ this.breakTimeL() * 60000 | minuteTime : "mm:ss" }}
     </p>
   </div>
-  <div class="timer-var-item">
+  <div class="item">
     <label>Intervals</label>
     <p>{{ this.maxInterval() }}</p>
   </div>
-  <div class="timer-var-item">
+  <div class="item">
     <label>Autocycling</label>
     <input type="checkbox" disabled="true" [checked]="autoCycle()" />
   </div>
-  <div class="timer-var-item">
-    <button class="form-button" (click)="onOpenForm()">
+  <div class="item">
+    <button (click)="onOpenForm()">
       <img src="/icons/settings.png" />
     </button>
   </div>
 </div>
-<div class="timer__settings"></div>
 
 }
