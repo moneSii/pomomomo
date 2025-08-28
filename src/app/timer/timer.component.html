@@ -1,9 +1,9 @@
-<div class="timer">
-  <div class="timer__display">
-    <p class="timer--stopwatch">{{ this.counter | minuteTime : "mm:ss" }}</p>
-    <h2 class="timer--intervalCount">
+<div class="body">
+  <div class="container">
+    <p class="timer">{{ this.counter | minuteTime : "mm:ss" }}</p>
+    <p class="interval">
       Work Done: {{ this.curInterval() + "/" + this.maxInterval() }}
-    </h2>
+    </p>
   </div>
   <ng-content select="app-buttons"></ng-content>
   <ng-content select="app-variables"></ng-content>
