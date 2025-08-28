@@ -1,19 +1,19 @@
-<div class="timer__buttons">
+<div class="container">
   @if (!this.timerStatus){
-  <button class="start-button" (click)="onStart()">
+  <button (click)="onStart()">
     <img src="/icons/play.svg" />
   </button>
   } @else {
-  <button class="pause-button" (click)="onPause()">
+  <button (click)="onPause()">
     <img src="/icons/pause.svg" /></button
   >}
-  <button class="skip-button" (click)="onSkip()">
+  <button (click)="onSkip()">
     <img src="/icons/skip.svg" />
   </button>
-  <button class="reset-button" (click)="onReset()">
+  <button (click)="onReset()">
     <img src="/icons/reset.svg" />
   </button>
-  <button class="toggle-button" (click)="onToggleDisplayVars()">
+  <button (click)="onToggleDisplayVars()">
     <img src="/icons/settingBUTTON.svg" />
   </button>
 </div>

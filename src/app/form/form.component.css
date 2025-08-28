@@ -1,5 +1,5 @@
 .backdrop {
-  background-color: rgba(0, 0, 0, 0.397);
+  background-color: rgba(0, 0, 0, 0.808);
   position: fixed;
   top: 0;
   left: 0;
@@ -7,9 +7,9 @@
   height: 100vh;
 }
 
-.settings {
+dialog {
   width: 90%;
-  max-width: 10rem;
+  max-width: 35rem;
   background-color: var(--main-color);
   border-radius: 6px;
   border: none;
@@ -19,15 +19,14 @@
   top: 15rem;
 }
 
-.form-title {
+h1 {
   color: #ffffff;
   font-family: var(--main-font);
   text-align: center;
 }
 
-.form-body {
+form {
   display: flex;
-  flex-direction: column;
   justify-content: space-evenly;
 }
 
@@ -35,7 +34,7 @@
   text-align: center;
 }
 
-.form-label {
+label {
   text-align: center;
   display: block;
   font-weight: bold;
@@ -44,7 +43,7 @@
   font-family: var(--main-font);
 }
 
-.form-input {
+input {
   border-radius: 4px;
   border: 1px solid #ab9ac0;
   background-color: #ffffff;

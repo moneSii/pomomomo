@@ -1,12 +1,11 @@
 @if (this.display()){
 <div class="backdrop" (click)="closeForm()"></div>
-<dialog open class="settings">
-  <h1 class="form-title">Adjust Timer!</h1>
-  <form class="form-body" [formGroup]="form">
+<dialog open>
+  <h1>Adjust Timer!</h1>
+  <form [formGroup]="form">
     <div class="form-item">
-      <label class="form-label">Minutes</label>
+      <label>Minutes</label>
       <input
-        class="form-input"
         formControlName="minutes"
         appSelect
         appNumbersOnly
@@ -15,11 +14,9 @@
         [lowerLimit]="1"
       />
     </div>
-
     <div class="form-item">
-      <label class="form-label">Short break</label>
+      <label>Short Break</label>
       <input
-        class="form-input"
         formControlName="short"
         appSelect
         appNumbersOnly
@@ -29,9 +26,8 @@
       />
     </div>
     <div class="form-item">
-      <label class="form-label">Long break</label>
+      <label>Long Break</label>
       <input
-        class="form-input"
         formControlName="long"
         appSelect
         appNumbersOnly
@@ -40,11 +36,9 @@
         [lowerLimit]="1"
       />
     </div>
-
     <div class="form-item">
-      <label class="form-label">intervals</label>
+      <label>Intervals</label>
       <input
-        class="form-input"
         formControlName="intervals"
         appSelect
         appNumbersOnly
@@ -53,10 +47,9 @@
         [lowerLimit]="1"
       />
     </div>
-
     <div class="form-item">
-      <label class="form-label">AutoCycle</label>
-      <input class="form-input" type="checkbox" formControlName="cycle" />
+      <label>AutoCycle</label>
+      <input type="checkbox" formControlName="cycle" />
     </div>
   </form>
 </dialog>

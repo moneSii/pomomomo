@@ -1,20 +1,13 @@
-.timer__buttons {
+.container {
   display: flex;
   padding: 10px;
   margin: 10px;
-
   justify-content: space-evenly;
   padding: 10px;
   margin: 10px;
   border-radius: 25px;
-
   background-color: var(--secondary-color);
   box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 7px 3px inset;
-}
-
-img {
-  max-width: 16px;
-  filter: brightness(3) invert(1);
 }
 
 button {
@@ -33,4 +26,9 @@ button:active {
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
     rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
   border-radius: 5px;
+}
+
+img {
+  max-width: 16px;
+  filter: brightness(3) invert(1);
 }
