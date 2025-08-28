@@ -1,12 +1,12 @@
 @if (this.display()){
 <div class="backdrop" (click)="closeForm()"></div>
-<dialog open class="form-box">
-  <h1>Adjust Timer!</h1>
-  <form class="form" [formGroup]="form">
-    <div class="control">
-      <label>Minutes</label>
+<dialog open class="settings">
+  <h1 class="form-title">Adjust Timer!</h1>
+  <form class="form-body" [formGroup]="form">
+    <div class="form-item">
+      <label class="form-label">Minutes</label>
       <input
-        id="workMinutes"
+        class="form-input"
         formControlName="minutes"
         appSelect
         appNumbersOnly
@@ -16,10 +16,10 @@
       />
     </div>
 
-    <div class="control">
-      <label>Short break</label>
+    <div class="form-item">
+      <label class="form-label">Short break</label>
       <input
-        id="shortBreakMinutes"
+        class="form-input"
         formControlName="short"
         appSelect
         appNumbersOnly
@@ -28,10 +28,10 @@
         [lowerLimit]="1"
       />
     </div>
-    <div class="control">
-      <label>Long break</label>
+    <div class="form-item">
+      <label class="form-label">Long break</label>
       <input
-        id="longBreakMinutes"
+        class="form-input"
         formControlName="long"
         appSelect
         appNumbersOnly
@@ -41,10 +41,10 @@
       />
     </div>
 
-    <div class="control">
-      <label>intervals</label>
+    <div class="form-item">
+      <label class="form-label">intervals</label>
       <input
-        id="workIntervals"
+        class="form-input"
         formControlName="intervals"
         appSelect
         appNumbersOnly
@@ -54,9 +54,9 @@
       />
     </div>
 
-    <div class="control">
-      <label>AutoCycle</label>
-      <input type="checkbox" formControlName="cycle" />
+    <div class="form-item">
+      <label class="form-label">AutoCycle</label>
+      <input class="form-input" type="checkbox" formControlName="cycle" />
     </div>
   </form>
 </dialog>

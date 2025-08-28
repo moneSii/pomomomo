@@ -7,7 +7,7 @@
   height: 100vh;
 }
 
-dialog {
+.settings {
   width: 90%;
   max-width: 10rem;
   background-color: var(--main-color);
@@ -18,8 +18,24 @@ dialog {
   padding: 1rem;
   top: 15rem;
 }
-h1,
-label {
+
+.form-title {
+  color: #ffffff;
+  font-family: var(--main-font);
+  text-align: center;
+}
+
+.form-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.form-item {
+  text-align: center;
+}
+
+.form-label {
   text-align: center;
   display: block;
   font-weight: bold;
@@ -28,7 +44,7 @@ label {
   font-family: var(--main-font);
 }
 
-input {
+.form-input {
   border-radius: 4px;
   border: 1px solid #ab9ac0;
   background-color: #ffffff;
@@ -36,14 +52,4 @@ input {
   font-size: 1.5rem;
   max-width: 4rem;
   font-family: var(--main-font);
-}
-
-.form {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-}
-
-.control {
-  text-align: center;
 }
