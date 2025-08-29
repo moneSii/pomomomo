@@ -1,6 +1,6 @@
 <div class="body">
   <div class="container">
-    <p class="timer">{{ this.counter | minuteTime : "mm:ss" }}</p>
+    <p class="timer">{{ this.counter | async | minuteTime : "mm:ss" }}</p>
     <p class="interval">
       Work Done: {{ this.curInterval() + "/" + this.maxInterval() }}
     </p>

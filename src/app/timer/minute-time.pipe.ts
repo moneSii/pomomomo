@@ -5,11 +5,15 @@ import { Pipe, PipeTransform } from '@angular/core';
   standalone: true,
 })
 export class MinuteTimePipe implements PipeTransform {
-  transform(milliseconds: number, format: 'mm:ss:S' | 'mm:ss'): string {
+  transform(milliseconds: number | null, format: 'mm:ss:S' | 'mm:ss'): string {
+    if (!milliseconds) {
+      return '';
+    }
+
     const seconds = Math.trunc(milliseconds / 1000) % 60;
     const minutes = Math.trunc(milliseconds / 1000 / 60);
 
-    if (format == 'mm:ss:S') {
+    if (format === 'mm:ss:S') {
       const decaSeconds = Math.trunc(milliseconds / 100) % 10;
       return (
         minutes.toLocaleString('en-US', {

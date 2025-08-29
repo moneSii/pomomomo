@@ -5,9 +5,8 @@ import {
   DestroyRef,
   OnDestroy,
 } from '@angular/core';
-import { DatePipe } from '@angular/common';
 
-import { Subscription, BehaviorSubject, Observable, timer, map } from 'rxjs';
+import { Subscription, BehaviorSubject, timer, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -73,53 +72,47 @@ export class TimerService implements OnDestroy {
     return this.timeType.asReadonly();
   }
 
-  get stopWatch(): Observable<number> {
-    return this.timer.pipe(map((val) => val));
+  get stopWatch() {
+    return this.timer;
   }
 
   setPomoVars(type: string, val: string | boolean | null) {
     if (this.status()) {
       return;
     }
-    console.log(type, val);
-
     if (typeof val === 'string') {
       const numVal = +val;
       switch (type) {
         case 'minutes':
-          console.log('minutes Changed');
           this.startTime.set(numVal);
 
-          console.log(this.session());
           if (!this.session()) {
             this.pauseTime = this.toMilliseconds(numVal);
             this.timer.next(this.pauseTime);
           }
           break;
         case 'short':
-          console.log('shortBreak Changed');
           this.shortBreak.set(numVal);
           break;
         case 'long':
-          console.log('longBreak Changed');
           this.longBreak.set(numVal);
           break;
         case 'intervals':
-          console.log('intervals Changed');
           this.intervalCount.set(+val);
           break;
       }
     } else if (typeof val === 'boolean') {
-      console.log('cycle Changed');
       this.autoStartCycles.set(val);
     }
   }
 
-  startCount(): void {
+  startCount() {
     if (this.status()) {
       return;
     }
+
     this.session.set(true);
+    this.status.set(true);
     var timerDate = new Date(this.pauseTime + Date.now());
 
     this.timerSubscription = timer(0, 100)
@@ -129,17 +122,15 @@ export class TimerService implements OnDestroy {
         })
       )
       .subscribe(this.timer);
-
-    this.status.set(true);
   }
 
-  stopCount(): void {
+  stopCount() {
     this.pauseTime = this.timer.value;
     this.timerSubscription.unsubscribe();
     this.status.set(false);
   }
 
-  resetCount(): void {
+  resetCount() {
     this.timerSubscription.unsubscribe();
     this.pauseTime = this.toMilliseconds(this.startTime());
     this.timer.next(this.pauseTime);
@@ -169,11 +160,9 @@ export class TimerService implements OnDestroy {
       if (this.currentInterval() === this.intervalCount()) {
         this.pauseTime = this.toMilliseconds(this.longBreak());
         this.timer.next(this.toMilliseconds(this.longBreak()));
-        console.log('STARTING LONG BREAK');
       } else {
         this.pauseTime = this.toMilliseconds(this.shortBreak());
         this.timer.next(this.toMilliseconds(this.shortBreak()));
-        console.log('STARTING SHORT BREAK');
       }
     }
 
@@ -181,7 +170,6 @@ export class TimerService implements OnDestroy {
     else {
       this.pauseTime = this.toMilliseconds(this.startTime());
       this.timer.next(this.toMilliseconds(this.startTime()));
-      console.log('STARTING WORK');
     }
 
     if (this.autoStartCycles() == true) {

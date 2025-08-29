@@ -1,4 +1,5 @@
-import { Component, inject, DestroyRef } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { AsyncPipe } from '@angular/common';
 
 import { TimerService } from './timer.service';
 import { MinuteTimePipe } from './minute-time.pipe';
@@ -6,12 +7,11 @@ import { MinuteTimePipe } from './minute-time.pipe';
 @Component({
   selector: 'app-timer',
   standalone: true,
-  imports: [MinuteTimePipe],
+  imports: [MinuteTimePipe, AsyncPipe],
   templateUrl: './timer.component.html',
   styleUrl: './timer.component.css',
 })
 export class TimerComponent {
-  private destroyRef = inject(DestroyRef);
   private timerService = inject(TimerService);
 
   maxInterval = this.timerService.maxInterval;
@@ -20,17 +20,5 @@ export class TimerComponent {
   status = this.timerService.curStatus;
   timeType = this.timerService.timeTypeStatus;
 
-  counter: number = 0;
-  constructor() {
-    const subscription = this.timerService.stopWatch.subscribe((val) => {
-      this.counter = val;
-      if (val <= 0) {
-        this.timerService.cycleTimer();
-      }
-    });
-
-    this.destroyRef.onDestroy(() => {
-      subscription?.unsubscribe();
-    });
-  }
+  counter = this.timerService.stopWatch;
 }
