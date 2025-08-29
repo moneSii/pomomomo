@@ -1,6 +1,36 @@
 :root {
-  --main-color: #ffc17f;
-  --secondary-color: #ffc08d;
-  --tertiary-color: #c25452;
   --main-font: monospace;
+  --work-main-color: #ffc17f;
+  --work-secondary-color: #ffc08d;
+  --work-tertiary-color: #c25452;
+  --short-main-color: #927fff;
+  --short-secondary-color: #b98dff;
+  --short-tertiary-color: #6752c2;
+  --long-main-color: #7fff85;
+  --long-secondary-color: #a8ff8d;
+  --long-tertiary-color: #72c252;
+}
+
+.work-main {
+  background-color: var(--work-main-color);
+}
+
+.work-secondary {
+  background-color: var(--work-secondary-color);
+}
+
+.short-main {
+  background-color: var(--short-main-color);
+}
+
+.short-secondary {
+  background-color: var(--short-secondary-color);
+}
+
+.long-main {
+  background-color: var(--long-main-color);
+}
+
+.long-secondary {
+  background-color: var(--long-secondary-color);
 }

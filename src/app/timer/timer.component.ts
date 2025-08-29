@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, NgClass } from '@angular/common';
 
 import { TimerService } from './timer.service';
 import { MinuteTimePipe } from './minute-time.pipe';
@@ -7,7 +7,7 @@ import { MinuteTimePipe } from './minute-time.pipe';
 @Component({
   selector: 'app-timer',
   standalone: true,
-  imports: [MinuteTimePipe, AsyncPipe],
+  imports: [MinuteTimePipe, AsyncPipe, NgClass],
   templateUrl: './timer.component.html',
   styleUrl: './timer.component.css',
 })
@@ -16,9 +16,9 @@ export class TimerComponent {
 
   maxInterval = this.timerService.maxInterval;
   curInterval = this.timerService.curInterval;
+  timeType = this.timerService.timeTypeStatus;
 
   status = this.timerService.curStatus;
-  timeType = this.timerService.timeTypeStatus;
 
   counter = this.timerService.stopWatch;
 }

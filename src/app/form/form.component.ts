@@ -1,4 +1,5 @@
 import { Component, inject, DestroyRef, OnInit } from '@angular/core';
+import { NgClass } from '@angular/common';
 import {
   ReactiveFormsModule,
   FormGroup,
@@ -18,6 +19,7 @@ import { SelectDirective } from './select.directive';
   selector: 'app-form',
   standalone: true,
   imports: [
+    NgClass,
     ReactiveFormsModule,
     NumbersOnlyDirective,
     LessThanDirective,
@@ -30,6 +32,10 @@ export class FormComponent implements OnInit {
   private destroyRef = inject(DestroyRef);
   private timerService = inject(TimerService);
   private displayService = inject(DisplayService);
+
+  maxInterval = this.timerService.maxInterval;
+  curInterval = this.timerService.curInterval;
+  timeType = this.timerService.timeTypeStatus;
 
   display = this.displayService.displayFormInputs;
 

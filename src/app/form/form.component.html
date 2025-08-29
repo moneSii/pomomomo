@@ -1,11 +1,19 @@
 @if (this.display()){
 <div class="backdrop" (click)="closeForm()"></div>
-<dialog open>
+<dialog
+  open
+  [ngClass]="{
+    'work-main': this.timeType(),
+    'long-main': !this.timeType() && this.maxInterval() === this.curInterval(),
+    'short-main': !this.timeType() && this.maxInterval() !== this.curInterval()
+  }"
+>
   <h1>Adjust Timer!</h1>
   <form [formGroup]="form">
     <div class="form-item">
       <label>Minutes</label>
       <input
+        title="1-60"
         formControlName="minutes"
         appSelect
         appNumbersOnly
@@ -17,6 +25,7 @@
     <div class="form-item">
       <label>Short Break</label>
       <input
+        title="1-60"
         formControlName="short"
         appSelect
         appNumbersOnly
@@ -28,6 +37,7 @@
     <div class="form-item">
       <label>Long Break</label>
       <input
+        title="1-60"
         formControlName="long"
         appSelect
         appNumbersOnly
@@ -39,6 +49,7 @@
     <div class="form-item">
       <label>Intervals</label>
       <input
+        title="1-60"
         formControlName="intervals"
         appSelect
         appNumbersOnly

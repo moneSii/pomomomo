@@ -1,4 +1,13 @@
-<div class="container">
+<div
+  class="container"
+  [ngClass]="{
+    'work-secondary': this.timeType(),
+    'long-secondary':
+      !this.timeType() && this.maxInterval() === this.curInterval(),
+    'short-secondary':
+      !this.timeType() && this.maxInterval() !== this.curInterval()
+  }"
+>
   @if (!this.timerStatus){
   <button (click)="onStart()">
     <img src="/icons/play.svg" />
@@ -13,7 +22,7 @@
   <button (click)="onReset()">
     <img src="/icons/reset.svg" />
   </button>
-  <button (click)="onToggleDisplayVars()">
+  <button (click)="onOpenForm()">
     <img src="/icons/settingBUTTON.svg" />
   </button>
 </div>
