@@ -1,13 +1,6 @@
-<div
-  class="background"
-  [ngClass]="{
-  'work-tertiary': this.colorClassState() === 'init',
-  'work-short-tertiary': this.colorClassState() === 'work-short',
-  'short-work-tertiary': this.colorClassState()=== 'short-work',
-  'work-long-tertiary': this.colorClassState() === 'work-long',
-  'long-work-tertiary': this.colorClassState() === 'long-work',
-}"
-></div>
+<div class="background" [ngClass]="colorState + '-tertiary'">
+  {{ colorState }}
+</div>
 <div
   class="body"
   [ngClass]="{

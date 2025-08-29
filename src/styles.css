@@ -51,28 +51,28 @@
 
 .work-short-tertiary {
   animation-name: work-short-tertiary-anim;
-  animation-duration: 2s;
+  animation-duration: 1s;
   animation-fill-mode: forwards;
   background-color: var(--work-tertiary-color);
 }
 
 .short-work-tertiary {
   animation-name: short-work-tertiary-anim;
-  animation-duration: 2s;
+  animation-duration: 1s;
   animation-fill-mode: forwards;
   background-color: var(--short-tertiary-color);
 }
 
 .work-long-tertiary {
   animation-name: work-long-tertiary-anim;
-  animation-duration: 2s;
+  animation-duration: 1s;
   animation-fill-mode: forwards;
   background-color: var(--work-tertiary-color);
 }
 
 .long-work-tertiary {
   animation-name: long-work-tertiary-anim;
-  animation-duration: 2s;
+  animation-duration: 1s;
   animation-fill-mode: forwards;
   background-color: var(--long-tertiary-color);
 }

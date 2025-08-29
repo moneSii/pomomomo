@@ -24,6 +24,7 @@ export class TimerService implements OnDestroy {
   }
 
   private classStatus = signal('init');
+  private evenBetter = new BehaviorSubject('init');
 
   private startTime = signal(25);
   private pauseTime = this.toMilliseconds(this.startTime());
@@ -77,6 +78,10 @@ export class TimerService implements OnDestroy {
 
   get stopWatch() {
     return this.timer;
+  }
+
+  get color() {
+    return this.evenBetter;
   }
 
   setPomoVars(type: string, val: string | boolean | null) {
@@ -155,6 +160,7 @@ export class TimerService implements OnDestroy {
       this.currentInterval.set(0);
       this.session.set(false);
       this.classStatus.set('long-work');
+      this.evenBetter.next('long-work');
     }
 
     this.timeType.update((val) => !val); // alternate WORK/BREAK
@@ -165,10 +171,12 @@ export class TimerService implements OnDestroy {
         this.pauseTime = this.toMilliseconds(this.longBreak());
         this.timer.next(this.toMilliseconds(this.longBreak()));
         this.classStatus.set('work-long');
+        this.evenBetter.next('work-long');
       } else {
         this.pauseTime = this.toMilliseconds(this.shortBreak());
         this.timer.next(this.toMilliseconds(this.shortBreak()));
         this.classStatus.set('work-short');
+        this.evenBetter.next('work-short');
       }
     }
 
@@ -178,6 +186,7 @@ export class TimerService implements OnDestroy {
       this.timer.next(this.toMilliseconds(this.startTime()));
       if (this.classStatus() !== 'long-work') {
         this.classStatus.set('short-work');
+        this.evenBetter.next('short-work');
       }
     }
 
