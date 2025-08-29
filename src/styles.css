@@ -2,7 +2,7 @@
   --main-font: monospace;
   --work-main-color: #ffc17f;
   --work-secondary-color: #ffc08d;
-  --work-tertiary-color: #c25452;
+  --work-tertiary-color: #c27b52;
   --short-main-color: #927fff;
   --short-secondary-color: #b98dff;
   --short-tertiary-color: #6752c2;
@@ -19,6 +19,10 @@
   background-color: var(--work-secondary-color);
 }
 
+.work-tertiary {
+  background-color: var(--work-tertiary-color);
+}
+
 .short-main {
   background-color: var(--short-main-color);
 }
@@ -27,10 +31,18 @@
   background-color: var(--short-secondary-color);
 }
 
+.short-tertiary {
+  background-color: var(--short-tertiary-color);
+}
+
 .long-main {
   background-color: var(--long-main-color);
 }
 
 .long-secondary {
   background-color: var(--long-secondary-color);
+}
+
+.long-tertiary {
+  background-color: var(--long-tertiary-color);
 }

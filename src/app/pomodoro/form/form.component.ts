@@ -10,7 +10,7 @@ import {
 import { debounceTime, tap, merge, map } from 'rxjs';
 
 import { TimerService } from '../timer/timer.service';
-import { DisplayService } from '../display.service';
+import { DisplayService } from '../../display.service';
 import { NumbersOnlyDirective } from './numbers-only.directive';
 import { LessThanDirective } from './less-than.directive';
 import { SelectDirective } from './select.directive';

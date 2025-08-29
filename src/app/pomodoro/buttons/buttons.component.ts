@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { NgClass } from '@angular/common';
-import { TimerService } from '../timer.service';
+import { TimerService } from '../timer/timer.service';
 import { DisplayService } from '../../display.service';
 
 @Component({

@@ -1,0 +1,22 @@
+<div
+  class="background"
+  [ngClass]="{
+    'work-tertiary': this.timeType(),
+    'long-tertiary':
+      !this.timeType() && this.maxInterval() === this.curInterval(),
+    'short-tertiary':
+      !this.timeType() && this.maxInterval() !== this.curInterval()
+  }"
+></div>
+<div
+  class="body"
+  [ngClass]="{
+    'work-main': this.timeType(),
+    'long-main': !this.timeType() && this.maxInterval() === this.curInterval(),
+    'short-main': !this.timeType() && this.maxInterval() !== this.curInterval()
+  }"
+>
+  <app-timer />
+  <app-buttons />
+  <app-form />
+</div>
