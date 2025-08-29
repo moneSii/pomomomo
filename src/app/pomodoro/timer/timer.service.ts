@@ -4,6 +4,7 @@ import {
   signal,
   DestroyRef,
   OnDestroy,
+  WritableSignal,
 } from '@angular/core';
 
 import { Subscription, BehaviorSubject, timer, map } from 'rxjs';
@@ -21,6 +22,8 @@ export class TimerService implements OnDestroy {
       this.timer.unsubscribe();
     });
   }
+
+  private classStatus = signal('init');
 
   private startTime = signal(25);
   private pauseTime = this.toMilliseconds(this.startTime());
@@ -151,6 +154,7 @@ export class TimerService implements OnDestroy {
     } else if (this.currentInterval() === this.intervalCount()) {
       this.currentInterval.set(0);
       this.session.set(false);
+      this.classStatus.set('long-work');
     }
 
     this.timeType.update((val) => !val); // alternate WORK/BREAK
@@ -160,9 +164,11 @@ export class TimerService implements OnDestroy {
       if (this.currentInterval() === this.intervalCount()) {
         this.pauseTime = this.toMilliseconds(this.longBreak());
         this.timer.next(this.toMilliseconds(this.longBreak()));
+        this.classStatus.set('work-long');
       } else {
         this.pauseTime = this.toMilliseconds(this.shortBreak());
         this.timer.next(this.toMilliseconds(this.shortBreak()));
+        this.classStatus.set('work-short');
       }
     }
 
@@ -170,6 +176,9 @@ export class TimerService implements OnDestroy {
     else {
       this.pauseTime = this.toMilliseconds(this.startTime());
       this.timer.next(this.toMilliseconds(this.startTime()));
+      if (this.classStatus() !== 'long-work') {
+        this.classStatus.set('short-work');
+      }
     }
 
     if (this.autoStartCycles() == true) {
@@ -179,5 +188,9 @@ export class TimerService implements OnDestroy {
 
   toMilliseconds(val: number): number {
     return val * 60000;
+  }
+
+  get colorClassState() {
+    return this.classStatus.asReadonly();
   }
 }

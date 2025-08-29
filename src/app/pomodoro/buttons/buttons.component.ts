@@ -29,11 +29,15 @@ export class ButtonsComponent {
   onSkip() {
     this.timerService.cycleTimer();
   }
-  onToggleDisplayVars() {
-    this.displayService.alternateDisplayVariables();
-  }
+  // onToggleDisplayVars() {
+  //   this.displayService.alternateDisplayVariables();
+  // }
   onOpenForm() {
-    this.displayService.alternateDisplayForm();
+    if (!this.timerStatus) {
+      this.displayService.alternateDisplayForm();
+    } else {
+      alert('Timer is still Running!');
+    }
   }
 
   get timerStatus() {

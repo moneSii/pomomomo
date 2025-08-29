@@ -19,4 +19,6 @@ export class PomodoroComponent {
   maxInterval = this.timerService.maxInterval;
   curInterval = this.timerService.curInterval;
   timeType = this.timerService.timeTypeStatus;
+
+  colorClassState = this.timerService.colorClassState;
 }

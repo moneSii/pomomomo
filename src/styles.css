@@ -6,7 +6,7 @@
   --short-main-color: #927fff;
   --short-secondary-color: #b98dff;
   --short-tertiary-color: #6752c2;
-  --long-main-color: #7fff85;
+  --long-main-color: #7fffb4;
   --long-secondary-color: #a8ff8d;
   --long-tertiary-color: #72c252;
 }
@@ -45,4 +45,58 @@
 
 .long-tertiary {
   background-color: var(--long-tertiary-color);
+}
+
+/* Animations */
+
+.work-short-tertiary {
+  animation-name: work-short-tertiary-anim;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+  background-color: var(--work-tertiary-color);
+}
+
+.short-work-tertiary {
+  animation-name: short-work-tertiary-anim;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+  background-color: var(--short-tertiary-color);
+}
+
+.work-long-tertiary {
+  animation-name: work-long-tertiary-anim;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+  background-color: var(--work-tertiary-color);
+}
+
+.long-work-tertiary {
+  animation-name: long-work-tertiary-anim;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+  background-color: var(--long-tertiary-color);
+}
+
+@keyframes work-short-tertiary-anim {
+  to {
+    background-color: var(--short-tertiary-color);
+  }
+}
+
+@keyframes short-work-tertiary-anim {
+  to {
+    background-color: var(--work-tertiary-color);
+  }
+}
+
+@keyframes work-long-tertiary-anim {
+  to {
+    background-color: var(--long-tertiary-color);
+  }
+}
+
+@keyframes long-work-tertiary-anim {
+  to {
+    background-color: var(--work-tertiary-color);
+  }
 }
