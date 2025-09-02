@@ -1,5 +1,4 @@
 import { Component, inject, DestroyRef, OnInit } from '@angular/core';
-import { NgClass } from '@angular/common';
 import {
   ReactiveFormsModule,
   FormGroup,
@@ -7,23 +6,24 @@ import {
   Validators,
 } from '@angular/forms';
 
-import { debounceTime, tap, merge, map } from 'rxjs';
+import { debounceTime, merge, map } from 'rxjs';
 
 import { TimerService } from '../timer/timer.service';
 import { DisplayService } from '../../display.service';
 import { NumbersOnlyDirective } from './numbers-only.directive';
 import { LessThanDirective } from './less-than.directive';
 import { SelectDirective } from './select.directive';
+import { ColorDirective } from '../../color.directive';
 
 @Component({
   selector: 'app-form',
   standalone: true,
   imports: [
-    NgClass,
     ReactiveFormsModule,
     NumbersOnlyDirective,
     LessThanDirective,
     SelectDirective,
+    ColorDirective,
   ],
   templateUrl: './form.component.html',
   styleUrl: './form.component.css',

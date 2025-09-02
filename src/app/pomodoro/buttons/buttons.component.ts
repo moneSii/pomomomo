@@ -1,12 +1,14 @@
 import { Component, inject } from '@angular/core';
-import { NgClass } from '@angular/common';
+
+import { ColorDirective } from '../../color.directive';
+
 import { TimerService } from '../timer/timer.service';
 import { DisplayService } from '../../display.service';
 
 @Component({
   selector: 'app-buttons',
   standalone: true,
-  imports: [NgClass],
+  imports: [ColorDirective],
   templateUrl: './buttons.component.html',
   styleUrl: './buttons.component.css',
 })

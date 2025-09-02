@@ -1,13 +1,4 @@
-<div
-  class="container"
-  [ngClass]="{
-    'work-secondary': this.timeType(),
-    'long-secondary':
-      !this.timeType() && this.maxInterval() === this.curInterval(),
-    'short-secondary':
-      !this.timeType() && this.maxInterval() !== this.curInterval()
-  }"
->
+<div class="container" appColor type="secondary">
   @if (!this.timerStatus){
   <button (click)="onStart()">
     <img src="/icons/play.svg" />

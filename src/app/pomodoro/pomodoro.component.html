@@ -1,14 +1,5 @@
-<div class="background" [ngClass]="colorState + '-tertiary'">
-  {{ colorState }}
-</div>
-<div
-  class="body"
-  [ngClass]="{
-    'work-main': this.timeType(),
-    'long-main': !this.timeType() && this.maxInterval() === this.curInterval(),
-    'short-main': !this.timeType() && this.maxInterval() !== this.curInterval()
-  }"
->
+<div class="background" appColor type="tertiary"></div>
+<div class="body" appColor type="primary">
   <app-timer />
   <app-buttons />
   <app-form />

@@ -1,13 +1,14 @@
 import { Component, inject } from '@angular/core';
-import { AsyncPipe, NgClass } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 
 import { TimerService } from './timer.service';
 import { MinuteTimePipe } from './minute-time.pipe';
+import { ColorDirective } from '../../color.directive';
 
 @Component({
   selector: 'app-timer',
   standalone: true,
-  imports: [MinuteTimePipe, AsyncPipe, NgClass],
+  imports: [MinuteTimePipe, AsyncPipe, ColorDirective],
   templateUrl: './timer.component.html',
   styleUrl: './timer.component.css',
 })

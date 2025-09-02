@@ -1,13 +1,6 @@
 @if (this.display()){
 <div class="backdrop" (click)="closeForm()"></div>
-<dialog
-  open
-  [ngClass]="{
-    'work-main': this.timeType(),
-    'long-main': !this.timeType() && this.maxInterval() === this.curInterval(),
-    'short-main': !this.timeType() && this.maxInterval() !== this.curInterval()
-  }"
->
+<dialog open appColor type="primary">
   <h1>Adjust Timer!</h1>
   <form [formGroup]="form">
     <div class="form-item">

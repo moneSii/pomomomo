@@ -1,13 +1,4 @@
-<div
-  class="container"
-  [ngClass]="{
-    'work-secondary': this.timeType(),
-    'long-secondary':
-      !this.timeType() && this.maxInterval() === this.curInterval(),
-    'short-secondary':
-      !this.timeType() && this.maxInterval() !== this.curInterval()
-  }"
->
+<div class="container" appColor type="secondary">
   <p class="timer">{{ this.counter | async | minuteTime : "mm:ss" }}</p>
   <p class="interval">
     Work Done: {{ this.curInterval() + "/" + this.maxInterval() }}
