@@ -25,11 +25,10 @@ export class ColorDirective implements OnInit {
     private destroyRef: DestroyRef
   ) {}
 
-  category: string = ''; // work | short | long
-  type = input('primary'); // primary | secondary | tertiary
+  category: string = '';
+  type = input('primary');
   interval = input('0.8s');
-
-  delay: string = this.interval();
+  animType: string = ' ease';
 
   ngOnInit() {
     const colorSubscription = this.timerService.color.subscribe((val) => {
@@ -43,7 +42,7 @@ export class ColorDirective implements OnInit {
               'var(--' + colorState[0] + '-' + this.type() + '-color)',
           }),
           animate(
-            this.interval() + ' ease-in',
+            this.interval() + ' ' + this.animType,
             style({
               'background-color':
                 'var(--' + colorState[1] + '-' + this.type() + '-color)',
@@ -52,20 +51,36 @@ export class ColorDirective implements OnInit {
         ]);
       } else {
         if (colorState[0] === 'reset') {
-          this.delay = '0.3s';
-        }
-        anima = animation([
-          style({
-            opacity: 0,
-          }),
-          animate(
-            this.delay + ' ease-in',
+          const colorOld = window.getComputedStyle(
+            this.el.nativeElement
+          ).background;
+          this.animType = 'ease-in-out';
+
+          anima = animation([
             style({
-              'background-color': 'var(--work-' + this.type() + '-color)',
-              opacity: 1,
-            })
-          ),
-        ]);
+              'background-color': colorOld,
+            }),
+            animate(
+              this.interval() + ' ' + this.animType,
+              style({
+                'background-color': 'var(--work-' + this.type() + '-color)',
+              })
+            ),
+          ]);
+        } else {
+          anima = animation([
+            style({
+              opacity: 0,
+            }),
+            animate(
+              this.interval() + ' ' + this.animType,
+              style({
+                'background-color': 'var(--work-' + this.type() + '-color)',
+                opacity: 1,
+              })
+            ),
+          ]);
+        }
       }
 
       const factory = this.builder.build(anima);
