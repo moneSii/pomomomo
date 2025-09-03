@@ -29,65 +29,40 @@ export class ColorDirective implements OnInit {
   type = input('primary'); // primary | secondary | tertiary
   interval = input('0.8s');
 
-  colorStateInit: string = '';
-  colorStateAfter: string = '';
+  delay: string = this.interval();
 
   ngOnInit() {
-    console.log(this.type());
     const colorSubscription = this.timerService.color.subscribe((val) => {
-      switch (val) {
-        case 'init':
-          this.colorStateInit = 'init';
-          break;
-        case 'reset':
-          this.colorStateInit = 'reset';
-          break;
-        case 'work-short':
-          this.colorStateInit = 'work';
-          this.colorStateAfter = 'short';
-          break;
-        case 'work-long':
-          this.colorStateInit = 'work';
-          this.colorStateAfter = 'long';
-          break;
-        case 'short-work':
-          this.colorStateInit = 'short';
-          this.colorStateAfter = 'work';
-          break;
-        case 'long-work':
-          this.colorStateInit = 'long';
-          this.colorStateAfter = 'work';
-          break;
-      }
-
+      const colorState = val.split('-');
       var anima;
 
-      // Init page load
-      if (this.colorStateInit === 'init' || this.colorStateInit === 'reset') {
-        anima = animation([
-          style({
-            opacity: 0,
-          }),
-          animate(
-            '0.5s ease-in',
-            style({
-              'background-color': 'var(--work-' + this.type() + '-color)',
-              opacity: 1,
-            })
-          ),
-        ]);
-      } else {
-        console.log('here');
+      if (colorState.length > 1) {
         anima = animation([
           style({
             'background-color':
-              'var(--' + this.colorStateInit + '-' + this.type() + '-color)',
+              'var(--' + colorState[0] + '-' + this.type() + '-color)',
           }),
           animate(
             this.interval() + ' ease-in',
             style({
               'background-color':
-                'var(--' + this.colorStateAfter + '-' + this.type() + '-color)',
+                'var(--' + colorState[1] + '-' + this.type() + '-color)',
+            })
+          ),
+        ]);
+      } else {
+        if (colorState[0] === 'reset') {
+          this.delay = '0.3s';
+        }
+        anima = animation([
+          style({
+            opacity: 0,
+          }),
+          animate(
+            this.delay + ' ease-in',
+            style({
+              'background-color': 'var(--work-' + this.type() + '-color)',
+              opacity: 1,
             })
           ),
         ]);
