@@ -26,7 +26,8 @@ export class ColorDirective implements OnInit {
   ) {}
 
   category: string = ''; // work | short | long
-  type = input(); // primary | secondary | tertiary
+  type = input('primary'); // primary | secondary | tertiary
+  interval = input('0.8s');
 
   colorStateInit: string = '';
   colorStateAfter: string = '';
@@ -83,7 +84,7 @@ export class ColorDirective implements OnInit {
               'var(--' + this.colorStateInit + '-' + this.type() + '-color)',
           }),
           animate(
-            '0.8s ease-in',
+            this.interval() + ' ease-in',
             style({
               'background-color':
                 'var(--' + this.colorStateAfter + '-' + this.type() + '-color)',
