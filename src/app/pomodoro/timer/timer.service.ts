@@ -144,7 +144,20 @@ export class TimerService implements OnDestroy {
     this.status.set(false);
     this.timeType.set(true);
     this.session.set(false);
-    this.classStatus.next('reset');
+
+    if (this.classStatus.value.split('-').length > 1) {
+      if (this.classStatus.value.split('-')[1] === 'work') {
+        this.classStatus.next('work-reset');
+      } else if (this.classStatus.value.split('-')[1] === 'short') {
+        this.classStatus.next('short-reset');
+      } else if (this.classStatus.value.split('-')[1] === 'long') {
+        this.classStatus.next('long-reset');
+      } else if (this.classStatus.value.split('-')[1] === 'reset') {
+        this.classStatus.next('work-reset');
+      }
+    } else {
+      this.classStatus.next('work-reset');
+    }
   }
 
   cycleTimer() {

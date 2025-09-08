@@ -1,4 +1,16 @@
-<div class="body" appColor type="primary" interval="0.4s">
+<div
+  class="body"
+  [ngClass]="{
+    'init-work-primary': this.currentColor === 'init',
+    'work-short-primary': this.currentColor === 'work-short',
+    'short-work-primary': this.currentColor === 'short-work',
+    'work-long-primary': this.currentColor === 'work-long',
+    'long-work-primary': this.currentColor === 'long-work',
+    'work-reset-primary': this.currentColor ==='work-reset',
+    'short-reset-primary': this.currentColor ==='short-reset',
+    'long-reset-primary': this.currentColor ==='long-reset',
+  }"
+>
   <app-timer />
   <app-buttons />
   <app-form />

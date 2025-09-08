@@ -1,0 +1,102 @@
+/* Animations */
+
+/* Primary Basic Colour Transitions */
+
+.init-work-primary {
+  background-color: var(--work-primary-color);
+}
+
+.work-short-primary {
+  animation: work-short-primary-anim 0.4s ease 0s 1 forwards normal;
+}
+
+@keyframes work-short-primary-anim {
+  from {
+    background-color: var(--work-primary-color);
+  }
+  to {
+    background-color: var(--short-primary-color);
+  }
+}
+
+.short-work-primary {
+  animation: short-work-primary-anim 0.4s ease 0s 1 forwards normal;
+}
+
+@keyframes short-work-primary-anim {
+  from {
+    background-color: var(--short-primary-color);
+  }
+  to {
+    background-color: var(--work-primary-color);
+  }
+}
+
+.work-long-primary {
+  animation: work-long-primary-anim 0.4s ease 0s 1 forwards normal;
+}
+
+@keyframes work-long-primary-anim {
+  from {
+    background-color: var(--work-primary-color);
+  }
+  to {
+    background-color: var(--long-primary-color);
+  }
+}
+
+.long-work-primary {
+  animation: long-work-primary-anim 0.4s ease 0s 1 forwards normal;
+}
+
+@keyframes long-work-primary-anim {
+  from {
+    background-color: var(--long-primary-color);
+  }
+  to {
+    background-color: var(--work-primary-color);
+  }
+}
+
+/* Primary Reset Colour Transitions */
+
+.work-reset-primary {
+  /*literally do nothing lmao*/
+  animation: work-reset-primary-anim 0.2s ease-in-out 0s 1 forwards normal;
+}
+
+@keyframes work-reset-primary-anim {
+  from {
+    background-color: var(--work-primary-color);
+  }
+  to {
+    background-color: var(--work-primary-color);
+  }
+}
+
+.short-reset-primary {
+  animation: short-reset-primary-anim 0.2s ease-in-out 0s 1 forwards normal;
+}
+
+@keyframes short-reset-primary-anim {
+  from {
+    background-color: var(--short-primary-color);
+  }
+  to {
+    background-color: var(--work-primary-color);
+  }
+}
+
+.long-reset-primary {
+  /*literally do nothing lmao*/
+  animation: long-reset-primary-anim 0.2s ease-in-out 0s 1 forwards normal;
+}
+
+@keyframes long-reset-primary-anim {
+  from {
+    background-color: var(--long-primary-color);
+  }
+  to {
+    background-color: var(--work-primary-color);
+  }
+}

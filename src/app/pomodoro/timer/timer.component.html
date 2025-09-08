@@ -1,4 +1,16 @@
-<div class="container" appColor type="secondary" interval="0.4s">
+<div
+  class="container"
+  [ngClass]="{
+    'init-work-secondary': this.currentColor === 'init',
+    'work-short-secondary': this.currentColor === 'work-short',
+    'short-work-secondary': this.currentColor === 'short-work',
+    'work-long-secondary': this.currentColor === 'work-long',
+    'long-work-secondary': this.currentColor === 'long-work',
+    'work-reset-secondary': this.currentColor ==='work-reset',
+    'short-reset-secondary': this.currentColor ==='short-reset',
+    'long-reset-secondary': this.currentColor ==='long-reset',
+  }"
+>
   <p class="timer">{{ this.counter | async | minuteTime : "mm:ss" }}</p>
   <p class="interval">
     Work Done: {{ this.curInterval() + "/" + this.maxInterval() }}

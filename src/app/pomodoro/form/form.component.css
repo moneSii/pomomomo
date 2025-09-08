@@ -51,3 +51,15 @@ input {
   max-width: 4rem;
   font-family: var(--main-font);
 }
+
+.work {
+  background-color: var(--work-primary-color);
+}
+
+.short {
+  background-color: var(--short-primary-color);
+}
+
+.long {
+  background-color: var(--long-primary-color);
+}

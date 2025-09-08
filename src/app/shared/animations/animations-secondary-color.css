@@ -1,0 +1,102 @@
+/* Animations */
+
+/* Primary Basic Colour Transitions */
+
+.init-work-secondary {
+  background-color: var(--work-secondary-color);
+}
+
+.work-short-secondary {
+  animation: work-short-secondary-anim 0.4s ease 0s 1 forwards normal;
+}
+
+@keyframes work-short-secondary-anim {
+  from {
+    background-color: var(--work-secondary-color);
+  }
+  to {
+    background-color: var(--short-secondary-color);
+  }
+}
+
+.short-work-secondary {
+  animation: short-work-secondary-anim 0.4s ease 0s 1 forwards normal;
+}
+
+@keyframes short-work-secondary-anim {
+  from {
+    background-color: var(--short-secondary-color);
+  }
+  to {
+    background-color: var(--work-secondary-color);
+  }
+}
+
+.work-long-secondary {
+  animation: work-long-secondary-anim 0.4s ease 0s 1 forwards normal;
+}
+
+@keyframes work-long-secondary-anim {
+  from {
+    background-color: var(--work-secondary-color);
+  }
+  to {
+    background-color: var(--long-secondary-color);
+  }
+}
+
+.long-work-secondary {
+  animation: long-work-secondary-anim 0.4s ease 0s 1 forwards normal;
+}
+
+@keyframes long-work-secondary-anim {
+  from {
+    background-color: var(--long-secondary-color);
+  }
+  to {
+    background-color: var(--work-secondary-color);
+  }
+}
+
+/* Primary Reset Colour Transitions */
+
+.work-reset-secondary {
+  /*literally do nothing lmao*/
+  animation: work-reset-secondary-anim 0.2s ease-in-out 0s 1 forwards normal;
+}
+
+@keyframes work-reset-secondary-anim {
+  from {
+    background-color: var(--work-secondary-color);
+  }
+  to {
+    background-color: var(--work-secondary-color);
+  }
+}
+
+.short-reset-secondary {
+  animation: short-reset-secondary-anim 0.2s ease-in-out 0s 1 forwards normal;
+}
+
+@keyframes short-reset-secondary-anim {
+  from {
+    background-color: var(--short-secondary-color);
+  }
+  to {
+    background-color: var(--work-secondary-color);
+  }
+}
+
+.long-reset-secondary {
+  /*literally do nothing lmao*/
+  animation: long-reset-secondary-anim 0.2s ease-in-out 0s 1 forwards normal;
+}
+
+@keyframes long-reset-secondary-anim {
+  from {
+    background-color: var(--long-secondary-color);
+  }
+  to {
+    background-color: var(--work-secondary-color);
+  }
+}

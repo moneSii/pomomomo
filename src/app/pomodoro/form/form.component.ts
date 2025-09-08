@@ -1,4 +1,5 @@
 import { Component, inject, DestroyRef, OnInit } from '@angular/core';
+import { NgClass } from '@angular/common';
 import {
   ReactiveFormsModule,
   FormGroup,
@@ -13,7 +14,6 @@ import { DisplayService } from '../../display.service';
 import { NumbersOnlyDirective } from './numbers-only.directive';
 import { LessThanDirective } from './less-than.directive';
 import { SelectDirective } from './select.directive';
-import { ColorDirective } from '../../color.directive';
 
 @Component({
   selector: 'app-form',
@@ -23,7 +23,7 @@ import { ColorDirective } from '../../color.directive';
     NumbersOnlyDirective,
     LessThanDirective,
     SelectDirective,
-    ColorDirective,
+    NgClass,
   ],
   templateUrl: './form.component.html',
   styleUrl: './form.component.css',
@@ -38,6 +38,7 @@ export class FormComponent implements OnInit {
   timeType = this.timerService.timeTypeStatus;
 
   display = this.displayService.displayFormInputs;
+  currentColor = '';
 
   ngOnInit() {
     const formSubscription = merge(
@@ -74,9 +75,14 @@ export class FormComponent implements OnInit {
           }
         },
       });
-
+    const colorSubscription = this.timerService.color.subscribe((val) => {
+      this.currentColor = val;
+      console.log(this.currentColor);
+    });
+    this.destroyRef.onDestroy(() => colorSubscription.unsubscribe());
     this.destroyRef.onDestroy(() => {
       formSubscription.unsubscribe();
+      colorSubscription.unsubscribe();
     });
   }
 

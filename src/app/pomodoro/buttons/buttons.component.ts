@@ -1,6 +1,5 @@
-import { Component, inject } from '@angular/core';
-
-import { ColorDirective } from '../../color.directive';
+import { Component, inject, DestroyRef, OnInit } from '@angular/core';
+import { NgClass } from '@angular/common';
 
 import { TimerService } from '../timer/timer.service';
 import { DisplayService } from '../../display.service';
@@ -8,16 +7,29 @@ import { DisplayService } from '../../display.service';
 @Component({
   selector: 'app-buttons',
   standalone: true,
-  imports: [ColorDirective],
+  imports: [NgClass],
   templateUrl: './buttons.component.html',
-  styleUrl: './buttons.component.css',
+  styleUrls: [
+    './buttons.component.css',
+    '../../shared/animations/animations-secondary-color.css',
+  ],
 })
-export class ButtonsComponent {
+export class ButtonsComponent implements OnInit {
   private timerService = inject(TimerService);
   private displayService = inject(DisplayService);
+  private destroyRef = inject(DestroyRef);
   maxInterval = this.timerService.maxInterval;
   curInterval = this.timerService.curInterval;
   timeType = this.timerService.timeTypeStatus;
+  currentColor = '';
+
+  ngOnInit() {
+    const colorSubscription = this.timerService.color.subscribe((val) => {
+      this.currentColor = val;
+      console.log(this.currentColor);
+    });
+    this.destroyRef.onDestroy(() => colorSubscription.unsubscribe());
+  }
 
   onStart() {
     this.timerService.startCount();

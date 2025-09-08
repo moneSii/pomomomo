@@ -1,19 +1,22 @@
-import { Component, inject } from '@angular/core';
-import { AsyncPipe } from '@angular/common';
+import { Component, inject, DestroyRef, OnInit } from '@angular/core';
+import { AsyncPipe, NgClass } from '@angular/common';
 
 import { TimerService } from './timer.service';
 import { MinuteTimePipe } from './minute-time.pipe';
-import { ColorDirective } from '../../color.directive';
 
 @Component({
   selector: 'app-timer',
   standalone: true,
-  imports: [MinuteTimePipe, AsyncPipe, ColorDirective],
+  imports: [MinuteTimePipe, AsyncPipe, NgClass],
   templateUrl: './timer.component.html',
-  styleUrl: './timer.component.css',
+  styleUrls: [
+    './timer.component.css',
+    '../../shared/animations/animations-secondary-color.css',
+  ],
 })
-export class TimerComponent {
+export class TimerComponent implements OnInit {
   private timerService = inject(TimerService);
+  private destroyRef = inject(DestroyRef);
 
   maxInterval = this.timerService.maxInterval;
   curInterval = this.timerService.curInterval;
@@ -22,4 +25,13 @@ export class TimerComponent {
   status = this.timerService.curStatus;
 
   counter = this.timerService.stopWatch;
+
+  currentColor = '';
+  ngOnInit() {
+    const colorSubscription = this.timerService.color.subscribe((val) => {
+      this.currentColor = val;
+      console.log(this.currentColor);
+    });
+    this.destroyRef.onDestroy(() => colorSubscription.unsubscribe());
+  }
 }

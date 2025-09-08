@@ -1,6 +1,13 @@
 @if (this.display()){
 <div class="backdrop" (click)="closeForm()"></div>
-<dialog open appColor type="primary" interval="0s">
+<dialog
+  open
+  [ngClass]="{
+    'work': this.currentColor === 'init' || this.currentColor === 'short-work' || this.currentColor === 'long-work' || this.currentColor==='work-reset' || this.currentColor==='short-reset' || this.currentColor==='long-reset',
+    'short': this.currentColor === 'work-short',
+    'long': this.currentColor=== 'work-long',
+  }"
+>
   <h1>Adjust Timer!</h1>
   <form [formGroup]="form">
     <div class="form-item">

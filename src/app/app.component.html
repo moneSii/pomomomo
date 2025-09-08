@@ -1,2 +1,14 @@
-<div class="background" appColor type="tertiary"></div>
+<div
+  class="background"
+  [ngClass]="{
+    'init-work-tertiary': this.currentColor === 'init',
+    'work-short-tertiary': this.currentColor === 'work-short',
+    'short-work-tertiary': this.currentColor === 'short-work',
+    'work-long-tertiary': this.currentColor === 'work-long',
+    'long-work-tertiary': this.currentColor === 'long-work',
+    'work-reset-tertiary': this.currentColor ==='work-reset',
+    'short-reset-tertiary': this.currentColor ==='short-reset',
+    'long-reset-tertiary': this.currentColor ==='long-reset',
+  }"
+></div>
 <app-pomodoro />
