@@ -1,13 +1,11 @@
-/* Animations */
-
-/* Primary Basic Colour Transitions */
+/* Tertiary Colour Basic Transitions */
 
 .init-work-tertiary {
   background-color: var(--work-tertiary-color);
 }
 
 .work-short-tertiary {
-  animation: work-short-tertiary-anim 0.4s ease 0s 1 forwards normal;
+  animation: work-short-tertiary-anim 1.2s ease 0s 1 forwards normal;
 }
 
 @keyframes work-short-tertiary-anim {
@@ -20,7 +18,7 @@
 }
 
 .short-work-tertiary {
-  animation: short-work-tertiary-anim 0.4s ease 0s 1 forwards normal;
+  animation: short-work-tertiary-anim 1.2s ease 0s 1 forwards normal;
 }
 
 @keyframes short-work-tertiary-anim {
@@ -33,7 +31,7 @@
 }
 
 .work-long-tertiary {
-  animation: work-long-tertiary-anim 0.4s ease 0s 1 forwards normal;
+  animation: work-long-tertiary-anim 1.2s ease 0s 1 forwards normal;
 }
 
 @keyframes work-long-tertiary-anim {
@@ -46,7 +44,7 @@
 }
 
 .long-work-tertiary {
-  animation: long-work-tertiary-anim 0.4s ease 0s 1 forwards normal;
+  animation: long-work-tertiary-anim 1.2s ease 0s 1 forwards normal;
 }
 
 @keyframes long-work-tertiary-anim {
@@ -58,10 +56,9 @@
   }
 }
 
-/* Primary Reset Colour Transitions */
+/* Tertiary Colour Reset Transitions */
 
 .work-reset-tertiary {
-  /*literally do nothing lmao*/
   animation: work-reset-tertiary-anim 0.2s ease-in-out 0s 1 forwards normal;
 }
 
@@ -88,7 +85,6 @@
 }
 
 .long-reset-tertiary {
-  /*literally do nothing lmao*/
   animation: long-reset-tertiary-anim 0.2s ease-in-out 0s 1 forwards normal;
 }
 

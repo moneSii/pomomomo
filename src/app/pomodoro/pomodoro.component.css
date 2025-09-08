@@ -2,11 +2,8 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  margin-top: 5vh;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 7rem auto auto;
   width: 34rem;
-  text-align: center;
   padding: 3rem;
-  border-radius: 10px;
+  border-radius: 25px;
 }

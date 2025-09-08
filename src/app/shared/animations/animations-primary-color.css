@@ -1,6 +1,4 @@
-/* Animations */
-
-/* Primary Basic Colour Transitions */
+/* Primary Colour Basic Transitions */
 
 .init-work-primary {
   background-color: var(--work-primary-color);
@@ -58,10 +56,9 @@
   }
 }
 
-/* Primary Reset Colour Transitions */
+/* Primary Colour Reset Transitions */
 
 .work-reset-primary {
-  /*literally do nothing lmao*/
   animation: work-reset-primary-anim 0.2s ease-in-out 0s 1 forwards normal;
 }
 
@@ -88,7 +85,6 @@
 }
 
 .long-reset-primary {
-  /*literally do nothing lmao*/
   animation: long-reset-primary-anim 0.2s ease-in-out 0s 1 forwards normal;
 }
 
