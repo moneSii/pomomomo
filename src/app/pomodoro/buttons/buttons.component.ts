@@ -18,8 +18,7 @@ export class ButtonsComponent implements OnInit {
   private timerService = inject(TimerService);
   private displayService = inject(DisplayService);
   private destroyRef = inject(DestroyRef);
-  maxInterval = this.timerService.maxInterval;
-  curInterval = this.timerService.curInterval;
+
   timeType = this.timerService.timeTypeStatus;
   currentColor = '';
 
@@ -43,9 +42,7 @@ export class ButtonsComponent implements OnInit {
   onSkip() {
     this.timerService.cycleTimer();
   }
-  // onToggleDisplayVars() {
-  //   this.displayService.alternateDisplayVariables();
-  // }
+
   onOpenForm() {
     if (!this.timerStatus) {
       this.displayService.alternateDisplayForm();
