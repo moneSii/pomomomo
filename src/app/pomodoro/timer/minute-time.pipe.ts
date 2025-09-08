@@ -6,8 +6,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class MinuteTimePipe implements PipeTransform {
   transform(milliseconds: number | null, format: 'mm:ss:S' | 'mm:ss'): string {
-    if (!milliseconds) {
-      return '';
+    if (!milliseconds || milliseconds < 0) {
+      return '00:00';
     }
 
     const seconds = Math.trunc(milliseconds / 1000) % 60;

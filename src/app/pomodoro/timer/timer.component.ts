@@ -23,15 +23,23 @@ export class TimerComponent implements OnInit {
   timeType = this.timerService.timeTypeStatus;
 
   status = this.timerService.curStatus;
-
   counter = this.timerService.stopWatch;
-
   currentColor = '';
+
   ngOnInit() {
+    const subscription = this.counter.subscribe((val) => {
+      if (val < 0) {
+        this.timerService.cycleTimer();
+      }
+    });
+
     const colorSubscription = this.timerService.color.subscribe((val) => {
       this.currentColor = val;
       console.log(this.currentColor);
     });
-    this.destroyRef.onDestroy(() => colorSubscription.unsubscribe());
+    this.destroyRef.onDestroy(() => {
+      subscription.unsubscribe();
+      colorSubscription.unsubscribe();
+    });
   }
 }
