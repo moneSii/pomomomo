@@ -1,7 +1,7 @@
 import { Component, inject, DestroyRef, OnInit } from '@angular/core';
 import { NgClass } from '@angular/common';
 
-import { TimerService } from '../timer/timer.service';
+import { PomodoroService } from '../pomodoro.service';
 import { DisplayService } from '../../display.service';
 
 @Component({
@@ -15,15 +15,15 @@ import { DisplayService } from '../../display.service';
   ],
 })
 export class ButtonsComponent implements OnInit {
-  private timerService = inject(TimerService);
+  private pomodoroService = inject(PomodoroService);
   private displayService = inject(DisplayService);
   private destroyRef = inject(DestroyRef);
 
-  timeType = this.timerService.timeTypeStatus;
+  timeType = this.pomodoroService.timeTypeStatus;
   currentColor = '';
 
   ngOnInit() {
-    const colorSubscription = this.timerService.color.subscribe((val) => {
+    const colorSubscription = this.pomodoroService.color.subscribe((val) => {
       this.currentColor = val;
       console.log(this.currentColor);
     });
@@ -31,16 +31,16 @@ export class ButtonsComponent implements OnInit {
   }
 
   onStart() {
-    this.timerService.startCount();
+    this.pomodoroService.startTimer();
   }
   onPause() {
-    this.timerService.stopCount();
+    this.pomodoroService.pauseTimer();
   }
   onReset() {
-    this.timerService.resetCount();
+    this.pomodoroService.resetTimer();
   }
   onSkip() {
-    this.timerService.cycleTimer();
+    this.pomodoroService.cycleTimer();
   }
 
   onOpenForm() {
@@ -52,6 +52,6 @@ export class ButtonsComponent implements OnInit {
   }
 
   get timerStatus() {
-    return this.timerService.curStatus();
+    return this.pomodoroService.curStatus();
   }
 }

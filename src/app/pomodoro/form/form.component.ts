@@ -9,7 +9,7 @@ import {
 
 import { debounceTime, merge, map } from 'rxjs';
 
-import { TimerService } from '../timer/timer.service';
+import { PomodoroService } from '../pomodoro.service';
 import { DisplayService } from '../../display.service';
 import { NumbersOnlyDirective } from './numbers-only.directive';
 import { LessThanDirective } from './less-than.directive';
@@ -30,12 +30,12 @@ import { SelectDirective } from './select.directive';
 })
 export class FormComponent implements OnInit {
   private destroyRef = inject(DestroyRef);
-  private timerService = inject(TimerService);
+  private pomodoroService = inject(PomodoroService);
   private displayService = inject(DisplayService);
 
-  maxInterval = this.timerService.maxInterval;
-  curInterval = this.timerService.curInterval;
-  timeType = this.timerService.timeTypeStatus;
+  maxInterval = this.pomodoroService.maxInterval;
+  curInterval = this.pomodoroService.curInterval;
+  timeType = this.pomodoroService.timeTypeStatus;
 
   display = this.displayService.displayFormInputs;
   currentColor = '';
@@ -66,16 +66,16 @@ export class FormComponent implements OnInit {
             this.form.controls[
               valSource.source as keyof typeof this.form.controls
             ].status != 'INVALID' ||
-            !this.timerService.curStatus()
+            !this.pomodoroService.curStatus()
           ) {
-            return this.timerService.setPomoVars(
+            return this.pomodoroService.setPomodoroVariables(
               valSource.source,
               valSource.val
             );
           }
         },
       });
-    const colorSubscription = this.timerService.color.subscribe((val) => {
+    const colorSubscription = this.pomodoroService.color.subscribe((val) => {
       this.currentColor = val;
       console.log(this.currentColor);
     });

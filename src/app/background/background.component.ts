@@ -1,7 +1,7 @@
 import { Component, inject, OnInit, DestroyRef } from '@angular/core';
 import { NgClass } from '@angular/common';
 
-import { TimerService } from '../pomodoro/timer/timer.service';
+import { PomodoroService } from '../pomodoro/pomodoro.service';
 
 @Component({
   selector: 'app-background',
@@ -14,12 +14,12 @@ import { TimerService } from '../pomodoro/timer/timer.service';
   ],
 })
 export class BackgroundComponent implements OnInit {
-  private timerService = inject(TimerService);
+  private pomodoroService = inject(PomodoroService);
   private destroyRef = inject(DestroyRef);
 
   currentColor = '';
   ngOnInit() {
-    const colorSubscription = this.timerService.color.subscribe((val) => {
+    const colorSubscription = this.pomodoroService.color.subscribe((val) => {
       this.currentColor = val;
       console.log(this.currentColor);
     });
