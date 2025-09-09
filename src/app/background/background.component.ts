@@ -18,10 +18,10 @@ export class BackgroundComponent implements OnInit {
   private destroyRef = inject(DestroyRef);
 
   currentColor = '';
+
   ngOnInit() {
     const colorSubscription = this.pomodoroService.color.subscribe((val) => {
       this.currentColor = val;
-      console.log(this.currentColor);
     });
     this.destroyRef.onDestroy(() => colorSubscription.unsubscribe());
   }

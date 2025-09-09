@@ -159,7 +159,6 @@ export class PomodoroService implements OnDestroy {
     if (this.autoStartCycles() == true) {
       this.startTimer();
     }
-    console.log(this.timer.value, 'huh');
   }
 
   toMilliseconds(val: number): number {

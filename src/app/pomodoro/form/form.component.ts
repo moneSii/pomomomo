@@ -77,7 +77,6 @@ export class FormComponent implements OnInit {
       });
     const colorSubscription = this.pomodoroService.color.subscribe((val) => {
       this.currentColor = val;
-      console.log(this.currentColor);
     });
     this.destroyRef.onDestroy(() => colorSubscription.unsubscribe());
     this.destroyRef.onDestroy(() => {
