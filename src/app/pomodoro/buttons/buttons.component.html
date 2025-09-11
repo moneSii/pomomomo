@@ -11,21 +11,19 @@
     'long-reset-secondary': this.currentColor ==='long-reset',
   }"
 >
-  @if (!this.timerStatus){
   <button (click)="onStart()">
-    <img src="/icons/play.svg" />
+    <img src="/icons/play.png" />
   </button>
-  } @else {
   <button (click)="onPause()">
-    <img src="/icons/pause.svg" /></button
-  >}
+    <img src="/icons/pause.png" />
+  </button>
   <button (click)="onSkip()">
-    <img src="/icons/skip.svg" />
+    <img src="/icons/forward.png" />
   </button>
   <button (click)="onReset()">
-    <img src="/icons/reset.svg" />
+    <img src="/icons/reset.png" />
   </button>
   <button (click)="onOpenForm()">
-    <img src="/icons/settingBUTTON.svg" />
+    <img src="/icons/menu.png" />
   </button>
 </div>
