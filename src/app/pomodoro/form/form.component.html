@@ -1,5 +1,10 @@
 @if (this.display()){
-<div class="backdrop" (click)="closeForm()"></div>
+<div
+  class="backdrop"
+  (click)="closeForm()"
+  animate.enter="enter-backdrop"
+  animate.leave="leave-backdrop"
+></div>
 <dialog
   open
   [ngClass]="{
@@ -7,6 +12,8 @@
     'short': this.currentColor === 'work-short',
     'long': this.currentColor=== 'work-long',
   }"
+  animate.enter="enter-dialog"
+  animate.leave="leave-dialog"
 >
   <h1>Adjust Timer!</h1>
   <form [formGroup]="form">
