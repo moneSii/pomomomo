@@ -46,16 +46,28 @@ export class PomodoroService implements OnDestroy {
         case 'minutes':
           this.startTime.set(numVal);
 
-          if (!this.session()) {
+          if (!this.session() && this.timeType()) {
             this.pauseTime = this.toMilliseconds(numVal);
             this.timer.next(this.pauseTime);
           }
           break;
         case 'short':
           this.shortBreak.set(numVal);
+          if (!this.session() && !this.timeType()) {
+            this.pauseTime = this.toMilliseconds(numVal);
+            this.timer.next(this.pauseTime);
+          }
           break;
         case 'long':
           this.longBreak.set(numVal);
+          if (
+            !this.session() &&
+            !this.timeType() &&
+            this.intervalCount() === this.curInterval()
+          ) {
+            this.pauseTime = this.toMilliseconds(numVal);
+            this.timer.next(this.pauseTime);
+          }
           break;
         case 'intervals':
           this.intervalCount.set(+val);
