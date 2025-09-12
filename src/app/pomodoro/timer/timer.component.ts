@@ -12,7 +12,8 @@ import { ColorService } from '../../color.service';
   templateUrl: './timer.component.html',
   styleUrls: [
     './timer.component.css',
-    '../../shared/animations/animations-secondary-color.css',
+    '../../shared/styles/animations-secondary-color.css',
+    '../../shared/styles/static-colors.css',
   ],
 })
 export class TimerComponent implements OnInit {

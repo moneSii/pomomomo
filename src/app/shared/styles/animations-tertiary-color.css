@@ -1,9 +1,4 @@
 /* Tertiary Colour Basic Transitions */
-
-.init-work-tertiary {
-  background-color: var(--work-tertiary-color);
-}
-
 .work-short-tertiary {
   animation: work-short-tertiary-anim 1.2s ease 0s 1 forwards normal;
 }

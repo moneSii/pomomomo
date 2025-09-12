@@ -1,9 +1,4 @@
 /* Secondary Colour Basic Transitions */
-
-.init-work-secondary {
-  background-color: var(--work-secondary-color);
-}
-
 .work-short-secondary {
   animation: work-short-secondary-anim 0.4s ease 0s 1 forwards normal;
 }

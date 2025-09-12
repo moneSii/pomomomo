@@ -10,7 +10,8 @@ import { ColorService } from '../color.service';
   templateUrl: './background.component.html',
   styleUrls: [
     './background.component.css',
-    '../shared/animations/animations-tertiary-color.css',
+    '../shared/styles/animations-tertiary-color.css',
+    '../shared/styles/static-colors.css',
   ],
 })
 export class BackgroundComponent {

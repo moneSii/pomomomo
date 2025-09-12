@@ -58,18 +58,6 @@ input[type="checkbox"] {
   border-radius: 5px;
 }
 
-.work-primary {
-  background-color: var(--work-primary-color);
-}
-
-.short-primary {
-  background-color: var(--short-primary-color);
-}
-
-.long-primary {
-  background-color: var(--long-primary-color);
-}
-
 .enter-dialog {
   animation: slide-in-fade ease-out 0.3s;
 }

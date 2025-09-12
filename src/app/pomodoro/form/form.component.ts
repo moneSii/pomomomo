@@ -27,7 +27,11 @@ import { ColorService } from '../../color.service';
     NgClass,
   ],
   templateUrl: './form.component.html',
-  styleUrl: './form.component.css',
+  styleUrls: [
+    './form.component.css',
+    '../../shared/styles/static-colors.css',
+    '../../shared/styles/static-colors.css',
+  ],
 })
 export class FormComponent implements OnInit {
   private pomodoroService = inject(PomodoroService);

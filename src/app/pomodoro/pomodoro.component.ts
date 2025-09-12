@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { NgClass } from '@angular/common';
 
 import { TimerComponent } from './timer/timer.component';
@@ -14,11 +14,13 @@ import { ColorService } from '../color.service';
   templateUrl: './pomodoro.component.html',
   styleUrls: [
     './pomodoro.component.css',
-    '../shared/animations/animations-primary-color.css',
+    '../shared/styles/animations-primary-color.css',
+    '../shared/styles/static-colors.css',
   ],
 })
 export class PomodoroComponent {
   private colorService = inject(ColorService);
+  firstInit = true;
 
   currentColor = this.colorService.colorAnimatedPrimary;
 }

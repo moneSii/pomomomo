@@ -1,9 +1,4 @@
 /* Primary Colour Basic Transitions */
-
-.init-work-primary {
-  background-color: var(--work-primary-color);
-}
-
 .work-short-primary {
   animation: work-short-primary-anim 0.4s ease 0s 1 forwards normal;
 }

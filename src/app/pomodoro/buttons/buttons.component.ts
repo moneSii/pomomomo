@@ -12,7 +12,8 @@ import { DisplayService } from '../../display.service';
   templateUrl: './buttons.component.html',
   styleUrls: [
     './buttons.component.css',
-    '../../shared/animations/animations-secondary-color.css',
+    '../../shared/styles/animations-secondary-color.css',
+    '../../shared/styles/static-colors.css',
   ],
 })
 export class ButtonsComponent {

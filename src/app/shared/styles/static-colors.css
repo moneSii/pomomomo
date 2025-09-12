@@ -1,0 +1,35 @@
+.work-primary {
+  background-color: var(--work-primary-color);
+}
+
+.short-primary {
+  background-color: var(--short-primary-color);
+}
+
+.long-primary {
+  background-color: var(--long-primary-color);
+}
+
+.work-secondary {
+  background-color: var(--work-secondary-color);
+}
+
+.short-secondary {
+  background-color: var(--short-secondary-color);
+}
+
+.long-secondary {
+  background-color: var(--long-secondary-color);
+}
+
+.work-tertiary {
+  background-color: var(--work-tertiary-color);
+}
+
+.short-tertiary {
+  background-color: var(--short-tertiary-color);
+}
+
+.long-tertiary {
+  background-color: var(--long-tertiary-color);
+}
