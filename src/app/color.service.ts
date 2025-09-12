@@ -15,20 +15,25 @@ import { PomodoroService } from './pomodoro/pomodoro.service';
 export class ColorService {
   constructor() {
     const colorState = this.pomodoroService.color.subscribe((val) => {
-      this.currentAnimationColor.set(val);
-      this.currentStaticColor.set(val.split('-')[1]);
-      console.log(this.currentAnimationColor(), this.currentStaticColor());
+      if (this.firstInit === true) {
+        this.firstInit = false;
+        this.currentAnimationColor.set(val.split('-')[1]);
+        this.currentStaticColor.set(val.split('-')[1]);
+      } else {
+        this.currentAnimationColor.set(val);
+        this.currentStaticColor.set(val.split('-')[1]);
+      }
     });
 
     this.destroyRef.onDestroy(() => {
       colorState.unsubscribe();
     });
   }
-
-  private currentAnimationColor: WritableSignal<string> = signal('');
-  private currentStaticColor: WritableSignal<string> = signal('');
   private pomodoroService = inject(PomodoroService);
   private destroyRef = inject(DestroyRef);
+  private currentAnimationColor: WritableSignal<string> = signal('');
+  private currentStaticColor: WritableSignal<string> = signal('');
+  private firstInit = true;
 
   get colorAnimatedPrimary() {
     return computed(() => {
