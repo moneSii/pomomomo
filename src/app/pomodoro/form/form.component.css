@@ -62,7 +62,7 @@ input[type="checkbox"] {
   animation: slide-in-fade ease-out 0.3s;
 }
 
-@keyframes dialog-slide-in-fade {
+@keyframes slide-in-fade {
   from {
     opacity: 0;
     transform: translateY(20px);
