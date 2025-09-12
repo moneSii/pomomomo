@@ -33,9 +33,7 @@ export class FormComponent implements OnInit {
   private pomodoroService = inject(PomodoroService);
   private displayService = inject(DisplayService);
 
-  maxInterval = this.pomodoroService.maxInterval;
   curInterval = this.pomodoroService.curInterval;
-  timeType = this.pomodoroService.timeTypeStatus;
 
   display = this.displayService.displayFormInputs;
   currentColor = '';
@@ -61,12 +59,12 @@ export class FormComponent implements OnInit {
       .pipe(debounceTime(250))
       .subscribe({
         next: (valSource) => {
-          console.log(valSource.val);
           if (
             this.form.controls[
               valSource.source as keyof typeof this.form.controls
             ].status != 'INVALID' ||
-            !this.pomodoroService.curStatus()
+            !this.pomodoroService.curStatus() ||
+            !(valSource.val === null)
           ) {
             return this.pomodoroService.setPomodoroVariables(
               valSource.source,

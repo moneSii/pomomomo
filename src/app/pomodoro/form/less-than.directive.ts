@@ -14,12 +14,12 @@ export class LessThanDirective {
   @HostListener('input', ['$event']) onInput(event: Event) {
     const initialVal = this.el.nativeElement.value;
     if (initialVal > this.upperLimit()) {
-      this.el.nativeElement.value = 60;
-      this.control.reset('60');
+      this.el.nativeElement.value = this.upperLimit();
+      this.control.reset(this.lowerLimit());
       event.stopPropagation();
     } else if (initialVal < this.lowerLimit()) {
-      this.el.nativeElement.value = 1;
-      this.control.reset('1');
+      this.el.nativeElement.value = this.lowerLimit();
+      this.control.reset(this.lowerLimit());
       event.stopPropagation();
     }
   }

@@ -1,5 +1,5 @@
 .backdrop {
-  background-color: rgba(0, 0, 0, 0.808);
+  backdrop-filter: blur(5px);
   position: fixed;
   top: 0;
   left: 0;
@@ -9,7 +9,7 @@
 
 dialog {
   padding: 1rem;
-  top: 15rem;
+  top: 14rem;
   max-width: 35rem;
   border-radius: 6px;
   border: none;
@@ -25,7 +25,8 @@ h1 {
 
 form {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-around;
+  width: 30rem;
 }
 
 .form-item {
@@ -36,7 +37,7 @@ label {
   text-align: center;
   display: block;
   font-weight: bold;
-  font-size: 1.25rem;
+  font-size: 0.9rem;
   color: #ffffff;
   font-family: var(--main-font);
 }
@@ -45,10 +46,16 @@ input {
   border-radius: 4px;
   border: 1px solid #ab9ac0;
   background-color: #ffffff;
-  max-width: 4rem;
+  width: 4rem;
   text-align: center;
   font-size: 1.5rem;
   font-family: var(--main-font);
+}
+
+input[type="checkbox"] {
+  margin-top: 0.5rem;
+  height: 20px;
+  border-radius: 5px;
 }
 
 .work {
@@ -61,4 +68,48 @@ input {
 
 .long {
   background-color: var(--long-primary-color);
+}
+
+.enter-dialog {
+  animation: slide-in-fade ease-out 0.3s;
+}
+
+@keyframes dialog-slide-in-fade {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.enter-backdrop {
+  animation: fade-in ease-out 0.2s;
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.leave-dialog {
+  animation: fade-out ease-out 0.1s;
+}
+
+.leave-backdrop {
+  animation: fade-out ease-out 0.1s;
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
 }

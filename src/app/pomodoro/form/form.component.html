@@ -1,5 +1,10 @@
 @if (this.display()){
-<div class="backdrop" (click)="closeForm()"></div>
+<div
+  class="backdrop"
+  (click)="closeForm()"
+  animate.enter="enter-backdrop"
+  animate.leave="leave-backdrop"
+></div>
 <dialog
   open
   [ngClass]="{
@@ -7,6 +12,8 @@
     'short': this.currentColor === 'work-short',
     'long': this.currentColor=== 'work-long',
   }"
+  animate.enter="enter-dialog"
+  animate.leave="leave-dialog"
 >
   <h1>Adjust Timer!</h1>
   <form [formGroup]="form">
@@ -15,6 +22,8 @@
       <input
         title="1-60"
         formControlName="minutes"
+        type="number"
+        step="5"
         appSelect
         appNumbersOnly
         appLessThan
@@ -23,10 +32,12 @@
       />
     </div>
     <div class="form-item">
-      <label>Short Break</label>
+      <label>Break(S)</label>
       <input
         title="1-60"
         formControlName="short"
+        type="number"
+        step="5"
         appSelect
         appNumbersOnly
         appLessThan
@@ -35,10 +46,12 @@
       />
     </div>
     <div class="form-item">
-      <label>Long Break</label>
+      <label>Break(L)</label>
       <input
         title="1-60"
         formControlName="long"
+        type="number"
+        step="5"
         appSelect
         appNumbersOnly
         appLessThan
@@ -49,13 +62,15 @@
     <div class="form-item">
       <label>Intervals</label>
       <input
-        title="1-60"
+        title="1-100"
         formControlName="intervals"
+        type="number"
+        step="1"
         appSelect
         appNumbersOnly
         appLessThan
-        [upperLimit]="60"
-        [lowerLimit]="1"
+        [upperLimit]="100"
+        [lowerLimit]="curInterval() + 1"
       />
     </div>
     <div class="form-item">

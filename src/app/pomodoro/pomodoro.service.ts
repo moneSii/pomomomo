@@ -36,30 +36,40 @@ export class PomodoroService implements OnDestroy {
   private generateTime = new Subscription();
   private colorClass = new BehaviorSubject('init');
 
-  setPomodoroVariables(type: string, val: string | boolean | null) {
+  setPomodoroVariables(type: string, val: string | number | boolean | null) {
     if (this.status()) {
       return;
     }
-    if (typeof val === 'string') {
-      const numVal = +val;
+    if (typeof val === 'number') {
       switch (type) {
         case 'minutes':
-          this.startTime.set(numVal);
+          this.startTime.set(val);
 
-          if (!this.session()) {
-            this.pauseTime = this.toMilliseconds(numVal);
+          if (!this.session() && this.timeType()) {
+            this.pauseTime = this.toMilliseconds(val);
             this.timer.next(this.pauseTime);
           }
           break;
         case 'short':
-          this.shortBreak.set(numVal);
+          this.shortBreak.set(val);
+          if (!this.session() && !this.timeType()) {
+            this.pauseTime = this.toMilliseconds(val);
+            this.timer.next(this.pauseTime);
+          }
           break;
         case 'long':
-          this.longBreak.set(numVal);
+          this.longBreak.set(val);
+          if (
+            !this.session() &&
+            !this.timeType() &&
+            this.intervalCount() === this.curInterval()
+          ) {
+            this.pauseTime = this.toMilliseconds(val);
+            this.timer.next(this.pauseTime);
+          }
           break;
         case 'intervals':
-          this.intervalCount.set(+val);
-          break;
+          this.intervalCount.set(val);
       }
     } else if (typeof val === 'boolean') {
       this.autoStartCycles.set(val);
