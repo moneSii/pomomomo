@@ -1,11 +1,6 @@
-import {
-  Injectable,
-  inject,
-  signal,
-  effect,
-  DestroyRef,
-  OnDestroy,
-} from '@angular/core';
+import { Injectable, signal, effect, OnDestroy } from '@angular/core';
+
+import { pomodoro } from './pomodoro.model';
 
 import { Subscription, BehaviorSubject, timer, map } from 'rxjs';
 
@@ -13,18 +8,48 @@ import { Subscription, BehaviorSubject, timer, map } from 'rxjs';
   providedIn: 'root',
 })
 export class PomodoroService implements OnDestroy {
-  private destroyRef = inject(DestroyRef);
-  constructor() {}
+  constructor() {
+    const savedVars = localStorage.getItem('pomodoroVariables');
 
-  ngOnDestroy() {
-    this.destroyRef.onDestroy(() => {
-      this.generateTime.unsubscribe();
-      this.timer.unsubscribe();
+    if (savedVars) {
+      const parsedVars = JSON.parse(savedVars);
+      this.startTime.set(parsedVars['work']);
+      this.pauseTime.set(parsedVars['curTime']);
+      this.shortBreak.set(parsedVars['short']);
+      this.longBreak.set(parsedVars['long']);
+      this.intervalCount.set(parsedVars['interval']);
+      this.currentInterval.set(parsedVars['curInterval']);
+      this.autoStartCycles.set(parsedVars['autoCycle']);
+      this.timeType.set(parsedVars['timeType']);
+      this.session.set(parsedVars['session']);
+      this.colorClass.next(parsedVars['color']);
+      this.timer.next(parsedVars['curTime']);
+    }
+
+    effect(() => {
+      const toSave: pomodoro = {
+        work: this.startTime(),
+        curTime: this.pauseTime(),
+        short: this.shortBreak(),
+        long: this.longBreak(),
+        interval: this.intervalCount(),
+        curInterval: this.currentInterval(),
+        autoCycle: this.autoStartCycles(),
+        timeType: this.timeType(),
+        session: this.session(),
+        color: this.colorClass.value,
+      };
+      localStorage.setItem('pomodoroVariables', JSON.stringify(toSave));
     });
   }
 
+  ngOnDestroy() {
+    this.generateTime.unsubscribe();
+    this.timer.unsubscribe();
+  }
+
   private startTime = signal(25);
-  private pauseTime = this.toMilliseconds(this.startTime());
+  private pauseTime = signal(this.toMilliseconds(this.startTime()));
   private shortBreak = signal(5);
   private longBreak = signal(30);
   private intervalCount = signal(4);
@@ -33,9 +58,10 @@ export class PomodoroService implements OnDestroy {
   private timeType = signal(true);
   private status = signal(false);
   private session = signal(false);
-  private timer = new BehaviorSubject(this.pauseTime);
-  private generateTime = new Subscription();
   private colorClass = new BehaviorSubject('init-work');
+
+  private timer = new BehaviorSubject(this.pauseTime());
+  private generateTime = new Subscription();
 
   setPomodoroVariables(type: string, val: string | number | boolean | null) {
     if (this.status()) {
@@ -47,15 +73,15 @@ export class PomodoroService implements OnDestroy {
           this.startTime.set(val);
 
           if (!this.session() && this.timeType()) {
-            this.pauseTime = this.toMilliseconds(val);
-            this.timer.next(this.pauseTime);
+            this.pauseTime.set(this.toMilliseconds(val));
+            this.timer.next(this.pauseTime());
           }
           break;
         case 'short':
           this.shortBreak.set(val);
           if (!this.session() && !this.timeType()) {
-            this.pauseTime = this.toMilliseconds(val);
-            this.timer.next(this.pauseTime);
+            this.pauseTime.set(this.toMilliseconds(val));
+            this.timer.next(this.pauseTime());
           }
           break;
         case 'long':
@@ -65,8 +91,8 @@ export class PomodoroService implements OnDestroy {
             !this.timeType() &&
             this.intervalCount() === this.curInterval()
           ) {
-            this.pauseTime = this.toMilliseconds(val);
-            this.timer.next(this.pauseTime);
+            this.pauseTime.set(this.toMilliseconds(val));
+            this.timer.next(this.pauseTime());
           }
           break;
         case 'intervals':
@@ -84,7 +110,7 @@ export class PomodoroService implements OnDestroy {
 
     this.session.set(true);
     this.status.set(true);
-    var timerDate = new Date(this.pauseTime + Date.now()).getTime();
+    var timerDate = new Date(this.pauseTime() + Date.now()).getTime();
 
     this.generateTime = timer(0, 250)
       .pipe(
@@ -98,15 +124,15 @@ export class PomodoroService implements OnDestroy {
   pauseTimer() {
     this.generateTime.unsubscribe();
 
-    this.pauseTime = this.timer.value;
+    this.pauseTime.set(this.timer.value);
     this.status.set(false);
   }
 
   resetTimer() {
     this.generateTime.unsubscribe();
 
-    this.pauseTime = this.toMilliseconds(this.startTime());
-    this.timer.next(this.pauseTime);
+    this.pauseTime.set(this.toMilliseconds(this.startTime()));
+    this.timer.next(this.pauseTime());
     this.currentInterval.set(0);
     this.status.set(false);
     this.timeType.set(true);
@@ -148,11 +174,11 @@ export class PomodoroService implements OnDestroy {
     // WORK -> BREAK(S/L)
     if (this.timeType() === false) {
       if (this.currentInterval() === this.intervalCount()) {
-        this.pauseTime = this.toMilliseconds(this.longBreak());
+        this.pauseTime.set(this.toMilliseconds(this.longBreak()));
         this.timer.next(this.toMilliseconds(this.longBreak()));
         this.colorClass.next('work-long');
       } else {
-        this.pauseTime = this.toMilliseconds(this.shortBreak());
+        this.pauseTime.set(this.toMilliseconds(this.shortBreak()));
         this.timer.next(this.toMilliseconds(this.shortBreak()));
         this.colorClass.next('work-short');
       }
@@ -160,7 +186,7 @@ export class PomodoroService implements OnDestroy {
 
     // BREAK -> WORK
     else {
-      this.pauseTime = this.toMilliseconds(this.startTime());
+      this.pauseTime.set(this.toMilliseconds(this.startTime()));
       this.timer.next(this.toMilliseconds(this.startTime()));
       if (this.colorClass.value !== 'long-work') {
         this.colorClass.next('short-work');

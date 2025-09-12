@@ -1,6 +1,4 @@
 <div class="container" [ngClass]="currentColor()">
-  <p class="timer">{{ this.time | minuteTime : "mm:ss" }}</p>
-  <p class="interval">
-    Work Done: {{ this.curInterval() + "/" + this.maxInterval() }}
-  </p>
+  <p class="timer">{{ time | minuteTime : "mm:ss" }}</p>
+  <p class="interval">Work Done: {{ curInterval() + "/" + maxInterval() }}</p>
 </div>

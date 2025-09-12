@@ -85,19 +85,19 @@ export class FormComponent implements OnInit {
   }
 
   form = new FormGroup({
-    minutes: new FormControl('25', {
+    minutes: new FormControl(this.pomodoroService.workTime(), {
       validators: [Validators.required, Validators.pattern('^[0-9]*$')],
     }),
-    short: new FormControl('5', {
+    short: new FormControl(this.pomodoroService.breakTimeS(), {
       validators: [Validators.required, Validators.pattern('^[0-9]*$')],
     }),
-    long: new FormControl('10', {
+    long: new FormControl(this.pomodoroService.breakTimeL(), {
       validators: [Validators.required, Validators.pattern('^[0-9]*$')],
     }),
-    intervals: new FormControl('4', {
+    intervals: new FormControl(this.pomodoroService.maxInterval(), {
       validators: [Validators.required, Validators.pattern('^[0-9]*$')],
     }),
-    cycle: new FormControl<boolean>(false, {
+    cycle: new FormControl<boolean>(this.pomodoroService.autoCycle(), {
       validators: [Validators.required],
     }),
   });
