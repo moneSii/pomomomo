@@ -7,11 +7,7 @@
 ></div>
 <dialog
   open
-  [ngClass]="{
-    'work': this.currentColor === 'init' || this.currentColor === 'short-work' || this.currentColor === 'long-work' || this.currentColor==='work-reset' || this.currentColor==='short-reset' || this.currentColor==='long-reset',
-    'short': this.currentColor === 'work-short',
-    'long': this.currentColor=== 'work-long',
-  }"
+  [ngClass]="currentColor()"
   animate.enter="enter-dialog"
   animate.leave="leave-dialog"
 >

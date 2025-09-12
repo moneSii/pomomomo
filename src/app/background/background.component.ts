@@ -1,7 +1,7 @@
-import { Component, inject, OnInit, DestroyRef } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { NgClass } from '@angular/common';
 
-import { PomodoroService } from '../pomodoro/pomodoro.service';
+import { ColorService } from '../color.service';
 
 @Component({
   selector: 'app-background',
@@ -13,16 +13,8 @@ import { PomodoroService } from '../pomodoro/pomodoro.service';
     '../shared/animations/animations-tertiary-color.css',
   ],
 })
-export class BackgroundComponent implements OnInit {
-  private pomodoroService = inject(PomodoroService);
-  private destroyRef = inject(DestroyRef);
+export class BackgroundComponent {
+  private colorService = inject(ColorService);
 
-  currentColor = '';
-
-  ngOnInit() {
-    const colorSubscription = this.pomodoroService.color.subscribe((val) => {
-      this.currentColor = val;
-    });
-    this.destroyRef.onDestroy(() => colorSubscription.unsubscribe());
-  }
+  currentColor = this.colorService.colorAnimatedTertiary;
 }

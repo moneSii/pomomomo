@@ -3,6 +3,7 @@ import { NgClass } from '@angular/common';
 
 import { PomodoroService } from '../pomodoro.service';
 import { MinuteTimePipe } from '../../shared/pipes/minute-time.pipe';
+import { ColorService } from '../../color.service';
 
 @Component({
   selector: 'app-timer',
@@ -16,6 +17,7 @@ import { MinuteTimePipe } from '../../shared/pipes/minute-time.pipe';
 })
 export class TimerComponent implements OnInit {
   private pomodoroService = inject(PomodoroService);
+  private colorService = inject(ColorService);
   private destroyRef = inject(DestroyRef);
 
   maxInterval = this.pomodoroService.maxInterval;
@@ -23,7 +25,7 @@ export class TimerComponent implements OnInit {
 
   time = 0;
 
-  currentColor = '';
+  currentColor = this.colorService.colorAnimatedSecondary;
 
   ngOnInit() {
     const timerSubscription = this.pomodoroService.stopWatch.subscribe(
@@ -35,12 +37,8 @@ export class TimerComponent implements OnInit {
       }
     );
 
-    const colorSubscription = this.pomodoroService.color.subscribe((val) => {
-      this.currentColor = val;
-    });
     this.destroyRef.onDestroy(() => {
       timerSubscription.unsubscribe();
-      colorSubscription.unsubscribe();
     });
   }
 }

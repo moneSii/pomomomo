@@ -1,11 +1,11 @@
-import { Component, inject, OnInit, DestroyRef } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { NgClass } from '@angular/common';
 
 import { TimerComponent } from './timer/timer.component';
 import { ButtonsComponent } from './buttons/buttons.component';
 import { FormComponent } from './form/form.component';
 
-import { PomodoroService } from './pomodoro.service';
+import { ColorService } from '../color.service';
 
 @Component({
   selector: 'app-pomodoro',
@@ -17,21 +17,8 @@ import { PomodoroService } from './pomodoro.service';
     '../shared/animations/animations-primary-color.css',
   ],
 })
-export class PomodoroComponent implements OnInit {
-  private pomodoroService = inject(PomodoroService);
-  private destroyRef = inject(DestroyRef);
+export class PomodoroComponent {
+  private colorService = inject(ColorService);
 
-  maxInterval = this.pomodoroService.maxInterval;
-  curInterval = this.pomodoroService.curInterval;
-  timeType = this.pomodoroService.timeTypeStatus;
-
-  currentColor = '';
-
-  ngOnInit() {
-    const colorSubscription = this.pomodoroService.color.subscribe((val) => {
-      this.currentColor = val;
-      console.log(this.currentColor);
-    });
-    this.destroyRef.onDestroy(() => colorSubscription.unsubscribe());
-  }
+  currentColor = this.colorService.colorAnimatedPrimary;
 }

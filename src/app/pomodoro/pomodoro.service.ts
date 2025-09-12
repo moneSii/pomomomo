@@ -34,7 +34,7 @@ export class PomodoroService implements OnDestroy {
   private session = signal(false);
   private timer = new BehaviorSubject(this.pauseTime);
   private generateTime = new Subscription();
-  private colorClass = new BehaviorSubject('init');
+  private colorClass = new BehaviorSubject('init-work');
 
   setPomodoroVariables(type: string, val: string | number | boolean | null) {
     if (this.status()) {

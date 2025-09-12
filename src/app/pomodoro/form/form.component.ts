@@ -14,6 +14,7 @@ import { DisplayService } from '../../display.service';
 import { NumbersOnlyDirective } from './numbers-only.directive';
 import { LessThanDirective } from './less-than.directive';
 import { SelectDirective } from './select.directive';
+import { ColorService } from '../../color.service';
 
 @Component({
   selector: 'app-form',
@@ -29,14 +30,15 @@ import { SelectDirective } from './select.directive';
   styleUrl: './form.component.css',
 })
 export class FormComponent implements OnInit {
-  private destroyRef = inject(DestroyRef);
   private pomodoroService = inject(PomodoroService);
+  private colorService = inject(ColorService);
   private displayService = inject(DisplayService);
+  private destroyRef = inject(DestroyRef);
 
   curInterval = this.pomodoroService.curInterval;
 
   display = this.displayService.displayFormInputs;
-  currentColor = '';
+  currentColor = this.colorService.colorStaticPrimary;
 
   ngOnInit() {
     const formSubscription = merge(
@@ -73,13 +75,8 @@ export class FormComponent implements OnInit {
           }
         },
       });
-    const colorSubscription = this.pomodoroService.color.subscribe((val) => {
-      this.currentColor = val;
-    });
-    this.destroyRef.onDestroy(() => colorSubscription.unsubscribe());
     this.destroyRef.onDestroy(() => {
       formSubscription.unsubscribe();
-      colorSubscription.unsubscribe();
     });
   }
 

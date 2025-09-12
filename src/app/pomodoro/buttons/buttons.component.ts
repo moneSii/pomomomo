@@ -1,7 +1,8 @@
-import { Component, inject, DestroyRef, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { NgClass } from '@angular/common';
 
 import { PomodoroService } from '../pomodoro.service';
+import { ColorService } from '../../color.service';
 import { DisplayService } from '../../display.service';
 
 @Component({
@@ -14,20 +15,12 @@ import { DisplayService } from '../../display.service';
     '../../shared/animations/animations-secondary-color.css',
   ],
 })
-export class ButtonsComponent implements OnInit {
+export class ButtonsComponent {
   private pomodoroService = inject(PomodoroService);
+  private colorService = inject(ColorService);
   private displayService = inject(DisplayService);
-  private destroyRef = inject(DestroyRef);
 
-  timeType = this.pomodoroService.timeTypeStatus;
-  currentColor = '';
-
-  ngOnInit() {
-    const colorSubscription = this.pomodoroService.color.subscribe((val) => {
-      this.currentColor = val;
-    });
-    this.destroyRef.onDestroy(() => colorSubscription.unsubscribe());
-  }
+  currentColor = this.colorService.colorAnimatedSecondary;
 
   onStart() {
     this.pomodoroService.startTimer();
@@ -43,14 +36,10 @@ export class ButtonsComponent implements OnInit {
   }
 
   onOpenForm() {
-    if (!this.timerStatus) {
+    if (!this.pomodoroService.curStatus()) {
       this.displayService.alternateDisplayForm();
     } else {
       alert('Timer is still Running!');
     }
-  }
-
-  get timerStatus() {
-    return this.pomodoroService.curStatus();
   }
 }

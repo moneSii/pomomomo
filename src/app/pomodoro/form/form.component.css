@@ -58,15 +58,15 @@ input[type="checkbox"] {
   border-radius: 5px;
 }
 
-.work {
+.work-primary {
   background-color: var(--work-primary-color);
 }
 
-.short {
+.short-primary {
   background-color: var(--short-primary-color);
 }
 
-.long {
+.long-primary {
   background-color: var(--long-primary-color);
 }
 
