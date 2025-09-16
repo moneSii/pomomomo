@@ -199,6 +199,25 @@ export class PomodoroService implements OnDestroy {
     }
   }
 
+  resetPomodoro() {
+    this.startTime.set(25);
+    this.pauseTime.set(this.toMilliseconds(this.startTime()));
+    this.shortBreak.set(5);
+    this.longBreak.set(30);
+    this.intervalCount.set(4);
+    this.autoStartCycles.set(false);
+
+    if (this.timeType()) {
+      this.timer.next(this.pauseTime());
+    } else {
+      this.timer.next(this.toMilliseconds(this.shortBreak()));
+    }
+
+    if (this.currentInterval() >= this.intervalCount()) {
+      this.currentInterval.set(this.intervalCount() - 1);
+    }
+  }
+
   toMilliseconds(val: number): number {
     return val * 60000;
   }

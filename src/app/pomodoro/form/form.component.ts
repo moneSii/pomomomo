@@ -105,4 +105,17 @@ export class FormComponent implements OnInit {
   closeForm() {
     this.displayService.alternateDisplayForm();
   }
+  onReset() {
+    this.pomodoroService.resetPomodoro();
+    this.form.patchValue(
+      {
+        minutes: this.pomodoroService.workTime(),
+        short: this.pomodoroService.breakTimeS(),
+        long: this.pomodoroService.breakTimeL(),
+        intervals: this.pomodoroService.maxInterval(),
+        cycle: this.pomodoroService.autoCycle(),
+      },
+      { emitEvent: false }
+    );
+  }
 }
