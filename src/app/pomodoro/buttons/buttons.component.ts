@@ -22,12 +22,14 @@ export class ButtonsComponent {
   private displayService = inject(DisplayService);
 
   currentColor = this.colorService.colorAnimatedSecondary;
+  status = this.pomodoroService.curStatus;
 
-  onStart() {
-    this.pomodoroService.startTimer();
-  }
-  onPause() {
-    this.pomodoroService.pauseTimer();
+  onStartPause() {
+    if (!this.status()) {
+      this.pomodoroService.startTimer();
+    } else {
+      this.pomodoroService.pauseTimer();
+    }
   }
   onReset() {
     this.pomodoroService.resetTimer();
@@ -37,7 +39,7 @@ export class ButtonsComponent {
   }
 
   onOpenForm() {
-    if (!this.pomodoroService.curStatus()) {
+    if (!this.status()) {
       this.displayService.alternateDisplayForm();
     } else {
       alert('Timer is still Running!');
