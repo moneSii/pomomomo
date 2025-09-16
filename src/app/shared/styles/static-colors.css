@@ -1,3 +1,4 @@
+.reset-primary,
 .work-primary {
   background-color: var(--work-primary-color);
 }
@@ -9,7 +10,7 @@
 .long-primary {
   background-color: var(--long-primary-color);
 }
-
+.reset-secondary,
 .work-secondary {
   background-color: var(--work-secondary-color);
 }
@@ -21,7 +22,7 @@
 .long-secondary {
   background-color: var(--long-secondary-color);
 }
-
+.reset-tertiary,
 .work-tertiary {
   background-color: var(--work-tertiary-color);
 }

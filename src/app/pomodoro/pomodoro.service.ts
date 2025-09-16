@@ -138,18 +138,19 @@ export class PomodoroService implements OnDestroy {
     this.timeType.set(true);
     this.session.set(false);
 
-    if (this.colorClass.value.split('-').length > 1) {
-      if (this.colorClass.value.split('-')[1] === 'work') {
+    switch (this.colorClass.value.split('-')[1]) {
+      case 'work':
         this.colorClass.next('work-reset');
-      } else if (this.colorClass.value.split('-')[1] === 'short') {
+        break;
+      case 'reset':
+        this.colorClass.next('work-reset');
+        break;
+      case 'short':
         this.colorClass.next('short-reset');
-      } else if (this.colorClass.value.split('-')[1] === 'long') {
+        break;
+      case 'long':
         this.colorClass.next('long-reset');
-      } else if (this.colorClass.value.split('-')[1] === 'reset') {
-        this.colorClass.next('work-reset');
-      }
-    } else {
-      this.colorClass.next('work-reset');
+        break;
     }
   }
 
