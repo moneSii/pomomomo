@@ -1,0 +1,45 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  margin: 1rem;
+  margin-top: 0;
+  border-radius: 25px;
+  box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 7px 3px inset;
+  font-family: var(--main-font);
+  color: white;
+  text-shadow: 2px 4px 3px rgba(0, 0, 0, 0.3);
+}
+
+.status {
+  position: relative;
+  top: 45px;
+  left: 480px;
+}
+
+.task-header {
+  width: 100%;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.title,
+.category {
+  margin-top: 0;
+  text-align: center;
+  margin: auto;
+}
+
+.task-content {
+  width: 85%;
+  height: 3.5rem;
+  margin: auto;
+  margin-bottom: 1rem;
+  justify-content: center;
+  overflow: hidden;
+  font-size: 1rem;
+}
+
+.content {
+  text-align: center;
+}

@@ -1,11 +1,27 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { NgClass } from '@angular/common';
+
+import { FocusComponent } from './focus/focus.component';
+import { OptionsComponent } from './options/options.component';
+import { LibraryComponent } from './library/library.component';
+
+import { ColorService } from '../color.service';
+import { DisplayService } from '../display.service';
 
 @Component({
   selector: 'app-tasks',
-  imports: [],
+  imports: [FocusComponent, LibraryComponent, OptionsComponent, NgClass],
   templateUrl: './tasks.component.html',
-  styleUrl: './tasks.component.css'
+  styleUrls: [
+    './tasks.component.css',
+    '../shared/styles/animations-primary-color.css',
+    '../shared/styles/static-colors.css',
+  ],
 })
 export class TasksComponent {
+  private colorService = inject(ColorService);
+  private displayService = inject(DisplayService);
+  currentColor = this.colorService.colorAnimatedPrimary;
 
+  display = this.displayService.displayLib;
 }

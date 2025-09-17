@@ -1,1 +1,7 @@
-<p>tasks works!</p>
+<div class="body" [ngClass]="currentColor()">
+  <app-focus />
+  <app-options />
+</div>
+@if (display()) {
+<app-library />
+}
