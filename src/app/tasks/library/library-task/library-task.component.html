@@ -1,0 +1,7 @@
+<div class="item">
+  <input [(ngModel)]="task().status" type="checkbox" />
+  <div class="handle" cdkDragHandle>H</div>
+  <p class="category">{{ task().type }}</p>
+  <h1 class="title">{{ task().title }}</h1>
+  <p class="content">{{ task().content }}</p>
+</div>

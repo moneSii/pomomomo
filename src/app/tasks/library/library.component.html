@@ -1,1 +1,18 @@
-<p>library works!</p>
+<div class="backdrop" (click)="onClose()"></div>
+<dialog open>
+  <div class="container-timer-input">
+    <div class="timer-content">timer</div>
+    <app-form-tasks />
+  </div>
+  <div clas="container-library">
+    <div class="header">Buttons go here</div>
+    <div class="library" cdkScrollable>
+      <div class="task-list" cdkDropList (cdkDropListDropped)="drop($event)">
+        @for (task of list(); track task.id) {<app-library-task
+          [task]="task"
+          cdkDrag
+        />}
+      </div>
+    </div>
+  </div>
+</dialog>
