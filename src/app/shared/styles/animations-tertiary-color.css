@@ -1,6 +1,6 @@
 /* Tertiary Colour Basic Transitions */
 .work-short-tertiary {
-  animation: work-short-tertiary-anim 1.2s ease 0s 1 forwards normal;
+  animation: work-short-tertiary-anim 0.9s ease 0s 1 forwards normal;
 }
 
 @keyframes work-short-tertiary-anim {
@@ -13,7 +13,7 @@
 }
 
 .short-work-tertiary {
-  animation: short-work-tertiary-anim 1.2s ease 0s 1 forwards normal;
+  animation: short-work-tertiary-anim 0.9s ease 0s 1 forwards normal;
 }
 
 @keyframes short-work-tertiary-anim {
@@ -26,7 +26,7 @@
 }
 
 .work-long-tertiary {
-  animation: work-long-tertiary-anim 1.2s ease 0s 1 forwards normal;
+  animation: work-long-tertiary-anim 0.9s ease 0s 1 forwards normal;
 }
 
 @keyframes work-long-tertiary-anim {
@@ -39,7 +39,7 @@
 }
 
 .long-work-tertiary {
-  animation: long-work-tertiary-anim 1.2s ease 0s 1 forwards normal;
+  animation: long-work-tertiary-anim 0.9s ease 0s 1 forwards normal;
 }
 
 @keyframes long-work-tertiary-anim {
