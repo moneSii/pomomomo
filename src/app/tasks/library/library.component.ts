@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { FormComponent } from './form/form.component';
+import { LibraryFormComponent } from './library-form/library-form.component';
 import { LibraryTaskComponent } from './library-task/library-task.component';
 
 import {
@@ -16,7 +16,7 @@ import { DisplayService } from '../../display.service';
 @Component({
   selector: 'app-library',
   imports: [
-    FormComponent,
+    LibraryFormComponent,
     LibraryTaskComponent,
     CdkDrag,
     CdkDropList,
