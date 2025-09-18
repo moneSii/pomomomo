@@ -1,12 +1,12 @@
 :root {
   --main-font: monospace;
-  --work-primary-color: #ffc17f;
+  --work-primary-color: #ffbc75;
   --work-secondary-color: #ffc08d;
-  --work-tertiary-color: #c27b52;
+  --work-tertiary-color: #e09468;
   --short-primary-color: #927fff;
   --short-secondary-color: #b98dff;
   --short-tertiary-color: #6752c2;
-  --long-primary-color: #7fffb4;
-  --long-secondary-color: #a8ff8d;
-  --long-tertiary-color: #72c252;
+  --long-primary-color: #00d0ff;
+  --long-secondary-color: #59defc;
+  --long-tertiary-color: #33a6c0;
 }
