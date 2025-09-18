@@ -1,11 +1,7 @@
 # PomoMomo
 
-What is this app?
-[Try it here](https)
-
-## Pomodoro?
-
-What is Pomodoro
+A simple lightweight Pomodoro timer.
+[Try it here](https://monesii.github.io/pomomomo/)
 
 ## Features
 
@@ -23,5 +19,3 @@ Pomomomo is the first app for an upcoming suite of productivity apps aimed to ge
 
 - Orient
 - Tackle
-
-## License
