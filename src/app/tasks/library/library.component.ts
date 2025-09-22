@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { LibraryFormComponent } from './library-form/library-form.component';
 import { LibraryTaskComponent } from './library-task/library-task.component';
+import { MiniTimerComponent } from '../../shared/components/mini-timer/mini-timer.component';
 
 import {
   CdkDragDrop,
@@ -18,6 +19,7 @@ import { DisplayService } from '../../display.service';
   imports: [
     LibraryFormComponent,
     LibraryTaskComponent,
+    MiniTimerComponent,
     CdkDrag,
     CdkDropList,
     CdkScrollable,
