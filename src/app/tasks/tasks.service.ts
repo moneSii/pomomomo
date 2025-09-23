@@ -42,10 +42,14 @@ export class TasksService {
   }
 
   public cycleRight() {
-    this.todoTaskList().push(this.todoTaskList().shift()!);
+    if (this.todoTaskList()) {
+      this.todoTaskList().push(this.todoTaskList().shift()!);
+    }
   }
   public cycleLeft() {
-    this.todoTaskList().unshift(this.todoTaskList().pop()!);
+    if (this.todoTaskList()) {
+      this.todoTaskList().unshift(this.todoTaskList().pop()!);
+    }
   }
 
   get taskList() {
