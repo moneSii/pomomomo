@@ -7,7 +7,7 @@
     <app-library-form />
   </div>
   <div clas="container-library">
-    <div class="header">Buttons go here</div>
+    <div class="header"><app-library-buttons /></div>
     <div class="library" cdkScrollable>
       <div class="task-list" cdkDropList (cdkDropListDropped)="drop($event)">
         @for (task of list(); track task.id) {<app-library-task

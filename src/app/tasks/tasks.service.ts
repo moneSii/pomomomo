@@ -52,6 +52,10 @@ export class TasksService {
     }
   }
 
+  public sortTasksList(type: string) {}
+  public filterTasksList(type: string) {}
+  public deleteTasksList(type: string) {}
+
   get taskList() {
     return this.todoTaskList.asReadonly();
   }
