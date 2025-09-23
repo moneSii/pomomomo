@@ -7,43 +7,39 @@ import { task } from './task.model';
   providedIn: 'root',
 })
 export class TasksService {
+  constructor() {
+    this.updateIdList();
+  }
   private todoTaskList: WritableSignal<task[]> = signal([
     {
-      title: 'Wash Dishes',
-      content: 'Make sure to scrub them clean!',
-      type: 'Life',
+      title: 'Title of your Task',
+      type: 'Category',
+      content: 'some extra notes!',
       status: false,
-      id: '1',
-    },
-    {
-      title: 'Complete French Homework',
-      content: 'Practice',
-      type: 'Academics',
-      status: false,
-      id: '2',
-    },
-    {
-      title: 'Create a Scheduler',
-      content: 'For both daily and weekly timeframes',
-      type: 'Life',
-      status: false,
-      id: '3',
-    },
-    {
-      title: 'Clean up',
-      content: 'Dust -> Wipe -> Dry',
-      type: 'Life',
-      status: false,
-      id: '4',
-    },
-    {
-      title: 'Nothing',
-      content: '',
-      type: 'Misc',
-      status: false,
-      id: '5',
+      id: 1,
     },
   ]);
+  private idList: number[] = [];
+
+  public addTasks(taskTitle: string, taskType: string, taskContent: string) {
+    this.todoTaskList().unshift({
+      title: taskTitle,
+      type: taskType,
+      content: taskContent,
+      status: false,
+      id: this.idList.sort(highestToLowest)[0] + 1,
+    });
+
+    this.updateIdList();
+  }
+
+  private updateIdList() {
+    for (var i = 0; i < this.todoTaskList().length; i++) {
+      if (!this.idList.includes(this.todoTaskList()[i].id)) {
+        this.idList.push(this.todoTaskList()[i].id);
+      }
+    }
+  }
 
   public cycleRight() {
     this.todoTaskList().push(this.todoTaskList().shift()!);
@@ -55,4 +51,14 @@ export class TasksService {
   get taskList() {
     return this.todoTaskList.asReadonly();
   }
+}
+
+function highestToLowest(a: number, b: number) {
+  if (a > b) {
+    return -1;
+  }
+  if (a < b) {
+    return 1;
+  }
+  return 0;
 }

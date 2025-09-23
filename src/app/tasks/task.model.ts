@@ -3,5 +3,5 @@ export interface task {
   content: string;
   type: string;
   status: boolean;
-  id: string;
+  id: number;
 }
