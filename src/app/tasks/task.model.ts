@@ -1,7 +1,7 @@
 export interface task {
   title: string;
+  category: string;
   content: string;
-  type: string;
   status: boolean;
   id: number;
 }

@@ -12,22 +12,43 @@ export class TasksService {
   }
   private todoTaskList: WritableSignal<task[]> = signal([
     {
-      title: 'Title of your Task',
-      type: 'Category',
+      title: 'Not Doing Anything',
+      category: 'Life',
+      content: 'some extra notes!',
+      status: false,
+      id: 0,
+    },
+    {
+      title: 'Kinda doing something',
+      category: 'Academics',
       content: 'some extra notes!',
       status: false,
       id: 1,
     },
+    {
+      title: 'Maybe Doring Something',
+      category: 'Work',
+      content: 'some extra notes!',
+      status: false,
+      id: 2,
+    },
   ]);
+  private focusTask: task = this.todoTaskList()[0];
   private idList: number[] = [];
+
+  private sort = {
+    title: false,
+    status: false,
+    category: false,
+  };
 
   public addTasks(taskTitle: string, taskType: string, taskContent: string) {
     this.todoTaskList().unshift({
       title: taskTitle,
-      type: taskType,
+      category: taskType,
       content: taskContent,
       status: false,
-      id: this.idList.sort(highestToLowest)[0] + 1,
+      id: this.idList.sort((a, b) => (a > b ? -1 : a < b ? 1 : 0))[0] + 1,
     });
 
     this.updateIdList();
@@ -52,21 +73,42 @@ export class TasksService {
     }
   }
 
-  public sortTasksList(type: string) {}
+  public sortTasksList(type: string) {
+    const keySort = type as keyof typeof this.sort;
+    const keyTask = type as keyof typeof this.focusTask;
+
+    if (this.sort[keySort] === true) {
+      this.todoTaskList().sort((a, b) =>
+        a[keyTask] > b[keyTask] ? -1 : a[keyTask] < b[keyTask] ? 1 : 0
+      );
+      this.sort[keySort] = false;
+    } else {
+      this.todoTaskList().sort((a, b) =>
+        a[keyTask] > b[keyTask] ? 1 : a[keyTask] < b[keyTask] ? -1 : 0
+      );
+      Object.keys(this.sort).forEach(
+        (val) => (this.sort[val as keyof typeof this.sort] = false)
+      );
+      this.sort[keySort] = true;
+    }
+    console.log(this.sort);
+  }
+
   public filterTasksList(type: string) {}
   public deleteTasksList(type: string) {}
+
+  public completeTask(index: number) {
+    this.todoTaskList().push(this.todoTaskList().splice(index, 1)[0]);
+    console.log(this.todoTaskList());
+  }
+
+  public onMoveList() {
+    Object.keys(this.sort).forEach(
+      (val) => (this.sort[val as keyof typeof this.sort] = false)
+    );
+  }
 
   get taskList() {
     return this.todoTaskList.asReadonly();
   }
-}
-
-function highestToLowest(a: number, b: number) {
-  if (a > b) {
-    return -1;
-  }
-  if (a < b) {
-    return 1;
-  }
-  return 0;
 }

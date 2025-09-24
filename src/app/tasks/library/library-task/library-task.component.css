@@ -20,6 +20,10 @@
   margin: 2rem;
 }
 
+.handle {
+  font-size: 4rem;
+}
+
 .category {
   min-width: 5rem;
 }

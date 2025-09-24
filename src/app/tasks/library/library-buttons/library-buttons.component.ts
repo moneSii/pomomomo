@@ -10,4 +10,8 @@ import { TasksService } from '../../tasks.service';
 })
 export class LibraryButtonsComponent {
   private tasksService = inject(TasksService);
+
+  onClick(type: string) {
+    this.tasksService.sortTasksList(type);
+  }
 }

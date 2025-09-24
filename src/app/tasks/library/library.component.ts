@@ -30,13 +30,17 @@ import { DisplayService } from '../../display.service';
   styleUrl: './library.component.css',
 })
 export class LibraryComponent {
-  private taskService = inject(TasksService);
+  private tasksService = inject(TasksService);
   private displayService = inject(DisplayService);
 
-  list = this.taskService.taskList;
+  constructor() {}
+
+  list = this.tasksService.taskList;
+  filter = '';
 
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.list(), event.previousIndex, event.currentIndex);
+    this.tasksService.onMoveList();
   }
 
   onClose() {

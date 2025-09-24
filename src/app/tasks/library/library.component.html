@@ -10,10 +10,9 @@
     <div class="header"><app-library-buttons /></div>
     <div class="library" cdkScrollable>
       <div class="task-list" cdkDropList (cdkDropListDropped)="drop($event)">
-        @for (task of list(); track task.id) {<app-library-task
-          [task]="task"
-          cdkDrag
-        />}
+        @for (task of list(); track task.id) {
+        <app-library-task [task]="task" cdkDrag />
+        }
       </div>
     </div>
   </div>
