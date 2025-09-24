@@ -1,7 +1,8 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, signal, effect } from '@angular/core';
 import { WritableSignal } from '@angular/core';
 
 import { task } from './task.model';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -36,7 +37,6 @@ export class TasksService {
       dateCreation: new Date(),
     },
   ]);
-  private focusTask: task = this.todoTaskList()[0];
   private idList: number[] = [];
 
   private sort = {
@@ -67,40 +67,56 @@ export class TasksService {
   }
 
   public cycleRight() {
-    if (this.todoTaskList()) {
+    if (this.todoTaskList().length > 0) {
       this.todoTaskList().push(this.todoTaskList().shift()!);
     }
     console.log(this.todoTaskList());
   }
   public cycleLeft() {
-    if (this.todoTaskList()) {
+    if (this.todoTaskList().length > 0) {
       this.todoTaskList().unshift(this.todoTaskList().pop()!);
     }
   }
 
   public sortTasksList(type: string) {
-    const keySort = type as keyof typeof this.sort;
-    const keyTask = type as keyof typeof this.focusTask;
+    if (this.todoTaskList().length > 0) {
+      const taskObject = this.todoTaskList()[0];
+      const keySort = type as keyof typeof this.sort;
+      const keyTask = type as keyof typeof taskObject;
 
-    if (this.sort[keySort] === true) {
-      this.todoTaskList().sort((a, b) =>
-        a[keyTask] > b[keyTask] ? -1 : a[keyTask] < b[keyTask] ? 1 : 0
-      );
-      this.sort[keySort] = false;
-    } else {
-      this.todoTaskList().sort((a, b) =>
-        a[keyTask] > b[keyTask] ? 1 : a[keyTask] < b[keyTask] ? -1 : 0
-      );
-      Object.keys(this.sort).forEach(
-        (val) => (this.sort[val as keyof typeof this.sort] = false)
-      );
-      this.sort[keySort] = true;
+      if (this.sort[keySort] === true) {
+        this.todoTaskList().sort((a, b) =>
+          a[keyTask] > b[keyTask] ? -1 : a[keyTask] < b[keyTask] ? 1 : 0
+        );
+        this.sort[keySort] = false;
+      } else {
+        this.todoTaskList().sort((a, b) =>
+          a[keyTask] > b[keyTask] ? 1 : a[keyTask] < b[keyTask] ? -1 : 0
+        );
+        Object.keys(this.sort).forEach(
+          (val) => (this.sort[val as keyof typeof this.sort] = false)
+        );
+        this.sort[keySort] = true;
+      }
     }
-    console.log(this.sort);
   }
 
   public filterTasksList(type: string) {}
-  public deleteTasksList(type: string) {}
+
+  public deleteTasksList(type: string) {
+    if (this.todoTaskList().length > 0) {
+      if (type === 'all') {
+        this.todoTaskList.set([]);
+      }
+
+      if (type === 'completed') {
+        this.todoTaskList.update((val) =>
+          val.filter((task) => task.status === false)
+        );
+        console.log('wat');
+      }
+    }
+  }
 
   public completeTask(index: number) {
     this.todoTaskList().push(this.todoTaskList().splice(index, 1)[0]);

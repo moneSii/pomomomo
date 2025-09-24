@@ -1,12 +1,20 @@
+@if (focusedTask().length>0){
 <input class="status" [(ngModel)]="focusedTask()[0].status" type="checkbox" />
 <div class="container" [ngClass]="currentColor()">
   <div class="task-header">
     <h2 class="title">
       {{ focusedTask()[0].title }}
     </h2>
-    <h3 class="category">{{ focusedTask()[0].category }}</h3>
+    <h3 class="category">
+      {{ focusedTask()[0].category }}
+    </h3>
   </div>
   <div class="task-content">
-    <p class="content">{{ focusedTask()[0].content }}</p>
+    <p class="content">
+      {{ focusedTask()[0].content }}
+    </p>
   </div>
 </div>
+} @else {
+<div>No Tasks</div>
+}
