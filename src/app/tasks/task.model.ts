@@ -4,4 +4,5 @@ export interface task {
   content: string;
   status: boolean;
   id: number;
+  dateCreation: Date;
 }

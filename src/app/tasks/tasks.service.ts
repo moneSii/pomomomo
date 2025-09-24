@@ -17,6 +17,7 @@ export class TasksService {
       content: 'some extra notes!',
       status: false,
       id: 0,
+      dateCreation: new Date(),
     },
     {
       title: 'Kinda doing something',
@@ -24,6 +25,7 @@ export class TasksService {
       content: 'some extra notes!',
       status: false,
       id: 1,
+      dateCreation: new Date(),
     },
     {
       title: 'Maybe Doring Something',
@@ -31,6 +33,7 @@ export class TasksService {
       content: 'some extra notes!',
       status: false,
       id: 2,
+      dateCreation: new Date(),
     },
   ]);
   private focusTask: task = this.todoTaskList()[0];
@@ -49,6 +52,7 @@ export class TasksService {
       content: taskContent,
       status: false,
       id: this.idList.sort((a, b) => (a > b ? -1 : a < b ? 1 : 0))[0] + 1,
+      dateCreation: new Date(),
     });
 
     this.updateIdList();
@@ -66,6 +70,7 @@ export class TasksService {
     if (this.todoTaskList()) {
       this.todoTaskList().push(this.todoTaskList().shift()!);
     }
+    console.log(this.todoTaskList());
   }
   public cycleLeft() {
     if (this.todoTaskList()) {
