@@ -1,8 +1,7 @@
-import { Injectable, signal, effect } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { WritableSignal } from '@angular/core';
 
 import { task } from './task.model';
-import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -29,7 +28,7 @@ export class TasksService {
       dateCreation: new Date(),
     },
     {
-      title: 'Maybe Doring Something',
+      title: 'Maybe Doing Something',
       category: 'Work',
       content: 'some extra notes!',
       status: false,
@@ -70,7 +69,6 @@ export class TasksService {
     if (this.todoTaskList().length > 0) {
       this.todoTaskList().push(this.todoTaskList().shift()!);
     }
-    console.log(this.todoTaskList());
   }
   public cycleLeft() {
     if (this.todoTaskList().length > 0) {
@@ -101,8 +99,6 @@ export class TasksService {
     }
   }
 
-  public filterTasksList(type: string) {}
-
   public deleteTasksList(type: string) {
     if (this.todoTaskList().length > 0) {
       if (type === 'all') {
@@ -113,14 +109,12 @@ export class TasksService {
         this.todoTaskList.update((val) =>
           val.filter((task) => task.status === false)
         );
-        console.log('wat');
       }
     }
   }
 
   public completeTask(index: number) {
     this.todoTaskList().push(this.todoTaskList().splice(index, 1)[0]);
-    console.log(this.todoTaskList());
   }
 
   public onMoveList() {

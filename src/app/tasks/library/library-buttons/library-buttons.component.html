@@ -1,21 +1,12 @@
 <div class="sort">
-  Sort
-
+  <label>Sort</label>
   <button (click)="onClick('title')">Sort By: Task</button>
   <button (click)="onClick('category')">Sort By: Category</button>
   <button (click)="onClick('status')">Sort By: Status</button>
   <button (click)="onClick('dateCreation')">Sort By: Date Created</button>
 </div>
-<div class="filter">
-  Filter
-  <select>
-    <option>No Filter</option>
-    <option>Category</option>
-    <option>Status</option>
-  </select>
-</div>
 <div class="delete">
-  Delete
+  <label>Delete</label>
   <button (click)="onClick('completed')">Delete Completed Tasks</button>
   <button (click)="onClick('all')">Delete All Tasks</button>
 </div>

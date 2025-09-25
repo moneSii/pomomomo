@@ -33,10 +33,7 @@ export class LibraryComponent {
   private tasksService = inject(TasksService);
   private displayService = inject(DisplayService);
 
-  constructor() {}
-
   list = this.tasksService.taskList;
-  filter = '';
 
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.list(), event.previousIndex, event.currentIndex);
