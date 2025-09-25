@@ -1,4 +1,4 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, signal, effect } from '@angular/core';
 import { WritableSignal } from '@angular/core';
 
 import { task } from './task.model';
@@ -9,6 +9,9 @@ import { task } from './task.model';
 export class TasksService {
   constructor() {
     this.updateIdList();
+    effect(() => {
+      console.log(this.todoTaskList());
+    });
   }
   private todoTaskList: WritableSignal<task[]> = signal([
     {
@@ -50,7 +53,10 @@ export class TasksService {
       category: taskType,
       content: taskContent,
       status: false,
-      id: this.idList.sort((a, b) => (a > b ? -1 : a < b ? 1 : 0))[0] + 1,
+      id:
+        this.todoTaskList().length > 0
+          ? this.idList.sort((a, b) => (a > b ? -1 : a < b ? 1 : 0))[0] + 1
+          : 0,
       dateCreation: new Date(),
     });
 
@@ -62,6 +68,12 @@ export class TasksService {
       if (!this.idList.includes(this.todoTaskList()[i].id)) {
         this.idList.push(this.todoTaskList()[i].id);
       }
+    }
+  }
+
+  private reduceTasksID() {
+    for (var i = 0; i < this.todoTaskList().length; i++) {
+      this.todoTaskList()[i].id = i;
     }
   }
 
@@ -103,14 +115,21 @@ export class TasksService {
     if (this.todoTaskList().length > 0) {
       if (type === 'all') {
         this.todoTaskList.set([]);
+        this.idList = [];
       }
 
       if (type === 'completed') {
         this.todoTaskList.update((val) =>
           val.filter((task) => task.status === false)
         );
+        this.reduceTasksID();
       }
     }
+  }
+
+  public deleteTask(id: number) {
+    this.todoTaskList.update((val) => val.filter((task) => task.id !== id));
+    this.reduceTasksID();
   }
 
   public completeTask(index: number) {
