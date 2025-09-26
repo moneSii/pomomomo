@@ -18,13 +18,20 @@ export class ColorService {
       if (this.firstInit === true) {
         this.firstInit = false;
         this.currentAnimationColor.set(val.split('-')[1]);
-        this.currentStaticColor.set(val.split('-')[1]);
+        if (val.split('-').length <= 1) {
+          this.currentStaticColor.set(val);
+        } else {
+          this.currentStaticColor.set(val.split('-')[1]);
+        }
       } else {
         this.currentAnimationColor.set(val);
-        this.currentStaticColor.set(val.split('-')[1]);
+        if (val.split('-').length <= 1) {
+          this.currentStaticColor.set(val);
+        } else {
+          this.currentStaticColor.set(val.split('-')[1]);
+        }
       }
     });
-
     this.destroyRef.onDestroy(() => {
       colorState.unsubscribe();
     });
