@@ -1,13 +1,13 @@
-import { Injectable, signal, effect, OnDestroy } from '@angular/core';
-
-import { pomodoro } from './pomodoro.model';
+import { Injectable, inject, signal, effect, DestroyRef } from '@angular/core';
 
 import { Subscription, BehaviorSubject, timer, map } from 'rxjs';
+
+import { pomodoro } from './pomodoro.model';
 
 @Injectable({
   providedIn: 'root',
 })
-export class PomodoroService implements OnDestroy {
+export class PomodoroService {
   constructor() {
     const savedVars = localStorage.getItem('pomodoroVariables');
 
@@ -41,12 +41,14 @@ export class PomodoroService implements OnDestroy {
       };
       localStorage.setItem('pomodoroVariables', JSON.stringify(toSave));
     });
+
+    this.destroyRef.onDestroy(() => {
+      this.generateTime.unsubscribe();
+      this.timer.unsubscribe();
+    });
   }
 
-  ngOnDestroy() {
-    this.generateTime.unsubscribe();
-    this.timer.unsubscribe();
-  }
+  private destroyRef = inject(DestroyRef);
 
   private startTime = signal(25);
   private pauseTime = signal(this.toMilliseconds(this.startTime()));
@@ -112,13 +114,19 @@ export class PomodoroService implements OnDestroy {
     this.status.set(true);
     var timerDate = new Date(this.pauseTime() + Date.now()).getTime();
 
-    this.generateTime = timer(0, 250)
+    this.generateTime = timer(0, 200)
       .pipe(
         map(() => {
           return timerDate - Date.now();
         })
       )
-      .subscribe(this.timer);
+      .subscribe((val) => {
+        if (val < 0) {
+          this.cycleTimer();
+        }
+
+        this.timer.next(val);
+      });
   }
 
   pauseTimer() {

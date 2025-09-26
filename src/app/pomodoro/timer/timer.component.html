@@ -1,4 +1,4 @@
 <div class="container" [class]="currentColor()">
-  <p class="timer">{{ time | minuteTime : "mm:ss" }}</p>
+  <p class="timer">{{ time | async | minuteTime : "mm:ss" }}</p>
   <p class="interval">Work Done: {{ curInterval() + "/" + maxInterval() }}</p>
 </div>
