@@ -203,7 +203,7 @@ export class PomodoroService {
     }
 
     if (this.autoStartCycles() == true) {
-      this.startTimer();
+      setTimeout(() => this.startTimer(), 1000);
     }
   }
 
