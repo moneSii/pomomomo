@@ -9,36 +9,39 @@ import { task } from './task.model';
 export class TasksService {
   constructor() {
     this.updateIdList();
+    console.log(this.idList);
     effect(() => {
       console.log(this.todoTaskList());
     });
   }
+
   private todoTaskList: WritableSignal<task[]> = signal([
     {
+      id: 0,
+      completed: false,
       title: 'Not Doing Anything',
       category: 'Life',
       content: 'some extra notes!',
-      status: false,
-      id: 0,
       dateCreation: new Date(),
     },
     {
+      id: 1,
+      completed: false,
       title: 'Kinda doing something',
       category: 'Academics',
       content: 'some extra notes!',
-      status: false,
-      id: 1,
       dateCreation: new Date(),
     },
     {
+      id: 2,
+      completed: false,
       title: 'Maybe Doing Something',
       category: 'Work',
       content: 'some extra notes!',
-      status: false,
-      id: 2,
       dateCreation: new Date(),
     },
   ]);
+
   private idList: number[] = [];
 
   private sort = {
@@ -48,15 +51,18 @@ export class TasksService {
   };
 
   public addTasks(taskTitle: string, taskType: string, taskContent: string) {
+    var newId: number = 0;
+
+    while (this.idList.includes(newId)) {
+      newId = Math.trunc(Math.random() * 1000);
+    }
+
     this.todoTaskList().unshift({
+      id: newId,
       title: taskTitle,
       category: taskType,
       content: taskContent,
-      status: false,
-      id:
-        this.todoTaskList().length > 0
-          ? this.idList.sort((a, b) => (a > b ? -1 : a < b ? 1 : 0))[0] + 1
-          : 0,
+      completed: false,
       dateCreation: new Date(),
     });
 
@@ -71,17 +77,12 @@ export class TasksService {
     }
   }
 
-  private reduceTasksID() {
-    for (var i = 0; i < this.todoTaskList().length; i++) {
-      this.todoTaskList()[i].id = i;
-    }
-  }
-
   public cycleRight() {
     if (this.todoTaskList().length > 0) {
       this.todoTaskList().push(this.todoTaskList().shift()!);
     }
   }
+
   public cycleLeft() {
     if (this.todoTaskList().length > 0) {
       this.todoTaskList().unshift(this.todoTaskList().pop()!);
@@ -120,16 +121,14 @@ export class TasksService {
 
       if (type === 'completed') {
         this.todoTaskList.update((val) =>
-          val.filter((task) => task.status === false)
+          val.filter((task) => task.completed === false)
         );
-        this.reduceTasksID();
       }
     }
   }
 
   public deleteTask(id: number) {
     this.todoTaskList.update((val) => val.filter((task) => task.id !== id));
-    this.reduceTasksID();
   }
 
   public completeTask(index: number) {
