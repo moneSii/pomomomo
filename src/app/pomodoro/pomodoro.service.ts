@@ -217,8 +217,10 @@ export class PomodoroService {
 
     if (this.timeType()) {
       this.timer.next(this.pauseTime());
+      this.colorClass.next('work');
     } else {
       this.timer.next(this.toMilliseconds(this.shortBreak()));
+      this.colorClass.next('short');
     }
 
     if (this.currentInterval() >= this.intervalCount()) {
