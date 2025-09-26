@@ -1,5 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { NgClass } from '@angular/common';
+import { Component, inject } from '@angular/core';
 
 import { TimerComponent } from './timer/timer.component';
 import { ButtonsComponent } from './buttons/buttons.component';
@@ -10,7 +9,7 @@ import { ColorService } from '../color.service';
 @Component({
   selector: 'app-pomodoro',
   standalone: true,
-  imports: [TimerComponent, ButtonsComponent, FormComponent, NgClass],
+  imports: [TimerComponent, ButtonsComponent, FormComponent],
   templateUrl: './pomodoro.component.html',
   styleUrls: [
     './pomodoro.component.css',

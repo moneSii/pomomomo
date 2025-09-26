@@ -1,5 +1,4 @@
 import { Component, inject, DestroyRef, OnInit } from '@angular/core';
-import { NgClass } from '@angular/common';
 import {
   ReactiveFormsModule,
   FormGroup,
@@ -24,7 +23,6 @@ import { ColorService } from '../../color.service';
     NumbersOnlyDirective,
     LessThanDirective,
     SelectDirective,
-    NgClass,
   ],
   templateUrl: './form.component.html',
   styleUrls: [

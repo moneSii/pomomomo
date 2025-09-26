@@ -1,5 +1,4 @@
 import { Component, inject, DestroyRef, OnInit } from '@angular/core';
-import { NgClass } from '@angular/common';
 
 import { PomodoroService } from '../pomodoro.service';
 import { MinuteTimePipe } from '../../shared/pipes/minute-time.pipe';
@@ -8,7 +7,7 @@ import { ColorService } from '../../color.service';
 @Component({
   selector: 'app-timer',
   standalone: true,
-  imports: [MinuteTimePipe, NgClass],
+  imports: [MinuteTimePipe],
   templateUrl: './timer.component.html',
   styleUrls: [
     './timer.component.css',

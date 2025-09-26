@@ -1,5 +1,4 @@
 import { Component, inject } from '@angular/core';
-import { NgClass } from '@angular/common';
 
 import { PomodoroService } from '../pomodoro.service';
 import { ColorService } from '../../color.service';
@@ -8,7 +7,7 @@ import { DisplayService } from '../../display.service';
 @Component({
   selector: 'app-buttons',
   standalone: true,
-  imports: [NgClass],
+  imports: [],
   templateUrl: './buttons.component.html',
   styleUrls: [
     './buttons.component.css',
