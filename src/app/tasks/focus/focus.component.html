@@ -1,5 +1,9 @@
 @if (focusedTask().length>0){
-<input class="status" [(ngModel)]="focusedTask()[0].status" type="checkbox" />
+<input
+  class="status"
+  [(ngModel)]="focusedTask()[0].completed"
+  type="checkbox"
+/>
 <div class="container" [ngClass]="currentColor()">
   <div class="task-header">
     <h2 class="title">
