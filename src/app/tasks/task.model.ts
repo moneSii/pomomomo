@@ -3,6 +3,5 @@ export interface task {
   completed: boolean;
   title: string;
   category: string;
-  content: string;
   dateCreation: Date;
 }

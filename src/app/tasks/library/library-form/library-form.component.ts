@@ -27,18 +27,13 @@ export class LibraryFormComponent {
       validators: [Validators.required],
       nonNullable: true,
     }),
-    content: new FormControl('', {
-      validators: [Validators.required],
-      nonNullable: true,
-    }),
   });
 
   onSubmit() {
     if (this.form.valid) {
       this.tasksService.addTasks(
         this.form.controls.title.getRawValue(),
-        this.form.controls.type.getRawValue(),
-        this.form.controls.content.getRawValue()
+        this.form.controls.type.getRawValue()
       );
     }
   }

@@ -21,7 +21,6 @@ export class TasksService {
       completed: false,
       title: 'Not Doing Anything',
       category: 'Life',
-      content: 'some extra notes!',
       dateCreation: new Date(),
     },
     {
@@ -29,7 +28,6 @@ export class TasksService {
       completed: false,
       title: 'Kinda doing something',
       category: 'Academics',
-      content: 'some extra notes!',
       dateCreation: new Date(),
     },
     {
@@ -37,7 +35,6 @@ export class TasksService {
       completed: false,
       title: 'Maybe Doing Something',
       category: 'Work',
-      content: 'some extra notes!',
       dateCreation: new Date(),
     },
   ]);
@@ -50,7 +47,7 @@ export class TasksService {
     category: false,
   };
 
-  public addTasks(taskTitle: string, taskType: string, taskContent: string) {
+  public addTasks(taskTitle: string, taskType: string) {
     var newId: number = 0;
 
     while (this.idList.includes(newId)) {
@@ -61,7 +58,6 @@ export class TasksService {
       id: newId,
       title: taskTitle,
       category: taskType,
-      content: taskContent,
       completed: false,
       dateCreation: new Date(),
     });
