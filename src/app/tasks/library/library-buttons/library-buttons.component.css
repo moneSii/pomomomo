@@ -1,0 +1,20 @@
+.sort,
+.delete,
+.button-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+label {
+  margin: auto;
+}
+
+.button-group {
+  display: flex;
+  flex-direction: row;
+}
+
+button {
+  margin: 7px;
+}

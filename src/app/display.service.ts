@@ -5,7 +5,7 @@ import { Injectable, signal } from '@angular/core';
 })
 export class DisplayService {
   private displayForm = signal(false);
-  private displayLibrary = signal(true);
+  private displayLibrary = signal(false);
   private displayLibraryForm = signal(false);
 
   get displayFormInputs() {

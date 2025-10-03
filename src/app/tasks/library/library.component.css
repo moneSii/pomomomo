@@ -33,7 +33,7 @@
 
 .task-list {
   width: 54rem;
-  margin: 1rem;
+  margin: 1rem auto 0 auto;
   border: solid 1px #851313;
   min-height: 2rem;
   font-family: sans-serif;
@@ -72,4 +72,9 @@
 
 .task-add {
   justify-content: center;
+}
+
+.library-buttons {
+  display: flex;
+  flex-direction: row;
 }
