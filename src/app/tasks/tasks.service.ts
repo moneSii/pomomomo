@@ -131,8 +131,11 @@ export class TasksService {
     this.todoTaskList.update((val) => val.filter((task) => task.id !== id));
   }
 
-  public completeTask(index: number) {
-    this.todoTaskList().push(this.todoTaskList().splice(index, 1)[0]);
+  public toggleTaskComplete(index: number) {
+    this.todoTaskList.update((task) => {
+      task[index].completed = !task[index].completed;
+      return task;
+    });
   }
 
   public onMoveList() {

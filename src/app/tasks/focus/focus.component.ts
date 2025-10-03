@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { NgClass } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 
 import { TasksService } from '../tasks.service';
@@ -7,7 +7,7 @@ import { ColorService } from '../../color.service';
 
 @Component({
   selector: 'app-focus',
-  imports: [NgClass, FormsModule],
+  imports: [FormsModule],
   templateUrl: './focus.component.html',
   styleUrls: [
     './focus.component.css',
@@ -22,4 +22,8 @@ export class FocusComponent {
   currentColor = this.colorService.colorAnimatedSecondary;
 
   focusedTask = this.tasksService.taskList;
+
+  onClick() {
+    this.tasksService.toggleTaskComplete(0);
+  }
 }

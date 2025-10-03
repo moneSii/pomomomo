@@ -1,5 +1,4 @@
 import { Component, inject } from '@angular/core';
-import { NgClass } from '@angular/common';
 
 import { TasksService } from '../tasks.service';
 import { ColorService } from '../../color.service';
@@ -7,7 +6,7 @@ import { DisplayService } from '../../display.service';
 
 @Component({
   selector: 'app-options',
-  imports: [NgClass],
+  imports: [],
   templateUrl: './options.component.html',
   styleUrls: [
     './options.component.css',

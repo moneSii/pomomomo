@@ -1,9 +1,10 @@
 .container {
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: center;
   margin: 1rem;
   margin-top: 0;
+  height: 11rem;
   border-radius: 25px;
   box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 7px 3px inset;
   font-family: var(--main-font);
@@ -15,6 +16,21 @@
   position: relative;
   top: 45px;
   left: 480px;
+  opacity: 0;
+}
+
+.active {
+  text-decoration: line-through 10px;
+}
+
+.title,
+.category {
+  text-align: center;
+  margin: auto;
+}
+
+.category {
+  margin-top: 1rem;
 }
 
 .task-header {
@@ -23,23 +39,6 @@
   margin-bottom: 0.5rem;
 }
 
-.title,
-.category {
-  margin-top: 0;
-  text-align: center;
-  margin: auto;
-}
-
-.task-content {
-  width: 85%;
-  height: 3.5rem;
-  margin: auto;
-  margin-bottom: 1rem;
-  justify-content: center;
-  overflow: hidden;
-  font-size: 1rem;
-}
-
-.content {
-  text-align: center;
+.title {
+  font-size: 2.7rem;
 }

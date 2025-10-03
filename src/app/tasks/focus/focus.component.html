@@ -4,21 +4,20 @@
   [(ngModel)]="focusedTask()[0].completed"
   type="checkbox"
 />
-<div class="container" [ngClass]="currentColor()">
+<div class="container" [class]="currentColor()" (click)="onClick()">
   <div class="task-header">
-    <h2 class="title">
+    <h2 class="title" [class.active]="focusedTask()[0].completed">
       {{ focusedTask()[0].title }}
     </h2>
     <h3 class="category">
       {{ focusedTask()[0].category }}
     </h3>
   </div>
-  <div class="task-content">
-    <p class="content">
-      {{ focusedTask()[0].content }}
-    </p>
-  </div>
 </div>
 } @else {
-<div>No Tasks</div>
+<div class="container" [class]="currentColor()">
+  <div class="task-header">
+    <h2 class="title">No Tasks!</h2>
+  </div>
+</div>
 }
