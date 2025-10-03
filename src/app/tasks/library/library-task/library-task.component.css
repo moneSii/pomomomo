@@ -1,7 +1,6 @@
 .item {
-  max-width: 55rem;
-  width: 100rem;
   padding: 20px 10px;
+  height: 3rem;
   border-bottom: solid 1px #ccc;
   color: rgba(0, 0, 0, 0.87);
   display: flex;
@@ -13,17 +12,31 @@
   font-family: var(--main-font);
 }
 
+.completed {
+  text-decoration: line-through 5px;
+}
+
 .handle,
-.title,
-.content,
-.status {
+.category,
+.title {
   margin: 2rem;
 }
 
 .handle {
   font-size: 4rem;
+  width: 5rem;
 }
 
 .category {
-  min-width: 5rem;
+  width: 5rem;
+}
+
+.title {
+  width: 30rem;
+}
+
+.status {
+  opacity: 0;
+  margin: 0;
+  padding: 0;
 }

@@ -17,7 +17,11 @@ export class LibraryTaskComponent {
   private tasksService = inject(TasksService);
   task = input.required<task>();
 
-  onClick() {
-    this.tasksService.deleteTask(this.task().id);
+  onClick(type: string) {
+    if (type === 'delete') {
+      this.tasksService.deleteTask(this.task().id);
+    } else if (type === 'completed') {
+      this.tasksService.toggleTaskComplete(this.task().id);
+    }
   }
 }

@@ -24,6 +24,6 @@ export class FocusComponent {
   focusedTask = this.tasksService.taskList;
 
   onClick() {
-    this.tasksService.toggleTaskComplete(0);
+    this.tasksService.toggleTaskComplete(this.focusedTask()[0].id);
   }
 }
