@@ -35,6 +35,8 @@ export class LibraryComponent {
 
   list = this.tasksService.taskList;
 
+  displayForm = this.displayService.displayLibForm;
+
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.list(), event.previousIndex, event.currentIndex);
     this.tasksService.onMoveList();
@@ -42,5 +44,9 @@ export class LibraryComponent {
 
   onClose() {
     this.displayService.alternateDisplayLibrary();
+  }
+
+  onClick() {
+    this.displayService.alternateDisplayLibraryForm();
   }
 }

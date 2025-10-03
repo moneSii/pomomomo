@@ -7,6 +7,8 @@ import {
   Validators,
 } from '@angular/forms';
 
+import { DisplayService } from '../../../display.service';
+
 import { TasksService } from '../../tasks.service';
 
 @Component({
@@ -16,7 +18,8 @@ import { TasksService } from '../../tasks.service';
   styleUrl: './library-form.component.css',
 })
 export class LibraryFormComponent {
-  tasksService = inject(TasksService);
+  private tasksService = inject(TasksService);
+  private displayService = inject(DisplayService);
 
   form = new FormGroup({
     title: new FormControl('', {
@@ -36,5 +39,9 @@ export class LibraryFormComponent {
         this.form.controls.type.getRawValue()
       );
     }
+  }
+
+  onClose() {
+    this.displayService.alternateDisplayLibraryForm();
   }
 }

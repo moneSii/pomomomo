@@ -1,19 +1,23 @@
 <div class="backdrop" (click)="onClose()"></div>
-<dialog open>
-  <div class="container-timer-input">
-    <div class="timer-content">
-      <app-mini-timer />
+<dialog class="box" open>
+  <div class="container">
+    <div class="header">
+      <app-mini-timer class="header-item mini-timer" />
+      <app-library-buttons />
     </div>
-    <app-library-form />
-  </div>
-  <div class="container-library">
-    <div class="header"><app-library-buttons /></div>
     <div class="library" cdkScrollable>
       <div class="task-list" cdkDropList (cdkDropListDropped)="drop($event)">
         @for (task of list(); track task.id) {
-        <app-library-task [task]="task" cdkDrag />
+        <app-library-task [task]="task" cdkDrag class="task-item" />
         }
+        <div class="task-item task-add" (click)="onClick()">
+          + Add new Task! +
+        </div>
       </div>
     </div>
   </div>
 </dialog>
+
+@if (displayForm()) {
+<app-library-form />
+}
