@@ -1,5 +1,5 @@
 <div class="backdrop" (click)="onClose()"></div>
-<dialog class="box" open>
+<dialog class="box" [class]="colorPrimary()" open>
   <div class="container">
     <div class="header">
       <app-mini-timer class="header-item mini-timer" />
@@ -8,9 +8,18 @@
     <div class="library" cdkScrollable>
       <div class="task-list" cdkDropList (cdkDropListDropped)="drop($event)">
         @for (task of list(); track task.id) {
-        <app-library-task [task]="task" cdkDrag class="task-item" />
+        <app-library-task
+          [task]="task"
+          cdkDrag
+          class="task-item"
+          [class]="colorSecondary()"
+        />
         }
-        <div class="task-item task-add" (click)="onClick()">
+        <div
+          class="task-item task-add"
+          [class]="colorSecondary()"
+          (click)="onClick()"
+        >
           + Add new Task! +
         </div>
       </div>
