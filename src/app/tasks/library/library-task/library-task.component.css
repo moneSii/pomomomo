@@ -8,17 +8,29 @@
   margin: 2rem;
 }
 
-.handle {
-  font-size: 4rem;
-  width: 5rem;
+.image-handle {
+  filter: brightness(1) invert(1) drop-shadow(2px 2px 1px #00000057);
 }
 
 .category {
+  margin: 0;
+  padding-right: 4rem;
+  padding-left: 0.5rem;
   width: 5rem;
+  color: rgb(245, 245, 245);
+  font-size: 1.2rem;
+  text-shadow: 0 1px 0.1px rgb(0, 0, 0);
+  overflow: hidden;
+  text-wrap: wrap;
+  justify-content: left;
 }
 
 .title {
   width: 30rem;
+  color: rgb(255, 255, 255);
+  text-shadow: 1px 1px 0.5px rgb(0, 0, 0);
+  text-wrap: wrap;
+  overflow: hidden;
 }
 
 .status {

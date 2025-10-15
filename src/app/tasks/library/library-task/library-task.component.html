@@ -1,4 +1,6 @@
-<div class="handle" cdkDragHandle>H</div>
+<div class="handle" cdkDragHandle>
+  <img class="image-handle" src="/icons/draggable.png" />
+</div>
 <p class="category">{{ task().category }}</p>
 <h1 class="title" [class.completed]="this.task().completed">
   {{ task().title }}
