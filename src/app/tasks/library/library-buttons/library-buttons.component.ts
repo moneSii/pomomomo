@@ -11,11 +11,10 @@ import { TasksService } from '../../tasks.service';
 export class LibraryButtonsComponent {
   private tasksService = inject(TasksService);
 
-  onClick(type: string) {
-    if (type === 'category' || type === 'status' || type === 'dateCreation') {
-      this.tasksService.sortTasksList(type);
-    } else if (type === 'all' || type === 'completed') {
-      this.tasksService.deleteTasksList(type);
-    }
+  onClickSort(type: string) {
+    this.tasksService.sortTasksList(type);
+  }
+  onClickDelete(type: string) {
+    this.tasksService.deleteTasksList(type);
   }
 }

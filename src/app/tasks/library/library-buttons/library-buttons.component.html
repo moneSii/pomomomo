@@ -1,15 +1,15 @@
 <div class="sort">
   <label>Sort</label>
   <div class="button-group">
-    <button (click)="onClick('category')">Sort By: Category</button>
-    <button (click)="onClick('completed')">Sort By: Completed</button>
-    <button (click)="onClick('dateCreation')">Sort By: Date Created</button>
+    <button (click)="onClickSort('category')">Sort By: Category</button>
+    <button (click)="onClickSort('completed')">Sort By: Completed</button>
+    <button (click)="onClickSort('dateCreation')">Sort By: Date Created</button>
   </div>
 </div>
 <div class="delete">
   <label>Delete</label>
   <div class="button-group">
-    <button (click)="onClick('completed')">Delete Completed Tasks</button>
-    <button (click)="onClick('all')">Delete All Tasks</button>
+    <button (click)="onClickDelete('completed')">Delete Completed Tasks</button>
+    <button (click)="onClickDelete('all')">Delete All Tasks</button>
   </div>
 </div>
