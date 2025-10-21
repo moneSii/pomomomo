@@ -5,6 +5,10 @@
 <h1 class="title" [class.completed]="this.task().completed">
   {{ task().title }}
 </h1>
-<button (click)="onClick('completed')" class="complete">Complete</button>
-<button (click)="onClick('delete')" class="delete">Delete</button>
+<div (click)="onClick('completed')" class="complete">
+  <img class="icon" src="/icons/checkmark.png" />
+</div>
+<div (click)="onClick('delete')" class="delete">
+  <img class="icon" src="/icons/cross.png" />
+</div>
 <input [(ngModel)]="task().completed" class="status" type="checkbox" />
