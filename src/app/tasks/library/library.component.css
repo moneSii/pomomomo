@@ -34,7 +34,7 @@
   width: 54rem;
   margin: 1rem auto 0 auto;
   min-height: 2rem;
-  font-family: sans-serif;
+  border: red solid;
 }
 
 .header {
@@ -57,10 +57,9 @@
 
 .task-item {
   border-radius: 30px;
-  min-height: 3rem;
-  max-height: 10rem;
-  margin: 2rem;
+  margin: 1.5rem;
   overflow: hidden;
+  max-height: 6.3rem;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -84,4 +83,47 @@
   flex-direction: row;
   justify-content: space-evenly;
   width: 70%;
+}
+
+.enter-animation {
+  animation: pop-up 0.4s ease-out;
+}
+@keyframes pop-up {
+  from {
+    opacity: 0;
+    height: 0;
+  }
+  to {
+    opacity: 1;
+    height: 6.3rem;
+  }
+}
+
+.leave-animation {
+  animation: exit-pop 0.4s ease-in;
+}
+
+@keyframes exit-pop {
+  from {
+    opacity: 1;
+    height: 6rem;
+    margin: 1.5rem;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    height: 0;
+    margin: 0;
+    transform: scale(0);
+  }
+}
+
+.cdk-drag-placeholder {
+  opacity: 0;
+}
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+.task-list.cdk-drop-list-dragging .task-item:not(.cdk-drag-placeholder) {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
