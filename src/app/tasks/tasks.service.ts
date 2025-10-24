@@ -65,6 +65,25 @@ export class TasksService {
     this.updateIdList();
   }
 
+  public modifyTask(newVal: string, contentType: string, taskId: number) {
+    console.log(newVal, contentType, taskId);
+
+    this.todoTaskList.update((list) => {
+      const targetIndex = list.findIndex((i) => i.id == taskId);
+
+      switch (contentType) {
+        case 'title':
+          list[targetIndex].title = newVal;
+          break;
+        case 'category':
+          list[targetIndex].category = newVal;
+          break;
+      }
+
+      return list;
+    });
+  }
+
   private updateIdList() {
     for (var i = 0; i < this.todoTaskList().length; i++) {
       if (!this.idList.includes(this.todoTaskList()[i].id)) {

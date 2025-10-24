@@ -1,8 +1,23 @@
 <div class="handle" cdkDragHandle>
   <img class="image-handle" src="/icons/draggable.png" />
 </div>
-<p class="category">{{ task().category }}</p>
-<h1 class="title" [class.completed]="this.task().completed">
+<p
+  class="category"
+  contenteditable="true"
+  appEditable
+  contentType="category"
+  [taskId]="task().id"
+>
+  {{ task().category }}
+</p>
+<h1
+  class="title"
+  contenteditable="true"
+  appEditable
+  contentType="title"
+  [taskId]="task().id"
+  [class.completed]="this.task().completed"
+>
   {{ task().title }}
 </h1>
 <div (click)="onClick('completed')" class="complete">

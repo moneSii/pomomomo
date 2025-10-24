@@ -5,11 +5,13 @@ import { CdkDragHandle } from '@angular/cdk/drag-drop';
 
 import { TasksService } from '../../tasks.service';
 
+import { EditableDirective } from './editable.directive';
+
 import { task } from '../../task.model';
 
 @Component({
   selector: 'app-library-task',
-  imports: [FormsModule, CdkDragHandle],
+  imports: [FormsModule, CdkDragHandle, EditableDirective],
   templateUrl: './library-task.component.html',
   styleUrl: './library-task.component.css',
 })
