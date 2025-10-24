@@ -54,7 +54,7 @@ export class TasksService {
       newId = Math.trunc(Math.random() * 1000);
     }
 
-    this.todoTaskList().unshift({
+    this.todoTaskList().push({
       id: newId,
       title: taskTitle,
       category: taskType,
@@ -66,8 +66,6 @@ export class TasksService {
   }
 
   public modifyTask(newVal: string, contentType: string, taskId: number) {
-    console.log(newVal, contentType, taskId);
-
     this.todoTaskList.update((list) => {
       const targetIndex = list.findIndex((i) => i.id == taskId);
 

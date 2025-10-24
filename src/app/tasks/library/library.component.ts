@@ -1,5 +1,4 @@
 import { Component, inject } from '@angular/core';
-import { LibraryFormComponent } from './library-form/library-form.component';
 import { LibraryTaskComponent } from './library-task/library-task.component';
 import { MiniTimerComponent } from '../../shared/components/mini-timer/mini-timer.component';
 import { LibraryButtonsComponent } from './library-buttons/library-buttons.component';
@@ -19,7 +18,6 @@ import { ColorService } from '../../color.service';
 @Component({
   selector: 'app-library',
   imports: [
-    LibraryFormComponent,
     LibraryTaskComponent,
     MiniTimerComponent,
     LibraryButtonsComponent,
@@ -55,6 +53,6 @@ export class LibraryComponent {
   }
 
   onClick() {
-    this.displayService.alternateDisplayLibraryForm();
+    this.tasksService.addTasks('Define Task', 'Life');
   }
 }
