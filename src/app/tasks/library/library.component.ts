@@ -53,6 +53,6 @@ export class LibraryComponent {
   }
 
   onClick() {
-    this.tasksService.addTasks('Define Task', 'Life');
+    this.tasksService.addTasks('New Task', 'Life');
   }
 }

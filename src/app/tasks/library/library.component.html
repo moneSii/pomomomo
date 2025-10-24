@@ -5,8 +5,20 @@
       <app-mini-timer class="header-item mini-timer" />
       <app-library-buttons class="library-buttons" />
     </div>
-    <div class="library" cdkScrollable>
-      <div class="task-list" cdkDropList (cdkDropListDropped)="drop($event)">
+    <div class="library">
+      <div
+        class="task-list"
+        cdkDropList
+        (cdkDropListDropped)="drop($event)"
+        cdkScrollable
+      >
+        <div
+          class="task-item task-add"
+          [class]="colorSecondary()"
+          (click)="onClick()"
+        >
+          + Add new Task! +
+        </div>
         @for (task of list(); track task.id) {
         <app-library-task
           [task]="task"
@@ -17,13 +29,6 @@
           animate.leave="leave-animation"
         />
         }
-        <div
-          class="task-item task-add"
-          [class]="colorSecondary()"
-          (click)="onClick()"
-        >
-          + Add new Task! +
-        </div>
       </div>
     </div>
   </div>
