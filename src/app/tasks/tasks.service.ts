@@ -9,9 +9,8 @@ import { task } from './task.model';
 export class TasksService {
   constructor() {
     this.updateIdList();
-    console.log(this.idList);
     effect(() => {
-      console.log(this.todoTaskList());
+      console.log(this.todoTaskList(), this.idList);
     });
   }
 
@@ -54,12 +53,15 @@ export class TasksService {
       newId = Math.trunc(Math.random() * 1000);
     }
 
-    this.todoTaskList().push({
-      id: newId,
-      title: taskTitle,
-      category: taskType,
-      completed: false,
-      dateCreation: new Date(),
+    this.todoTaskList.update((list) => {
+      list.push({
+        id: newId,
+        title: taskTitle,
+        category: taskType,
+        completed: false,
+        dateCreation: new Date(),
+      });
+      return list;
     });
 
     this.updateIdList();
@@ -136,12 +138,15 @@ export class TasksService {
         this.todoTaskList.update((val) =>
           val.filter((task) => task.completed === false)
         );
+        this.idList = [];
+        this.updateIdList();
       }
     }
   }
 
   public deleteTask(id: number) {
     this.todoTaskList.update((val) => val.filter((task) => task.id !== id));
+    this.idList = this.idList.filter((val) => val !== id);
   }
 
   public toggleTaskComplete(id: number) {

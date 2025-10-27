@@ -53,5 +53,6 @@ export class EditableDirective implements OnInit, OnDestroy {
         this.hold.id
       );
     }
+    this.inputSubscription.unsubscribe();
   }
 }
