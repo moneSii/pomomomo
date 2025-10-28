@@ -49,3 +49,7 @@
 .icon {
   width: 1.3rem;
 }
+
+.at-limit {
+  border: red solid;
+}

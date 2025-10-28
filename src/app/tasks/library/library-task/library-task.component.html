@@ -6,6 +6,8 @@
   contenteditable="true"
   appEditable
   contentType="category"
+  appTextLimit
+  [limit]="23"
   [taskId]="task().id"
 >
   {{ task().category }}
@@ -16,6 +18,8 @@
   appEditable
   contentType="title"
   [taskId]="task().id"
+  appTextLimit
+  [limit]="23"
   [class.completed]="this.task().completed"
 >
   {{ task().title }}

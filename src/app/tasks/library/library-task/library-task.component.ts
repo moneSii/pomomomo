@@ -8,10 +8,11 @@ import { TasksService } from '../../tasks.service';
 import { EditableDirective } from './editable.directive';
 
 import { task } from '../../task.model';
+import { TextLimitDirective } from './text-limit.directive';
 
 @Component({
   selector: 'app-library-task',
-  imports: [FormsModule, CdkDragHandle, EditableDirective],
+  imports: [FormsModule, CdkDragHandle, EditableDirective, TextLimitDirective],
   templateUrl: './library-task.component.html',
   styleUrl: './library-task.component.css',
 })
