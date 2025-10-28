@@ -23,6 +23,7 @@
   overflow: hidden;
   text-wrap: wrap;
   justify-content: left;
+  white-space: normal;
 }
 
 .title {
@@ -31,6 +32,7 @@
   text-shadow: 1px 1px 0.5px rgb(0, 0, 0);
   text-wrap: wrap;
   overflow: hidden;
+  white-space: normal;
 }
 
 .status {

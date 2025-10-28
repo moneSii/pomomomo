@@ -11,14 +11,20 @@ export class TextLimitDirective {
 
   limit = input.required<number>();
 
+  range = window.getSelection();
+
   oldVal = '';
   atLimit = false;
 
-  @HostListener('input', ['$event']) oninput(event: Event) {
+  @HostListener('input', ['$event']) onInput(event: Event) {
     const val = this.el.nativeElement.innerText;
 
     if (val.length > this.limit()) {
       this.el.nativeElement.innerText = this.oldVal;
+
+      this.range?.removeAllRanges();
+      this.el.nativeElement.blur();
+
       this.atLimit = true;
     } else {
       this.atLimit = false;

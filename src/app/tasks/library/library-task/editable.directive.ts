@@ -5,6 +5,7 @@ import {
   inject,
   OnInit,
   OnDestroy,
+  AfterContentInit,
 } from '@angular/core';
 import { fromEvent, debounceTime, map, Subscription } from 'rxjs';
 
@@ -13,7 +14,7 @@ import { TasksService } from '../../tasks.service';
 @Directive({
   selector: '[appEditable]',
 })
-export class EditableDirective implements OnInit, OnDestroy {
+export class EditableDirective implements OnInit, OnDestroy, AfterContentInit {
   private el = inject(ElementRef);
   private tasksService = inject(TasksService);
 
@@ -43,6 +44,14 @@ export class EditableDirective implements OnInit, OnDestroy {
           id: this.taskId(),
         };
       });
+  }
+
+  ngAfterContentInit() {
+    const withoutLineBreak = this.el.nativeElement.innerHTML.replace(
+      /^\n|\n$/g,
+      ''
+    );
+    this.el.nativeElement.innerHTML = withoutLineBreak;
   }
 
   ngOnDestroy(): void {
