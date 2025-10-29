@@ -118,6 +118,46 @@
   }
 }
 
+.enter-dialog {
+  animation: slide-in-fade ease-out 0.3s;
+}
+
+@keyframes slide-in-fade {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.enter-backdrop {
+  animation: fade-in ease-out 0.2s;
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.leave {
+  animation: fade-out ease-out 0.1s;
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
 .cdk-drag-placeholder {
   opacity: 0;
 }

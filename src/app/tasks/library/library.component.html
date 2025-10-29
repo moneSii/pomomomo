@@ -1,5 +1,16 @@
-<div class="backdrop" (click)="onClose()"></div>
-<dialog class="box" [class]="colorPrimary()" open>
+<div
+  class="backdrop"
+  (click)="onClose()"
+  animate.enter="enter-backdrop"
+  animate.leave="leave"
+></div>
+<dialog
+  class="box"
+  [class]="colorPrimary()"
+  open
+  animate.enter="enter-dialog"
+  animate.leave="leave"
+>
   <div class="container">
     <div class="header">
       <app-mini-timer class="header-item mini-timer" />
@@ -19,7 +30,7 @@
         >
           + Add new Task! +
         </div>
-        @for (task of list(); track task.id) {
+        @defer (on timer(250ms)){ @for (task of list(); track task.id) {
         <app-library-task
           [task]="task"
           cdkDrag
@@ -28,7 +39,7 @@
           animate.enter="enter-animation"
           animate.leave="leave-animation"
         />
-        }
+        } }
       </div>
     </div>
   </div>
