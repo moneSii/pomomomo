@@ -30,7 +30,9 @@
         <app-library-task
           class="task-item"
           [class]="colorSecondary()"
+          [class.focused-task]="task.id === focusedTask"
           [task]="task"
+          (click)="focusTask(task.id)"
           cdkDrag
           animate.enter="enter-task"
           animate.leave="leave-task"

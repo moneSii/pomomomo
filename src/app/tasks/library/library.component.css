@@ -71,6 +71,10 @@
   font-size: 1.5rem;
 }
 
+.focused-task {
+  filter: brightness(1.05);
+}
+
 .enter-backdrop {
   animation: fade-in ease-out 0.2s;
 }

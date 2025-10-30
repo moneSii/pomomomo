@@ -116,6 +116,10 @@ export class TasksService {
     }
   }
 
+  public changeFocus(id: number) {
+    this.focusTaskId.next(id);
+  }
+
   private refocusTask() {
     if (this.todoTaskList().length === 0) {
       this.focusTaskId.next(-1);
