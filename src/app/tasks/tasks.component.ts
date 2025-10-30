@@ -1,5 +1,4 @@
 import { Component, inject } from '@angular/core';
-import { NgClass } from '@angular/common';
 
 import { FocusComponent } from './focus/focus.component';
 import { OptionsComponent } from './options/options.component';
@@ -10,7 +9,7 @@ import { DisplayService } from '../display.service';
 
 @Component({
   selector: 'app-tasks',
-  imports: [FocusComponent, LibraryComponent, OptionsComponent, NgClass],
+  imports: [FocusComponent, LibraryComponent, OptionsComponent],
   templateUrl: './tasks.component.html',
   styleUrls: [
     './tasks.component.css',
@@ -21,7 +20,7 @@ import { DisplayService } from '../display.service';
 export class TasksComponent {
   private colorService = inject(ColorService);
   private displayService = inject(DisplayService);
-  currentColor = this.colorService.colorAnimatedPrimary;
 
+  currentColor = this.colorService.colorAnimatedPrimary;
   display = this.displayService.displayLib;
 }

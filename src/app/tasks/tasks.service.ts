@@ -3,40 +3,21 @@ import { WritableSignal } from '@angular/core';
 
 import { task } from './task.model';
 
+import { data } from '../dummydata/dummy-tasks';
+
 @Injectable({
   providedIn: 'root',
 })
 export class TasksService {
   constructor() {
+    this.todoTaskList.set(data);
     this.updateIdList();
     effect(() => {
       console.log(this.todoTaskList(), this.idList);
     });
   }
 
-  private todoTaskList: WritableSignal<task[]> = signal([
-    {
-      id: 0,
-      completed: false,
-      title: 'Not Doing Anything',
-      category: 'Life',
-      dateCreation: new Date(),
-    },
-    {
-      id: 1,
-      completed: false,
-      title: 'Kinda doing something',
-      category: 'Academics',
-      dateCreation: new Date(),
-    },
-    {
-      id: 2,
-      completed: false,
-      title: 'Maybe Doing Something',
-      category: 'Work',
-      dateCreation: new Date(),
-    },
-  ]);
+  private todoTaskList: WritableSignal<task[]> = signal([]);
 
   private idList: number[] = [];
 
