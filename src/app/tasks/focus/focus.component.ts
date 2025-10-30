@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 
 import { FormsModule } from '@angular/forms';
 
@@ -15,14 +15,23 @@ import { ColorService } from '../../color.service';
     '../../shared/styles/static-colors.css',
   ],
 })
-export class FocusComponent {
+export class FocusComponent implements OnInit {
   tasksService = inject(TasksService);
   colorService = inject(ColorService);
 
   currentColor = this.colorService.colorAnimatedSecondary;
-  focusedTask = this.tasksService.taskList;
+  focusedTask: any;
+  focusedTaskId = this.tasksService.focusedTaskId;
+
+  ngOnInit() {
+    this.focusedTaskId.subscribe((val) => {
+      if (val >= 0) {
+        this.focusedTask = this.tasksService.focusedTask;
+      }
+    });
+  }
 
   onClick() {
-    this.tasksService.toggleTaskComplete(this.focusedTask()[0].id);
+    this.tasksService.toggleTaskComplete(this.focusedTask().id);
   }
 }

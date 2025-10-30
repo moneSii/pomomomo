@@ -1,9 +1,10 @@
-import { Injectable, signal, effect } from '@angular/core';
+import { Injectable, signal, effect, computed } from '@angular/core';
 import { WritableSignal } from '@angular/core';
 
 import { task } from './task.model';
 
 import { data } from '../dummydata/dummy-tasks';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -12,6 +13,13 @@ export class TasksService {
   constructor() {
     this.todoTaskList.set(data);
     this.updateIdList();
+
+    if (this.todoTaskList().length > 0) {
+      this.focusTaskId.next(this.todoTaskList()[0].id);
+    } else {
+      this.focusTaskId.next(-1);
+    }
+
     effect(() => {
       console.log(this.todoTaskList(), this.idList);
     });
@@ -21,6 +29,8 @@ export class TasksService {
 
   private idList: number[] = [];
 
+  private focusTaskId: BehaviorSubject<number> = new BehaviorSubject(-1);
+
   private sort = {
     title: false,
     status: false,
@@ -28,7 +38,7 @@ export class TasksService {
   };
 
   public addTasks(taskTitle: string, taskType: string) {
-    var newId: number = 0;
+    var newId: number = Math.trunc(Math.random() * 1000);
 
     while (this.idList.includes(newId)) {
       newId = Math.trunc(Math.random() * 1000);
@@ -46,6 +56,7 @@ export class TasksService {
     });
 
     this.updateIdList();
+    this.refocusTask();
   }
 
   public modifyTask(newVal: string, contentType: string, taskId: number) {
@@ -75,13 +86,48 @@ export class TasksService {
 
   public cycleRight() {
     if (this.todoTaskList().length > 0) {
-      this.todoTaskList().push(this.todoTaskList().shift()!);
+      const index = this.todoTaskList().findIndex(
+        (i) => i.id === this.focusTaskId.value
+      );
+      if (index + 1 <= this.todoTaskList().length - 1) {
+        this.focusTaskId.next(this.todoTaskList()[index + 1].id);
+      } else {
+        this.focusTaskId.next(this.todoTaskList()[0].id);
+      }
+    } else {
+      this.focusTaskId.next(-1);
     }
   }
 
   public cycleLeft() {
     if (this.todoTaskList().length > 0) {
-      this.todoTaskList().unshift(this.todoTaskList().pop()!);
+      const index = this.todoTaskList().findIndex(
+        (i) => i.id === this.focusTaskId.value
+      );
+      if (index - 1 >= 0) {
+        this.focusTaskId.next(this.todoTaskList()[index - 1].id);
+      } else {
+        this.focusTaskId.next(
+          this.todoTaskList()[this.todoTaskList().length - 1].id
+        );
+      }
+    } else {
+      this.focusTaskId.next(-1);
+    }
+  }
+
+  private refocusTask() {
+    if (this.todoTaskList().length === 0) {
+      this.focusTaskId.next(-1);
+    } else {
+      const index = this.todoTaskList().findIndex(
+        (i) => i.id === this.focusTaskId.value
+      );
+      if (index > 0) {
+        this.focusTaskId.next(this.todoTaskList()[index].id);
+      } else {
+        this.focusTaskId.next(this.todoTaskList()[0].id);
+      }
     }
   }
 
@@ -123,11 +169,13 @@ export class TasksService {
         this.updateIdList();
       }
     }
+    this.refocusTask();
   }
 
   public deleteTask(id: number) {
     this.todoTaskList.update((val) => val.filter((task) => task.id !== id));
     this.idList = this.idList.filter((val) => val !== id);
+    this.refocusTask();
   }
 
   public toggleTaskComplete(id: number) {
@@ -146,5 +194,21 @@ export class TasksService {
 
   get taskList() {
     return this.todoTaskList.asReadonly();
+  }
+
+  get focusedTaskId() {
+    return this.focusTaskId;
+  }
+
+  get focusedTask() {
+    return computed(() => {
+      if (this.focusTaskId.value < 0) {
+        return false;
+      } else {
+        return this.todoTaskList()[
+          this.todoTaskList().findIndex((i) => i.id === this.focusTaskId.value)
+        ];
+      }
+    });
   }
 }
