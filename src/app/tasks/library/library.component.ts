@@ -38,8 +38,6 @@ export class LibraryComponent {
 
   list = this.tasksService.taskList;
 
-  displayForm = this.displayService.displayLibForm;
-
   colorPrimary = this.colorService.colorStaticPrimary;
   colorSecondary = this.colorService.colorStaticSecondary;
 
