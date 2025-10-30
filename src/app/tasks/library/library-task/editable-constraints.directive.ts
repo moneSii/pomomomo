@@ -1,12 +1,12 @@
 import { Directive, ElementRef, HostListener, input } from '@angular/core';
 
 @Directive({
-  selector: '[appTextLimit]',
+  selector: '[appEditableConstraints]',
   host: {
     '[class.at-limit]': 'atLimit',
   },
 })
-export class TextLimitDirective {
+export class EditableContraintsDirective {
   constructor(private el: ElementRef) {}
 
   limit = input.required<number>();

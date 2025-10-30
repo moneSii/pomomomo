@@ -14,30 +14,26 @@
   <div class="container">
     <div class="header">
       <app-mini-timer class="header-item mini-timer" />
-      <app-library-buttons class="library-buttons" />
+      <app-library-buttons />
     </div>
     <div class="library">
       <div
         class="task-list"
         cdkDropList
-        (cdkDropListDropped)="drop($event)"
         cdkScrollable
+        (cdkDropListDropped)="drop($event)"
       >
-        <div
-          class="task-item task-add"
-          [class]="colorSecondary()"
-          (click)="onClick()"
-        >
-          + Add new Task! +
+        <div class="task-add" [class]="colorSecondary()" (click)="onClick()">
+          + Add New Task +
         </div>
         @defer (on timer(250ms)){ @for (task of list(); track task.id) {
         <app-library-task
-          [task]="task"
-          cdkDrag
           class="task-item"
           [class]="colorSecondary()"
-          animate.enter="enter-animation"
-          animate.leave="leave-animation"
+          [task]="task"
+          cdkDrag
+          animate.enter="enter-task"
+          animate.leave="leave-task"
         />
         } }
       </div>

@@ -1,7 +1,4 @@
 import { Component, inject } from '@angular/core';
-import { LibraryTaskComponent } from './library-task/library-task.component';
-import { MiniTimerComponent } from '../../shared/components/mini-timer/mini-timer.component';
-import { LibraryButtonsComponent } from './library-buttons/library-buttons.component';
 
 import {
   CdkDragDrop,
@@ -10,6 +7,10 @@ import {
   moveItemInArray,
 } from '@angular/cdk/drag-drop';
 import { CdkScrollable } from '@angular/cdk/scrolling';
+
+import { LibraryTaskComponent } from './library-task/library-task.component';
+import { LibraryButtonsComponent } from './library-buttons/library-buttons.component';
+import { MiniTimerComponent } from '../../shared/components/mini-timer/mini-timer.component';
 
 import { TasksService } from '../tasks.service';
 import { DisplayService } from '../../display.service';
@@ -37,7 +38,6 @@ export class LibraryComponent {
   private colorService = inject(ColorService);
 
   list = this.tasksService.taskList;
-
   colorPrimary = this.colorService.colorStaticPrimary;
   colorSecondary = this.colorService.colorStaticSecondary;
 
@@ -51,6 +51,6 @@ export class LibraryComponent {
   }
 
   onClick() {
-    this.tasksService.addTasks('New Task', 'Life');
+    this.tasksService.addTasks('New Task', 'Category');
   }
 }

@@ -6,21 +6,21 @@
   contenteditable="true"
   appEditable
   contentType="category"
-  appTextLimit
-  [limit]="23"
   [taskId]="task().id"
+  appEditableConstraints
+  [limit]="12"
 >
   {{ task().category }}
 </p>
 <h1
   class="title"
+  [class.completed]="this.task().completed"
   contenteditable="true"
   appEditable
   contentType="title"
   [taskId]="task().id"
-  appTextLimit
-  [limit]="23"
-  [class.completed]="this.task().completed"
+  appEditableConstraints
+  [limit]="48"
 >
   {{ task().title }}
 </h1>

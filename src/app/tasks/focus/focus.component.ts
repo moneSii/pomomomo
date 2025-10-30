@@ -20,7 +20,6 @@ export class FocusComponent {
   colorService = inject(ColorService);
 
   currentColor = this.colorService.colorAnimatedSecondary;
-
   focusedTask = this.tasksService.taskList;
 
   onClick() {
