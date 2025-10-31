@@ -1,0 +1,72 @@
+:host {
+  border-radius: 30px;
+  margin: 1.5rem;
+  overflow: hidden;
+  max-height: 6.3rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: 14px;
+  font-family: var(--main-font);
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px,
+    rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+}
+
+.handle,
+.category,
+.title {
+  margin: 2rem;
+}
+
+.image-handle {
+  filter: brightness(1) invert(1) drop-shadow(2px 2px 1px #00000057);
+}
+
+.category {
+  margin: 0;
+  padding-right: 4rem;
+  padding-left: 0.5rem;
+  width: 5rem;
+  color: rgb(245, 245, 245);
+  font-size: 1.2rem;
+  text-shadow: 0 1px 0.1px rgb(0, 0, 0);
+  overflow: hidden;
+  text-wrap: wrap;
+  justify-content: left;
+  white-space: normal;
+}
+
+.title {
+  width: 30rem;
+  color: rgb(255, 255, 255);
+  text-shadow: 1px 1px 0.5px rgb(0, 0, 0);
+  text-wrap: wrap;
+  overflow: hidden;
+  white-space: normal;
+}
+
+.completed {
+  text-decoration: line-through 5px;
+}
+
+.complete,
+.delete {
+  margin: auto 2rem auto 1rem;
+  filter: brightness(1) invert(1) drop-shadow(2px 2px 1px #00000057);
+  cursor: pointer;
+}
+
+.icon {
+  width: 1.3rem;
+}
+
+.status {
+  opacity: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.at-limit {
+  opacity: 99%;
+}

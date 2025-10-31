@@ -1,0 +1,44 @@
+<div
+  class="backdrop"
+  (click)="onClose()"
+  animate.enter="enter-backdrop"
+  animate.leave="leave"
+></div>
+<dialog
+  class="box"
+  [class]="colorPrimary()"
+  open
+  animate.enter="enter-dialog"
+  animate.leave="leave"
+>
+  <div class="container">
+    <div class="header">
+      <app-mini-timer class="header-item mini-timer" />
+      <app-library-buttons />
+    </div>
+    <div class="library">
+      <div
+        class="task-list"
+        cdkDropList
+        cdkScrollable
+        (cdkDropListDropped)="drop($event)"
+      >
+        <div class="task-add" [class]="colorSecondary()" (click)="onClick()">
+          + Add New Task +
+        </div>
+        @defer (on timer(250ms)){ @for (task of list(); track task.id) {
+        <app-library-task
+          class="task-item"
+          [class]="colorSecondary()"
+          [class.focused-task]="task.id === focusedTask"
+          [task]="task"
+          (click)="focusTask(task.id)"
+          cdkDrag
+          animate.enter="enter-task"
+          animate.leave="leave-task"
+        />
+        } }
+      </div>
+    </div>
+  </div>
+</dialog>
