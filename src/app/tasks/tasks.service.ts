@@ -19,10 +19,6 @@ export class TasksService {
     } else {
       this.focusTaskId.next(-1);
     }
-
-    effect(() => {
-      console.log(this.todoTaskList(), this.idList);
-    });
   }
 
   private todoTaskList: WritableSignal<task[]> = signal([]);
