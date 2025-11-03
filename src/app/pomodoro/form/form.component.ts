@@ -116,4 +116,8 @@ export class FormComponent implements OnInit {
       { emitEvent: false }
     );
   }
+
+  onToggleTasks() {
+    this.displayService.alternateDisplayTasks();
+  }
 }

@@ -62,9 +62,16 @@ input[type="checkbox"] {
   animation: slide-in-fade ease-out 0.3s;
 }
 
+.hidden-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 30rem;
+  height: 3rem;
+}
+
 button {
-  margin-top: 1rem;
-  margin-left: 45%;
+  margin-top: 0.5rem;
   width: 1.1cm;
   height: 1.1cm;
   background-color: transparent;

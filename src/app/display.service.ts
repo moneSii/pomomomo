@@ -6,6 +6,7 @@ import { Injectable, signal } from '@angular/core';
 export class DisplayService {
   private displayForm = signal(false);
   private displayLibrary = signal(false);
+  private displayTasks = signal(false);
 
   get displayFormInputs() {
     return this.displayForm.asReadonly();
@@ -18,5 +19,11 @@ export class DisplayService {
   }
   alternateDisplayLibrary() {
     this.displayLibrary.update((val) => !val);
+  }
+  get displayTasksComponent() {
+    return this.displayTasks.asReadonly();
+  }
+  alternateDisplayTasks() {
+    this.displayTasks.update((val) => !val);
   }
 }

@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 
 import { PomodoroComponent } from './pomodoro/pomodoro.component';
 import { TasksComponent } from './tasks/tasks.component';
 import { BackgroundComponent } from './background/background.component';
+
+import { DisplayService } from './display.service';
 
 @Component({
   selector: 'app-root',
@@ -13,4 +15,7 @@ import { BackgroundComponent } from './background/background.component';
 })
 export class AppComponent {
   title = 'PomoMomo';
+
+  private displayService = inject(DisplayService);
+  showTasks = this.displayService.displayTasksComponent;
 }

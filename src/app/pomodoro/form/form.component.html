@@ -74,6 +74,9 @@
       <input type="checkbox" formControlName="cycle" />
     </div>
   </form>
-  <button (click)="onReset()"></button>
+  <div class="hidden-buttons">
+    <button class="reset-button" (click)="onReset()"></button>
+    <button class="tasks-button" (click)="onToggleTasks()"></button>
+  </div>
 </dialog>
 }
