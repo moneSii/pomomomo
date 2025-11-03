@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 
 import {
   CdkDragDrop,
@@ -32,7 +32,7 @@ import { ColorService } from '../../color.service';
     '../../shared/styles/static-colors.css',
   ],
 })
-export class LibraryComponent implements OnInit {
+export class LibraryComponent implements OnInit, OnDestroy {
   private tasksService = inject(TasksService);
   private displayService = inject(DisplayService);
   private colorService = inject(ColorService);
@@ -47,6 +47,10 @@ export class LibraryComponent implements OnInit {
     this.focusedTaskId.subscribe(() => {
       this.focusedTask = this.focusedTaskId.value;
     });
+  }
+
+  ngOnDestroy() {
+    this.tasksService.saveTasks();
   }
 
   drop(event: CdkDragDrop<string[]>) {

@@ -1,4 +1,4 @@
-import { Injectable, signal, effect, computed } from '@angular/core';
+import { Injectable, signal, computed } from '@angular/core';
 import { WritableSignal } from '@angular/core';
 
 import { task } from './task.model';
@@ -11,14 +11,22 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class TasksService {
   constructor() {
-    this.todoTaskList.set(data);
-    this.updateIdList();
+    const savedTasks = localStorage.getItem('tasksList');
+    const savedCurrentTask = localStorage.getItem('currentTaskIndex');
 
-    if (this.todoTaskList().length > 0) {
-      this.focusTaskId.next(this.todoTaskList()[0].id);
+    if (savedTasks) {
+      const parsedTasks = JSON.parse(savedTasks);
+      console.log(parsedTasks);
+      this.todoTaskList.set([...parsedTasks]);
     } else {
-      this.focusTaskId.next(-1);
+      this.todoTaskList.set(data);
     }
+
+    if (savedCurrentTask) {
+      this.focusTaskId.next(JSON.parse(savedCurrentTask));
+    }
+
+    this.updateIdList();
   }
 
   private todoTaskList: WritableSignal<task[]> = signal([]);
@@ -53,6 +61,7 @@ export class TasksService {
 
     this.updateIdList();
     this.refocusTask();
+    this.saveTasks();
   }
 
   public modifyTask(newVal: string, contentType: string, taskId: number) {
@@ -70,6 +79,7 @@ export class TasksService {
 
       return list;
     });
+    this.saveTasks();
   }
 
   private updateIdList() {
@@ -93,6 +103,7 @@ export class TasksService {
     } else {
       this.focusTaskId.next(-1);
     }
+    this.saveTasks();
   }
 
   public cycleLeft() {
@@ -110,6 +121,7 @@ export class TasksService {
     } else {
       this.focusTaskId.next(-1);
     }
+    this.saveTasks();
   }
 
   public changeFocus(id: number) {
@@ -152,6 +164,7 @@ export class TasksService {
         this.sort[keySort] = true;
       }
     }
+    this.saveTasks();
   }
 
   public deleteTasksList(type: string) {
@@ -170,12 +183,14 @@ export class TasksService {
       }
     }
     this.refocusTask();
+    this.saveTasks();
   }
 
   public deleteTask(id: number) {
     this.todoTaskList.update((val) => val.filter((task) => task.id !== id));
     this.idList = this.idList.filter((val) => val !== id);
     this.refocusTask();
+    this.saveTasks();
   }
 
   public toggleTaskComplete(id: number) {
@@ -184,11 +199,21 @@ export class TasksService {
       task[target].completed = !task[target].completed;
       return task;
     });
+    this.saveTasks();
   }
 
   public onMoveList() {
     Object.keys(this.sort).forEach(
       (val) => (this.sort[val as keyof typeof this.sort] = false)
+    );
+  }
+
+  public saveTasks() {
+    const toSave: task[] = [...this.todoTaskList()];
+    localStorage.setItem('tasksList', JSON.stringify(toSave));
+    localStorage.setItem(
+      'currentTaskIndex',
+      JSON.stringify(this.focusTaskId.value)
     );
   }
 

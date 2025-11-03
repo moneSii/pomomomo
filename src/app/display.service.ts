@@ -6,7 +6,7 @@ import { Injectable, signal } from '@angular/core';
 export class DisplayService {
   private displayForm = signal(false);
   private displayLibrary = signal(false);
-  private displayTasks = signal(false);
+  private displayTasks = signal(true);
 
   get displayFormInputs() {
     return this.displayForm.asReadonly();
