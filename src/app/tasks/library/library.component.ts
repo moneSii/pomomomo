@@ -43,7 +43,7 @@ export class LibraryComponent implements OnInit, OnDestroy {
   colorPrimary = this.colorService.colorStaticPrimary;
   colorSecondary = this.colorService.colorStaticSecondary;
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.focusedTaskId.subscribe(() => {
       this.focusedTask = this.focusedTaskId.value;
     });

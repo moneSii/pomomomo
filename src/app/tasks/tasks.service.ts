@@ -16,7 +16,6 @@ export class TasksService {
 
     if (savedTasks) {
       const parsedTasks = JSON.parse(savedTasks);
-      console.log(parsedTasks);
       this.todoTaskList.set([...parsedTasks]);
     } else {
       this.todoTaskList.set(data);
