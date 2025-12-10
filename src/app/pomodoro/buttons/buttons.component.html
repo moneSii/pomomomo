@@ -1,18 +1,23 @@
-<div class="container" [class]="currentColor()">
-  <button (click)="onStartPause()">
-    @if (!this.status()){
-    <img src="/icons/play.png" />
-    } @else {
-    <img src="/icons/pause.png" />
-    }
-  </button>
-  <button (click)="onSkip()">
-    <img src="/icons/forward.png" />
-  </button>
-  <button (click)="onReset()">
-    <img src="/icons/reset.png" />
-  </button>
-  <button (click)="onOpenForm()">
-    <img src="/icons/menu.png" />
-  </button>
+<div class="button-tray">
+  @if (showButton){
+  <div animate.enter="enter-buttons" animate.leave="leave-buttons">
+    <button (click)="onStartPause()">
+      @if (!this.status()){
+      <img src="/icons/play.png" />
+      } @else {
+      <img src="/icons/pause.png" />
+      }
+    </button>
+    <button (click)="onSkip()">
+      <img src="/icons/forward.png" />
+    </button>
+    <button (click)="onReset()">
+      <img src="/icons/reset.png" />
+    </button>
+    <button (click)="onOpenForm()">
+      <img src="/icons/menu.png" />
+    </button>
+  </div>
+
+  }
 </div>

@@ -5,6 +5,7 @@ import { ButtonsComponent } from './buttons/buttons.component';
 import { FormComponent } from './form/form.component';
 
 import { ColorService } from '../color.service';
+import { DisplayService } from '../display.service';
 
 @Component({
   selector: 'app-pomodoro',
@@ -19,7 +20,12 @@ import { ColorService } from '../color.service';
 })
 export class PomodoroComponent {
   private colorService = inject(ColorService);
+  private displayService = inject(DisplayService);
   firstInit = true;
 
   currentColor = this.colorService.colorAnimatedPrimary;
+
+  buttonsControl(type: boolean) {
+    this.displayService.alternateDisplayControls(type);
+  }
 }

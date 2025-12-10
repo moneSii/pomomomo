@@ -1,9 +1,11 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, DestroyRef } from '@angular/core';
+
+import { debounce, timer } from 'rxjs';
+import { toObservable } from '@angular/core/rxjs-interop';
 
 import { PomodoroService } from '../pomodoro.service';
 import { ColorService } from '../../color.service';
 import { DisplayService } from '../../display.service';
-
 @Component({
   selector: 'app-buttons',
   standalone: true,
@@ -19,9 +21,21 @@ export class ButtonsComponent {
   private pomodoroService = inject(PomodoroService);
   private colorService = inject(ColorService);
   private displayService = inject(DisplayService);
+  private destroyRef = inject(DestroyRef);
 
+  showButton = false;
   currentColor = this.colorService.colorAnimatedSecondary;
   status = this.pomodoroService.curStatus;
+
+  constructor() {
+    const controlSubscription = toObservable(
+      this.displayService.displayTimerControls
+    )
+      .pipe(debounce((val) => (val ? timer(150) : timer(1000))))
+      .subscribe((val) => (this.showButton = val));
+
+    this.destroyRef.onDestroy(() => controlSubscription.unsubscribe());
+  }
 
   onStartPause() {
     if (!this.status()) {

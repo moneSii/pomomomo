@@ -27,3 +27,33 @@ img {
   max-width: 35px;
   filter: brightness(1) invert(1) drop-shadow(2px 2px 1px #00000057);
 }
+
+.enter-buttons {
+  animation: slide-in-fade 0.6s;
+}
+
+@keyframes slide-in-fade {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
+.leave-buttons {
+  animation: slide-out-fade 0.6s;
+}
+
+@keyframes slide-out-fade {
+  from {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+}

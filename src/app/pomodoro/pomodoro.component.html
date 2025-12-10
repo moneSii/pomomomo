@@ -1,4 +1,8 @@
-<div class="body" [class]="currentColor()">
+<div
+  class="hold"
+  (mouseenter)="buttonsControl(true)"
+  (mouseleave)="buttonsControl(false)"
+>
   <app-timer />
   <app-buttons />
   <app-form />
