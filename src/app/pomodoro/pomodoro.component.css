@@ -1,10 +1,7 @@
-.body {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  margin: 7rem auto auto;
-  width: 34rem;
-  padding: 3rem;
-  border-radius: 25px;
-  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2), 15px 15px 10px rgba(0, 0, 0, 0.1);
+.hold {
+  border: red solid;
+  margin: auto;
+  width: 50rem;
+  height: 32rem;
+  margin: 10rem auto 0 auto;
 }

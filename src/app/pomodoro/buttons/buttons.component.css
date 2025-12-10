@@ -1,10 +1,10 @@
-.container {
+.button-tray {
   display: flex;
   justify-content: space-evenly;
-  margin: 1rem;
-  padding: 0.5rem;
+  margin: 1rem auto 0 auto;
+  padding: 0.2rem;
   border-radius: 25px;
-  box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 7px 3px inset;
+  width: 30rem;
 }
 
 button {

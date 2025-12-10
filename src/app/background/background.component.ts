@@ -9,12 +9,12 @@ import { ColorService } from '../color.service';
   templateUrl: './background.component.html',
   styleUrls: [
     './background.component.css',
-    '../shared/styles/animations-tertiary-color.css',
+    '../shared/styles/animations-primary-color.css',
     '../shared/styles/static-colors.css',
   ],
 })
 export class BackgroundComponent {
   private colorService = inject(ColorService);
 
-  currentColor = this.colorService.colorAnimatedTertiary;
+  currentColor = this.colorService.colorAnimatedPrimary;
 }

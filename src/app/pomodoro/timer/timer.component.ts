@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 
 import { AsyncPipe } from '@angular/common';
 
+import { DisplayService } from '../../display.service';
 import { ColorService } from '../../color.service';
 import { PomodoroService } from '../pomodoro.service';
 
@@ -12,11 +13,7 @@ import { MinuteTimePipe } from '../../shared/pipes/minute-time.pipe';
   standalone: true,
   imports: [MinuteTimePipe, AsyncPipe],
   templateUrl: './timer.component.html',
-  styleUrls: [
-    './timer.component.css',
-    '../../shared/styles/animations-secondary-color.css',
-    '../../shared/styles/static-colors.css',
-  ],
+  styleUrl: './timer.component.css',
 })
 export class TimerComponent {
   private colorService = inject(ColorService);
