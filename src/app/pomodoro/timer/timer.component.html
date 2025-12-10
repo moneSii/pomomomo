@@ -1,6 +1,6 @@
 <div class="container">
+  <p class="interval">{{ curInterval() + " / " + maxInterval() }}</p>
   <p class="timer">
     {{ time | async | minuteTime : "mm:ss" }}
   </p>
-  <p class="interval">Cycles: {{ curInterval() + "/" + maxInterval() }}</p>
 </div>

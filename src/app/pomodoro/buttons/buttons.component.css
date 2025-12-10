@@ -1,7 +1,9 @@
 .button-tray {
+  position: relative;
+  top: -40px;
   display: flex;
   justify-content: space-evenly;
-  margin: 1rem auto 0 auto;
+  margin: 0 auto 0 auto;
   padding: 0.2rem;
   border-radius: 25px;
   width: 30rem;
