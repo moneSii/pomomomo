@@ -21,6 +21,8 @@ export class TimerComponent {
 
   currentColor = this.colorService.colorAnimatedSecondary;
 
+  isRunning = this.pomodoroService.curStatus;
+
   maxInterval = this.pomodoroService.maxInterval;
   curInterval = this.pomodoroService.curInterval;
 

@@ -114,12 +114,8 @@ export class PomodoroService {
     this.status.set(true);
     var timerDate = new Date(this.pauseTime() + Date.now()).getTime();
 
-    this.generateTime = timer(0, 200)
-      .pipe(
-        map(() => {
-          return timerDate - Date.now();
-        })
-      )
+    this.generateTime = timer(0, 100)
+      .pipe(map(() => timerDate - Date.now()))
       .subscribe((val) => {
         if (val < 0) {
           this.cycleTimer();

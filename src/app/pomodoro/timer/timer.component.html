@@ -1,6 +1,6 @@
 <div class="container">
-  <p class="interval">{{ curInterval() + " / " + maxInterval() }}</p>
-  <p class="timer">
+  <p class="timer" [class.running]="isRunning()">
     {{ time | async | minuteTime : "mm:ss" }}
   </p>
+  <p class="interval">{{ curInterval() + " / " + maxInterval() }}</p>
 </div>

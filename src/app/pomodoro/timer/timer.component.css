@@ -4,25 +4,33 @@
   justify-content: space-evenly;
   border-radius: 25px;
   width: 50rem;
-  height: 25rem;
+  height: 26rem;
   text-align: center;
-  margin: 0;
+  margin: auto;
 }
 
 .timer {
   color: white;
   text-shadow: 2px 4px 10px rgba(0, 0, 0, 0.3);
-  font-size: 15rem;
+  font-size: 16rem;
   font-family: monospace;
   margin: 0;
+  padding: 0.2rem;
+  box-shadow: none;
+  transition: 0.5s ease;
+  border-radius: 75px;
 }
 
 .interval {
   position: relative;
-  top: 75px;
+  bottom: 15px;
   color: white;
   font-family: monospace;
   text-shadow: 2px 4px 3px rgba(0, 0, 0, 0.3);
   font-size: 2rem;
   margin: 0;
+}
+
+.running {
+  box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;
 }

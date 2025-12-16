@@ -1,5 +1,4 @@
 <div class="button-tray">
-  @if (showButton){
   <div animate.enter="enter-buttons" animate.leave="leave-buttons">
     <button (click)="onStartPause()">
       @if (!this.status()){
@@ -18,6 +17,4 @@
       <img src="/icons/menu.png" />
     </button>
   </div>
-
-  }
 </div>
