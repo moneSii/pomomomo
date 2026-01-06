@@ -1,7 +1,8 @@
-<div class="box" [class]="currentColor()">
+@if (showTasks){
+<div class="box">
   <app-focus />
   <app-options />
 </div>
 @if (display()) {
 <app-library />
-}
+} }

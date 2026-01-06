@@ -2,13 +2,16 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin: 0 1rem 1rem 1rem;
-  height: 11rem;
+  margin: 3rem 5rem 1rem 5rem;
+  min-height: 11rem;
   border-radius: 25px;
-  box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 7px 3px inset;
   font-family: var(--main-font);
+  padding: 2rem;
   color: white;
   text-shadow: 2px 4px 3px rgba(0, 0, 0, 0.3);
+  box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 10px 5px inset;
+  border-radius: 80px;
+  cursor: pointer;
 }
 
 .status {
@@ -23,20 +26,25 @@
 }
 
 .task-header {
-  width: 100%;
   margin: 0.5rem auto 0.5rem auto;
 }
 
 .title,
 .category {
+  position: relative;
+  top: -15px;
   text-align: center;
   margin: auto;
 }
 
 .title {
-  font-size: 2.1rem;
+  font-size: 4rem;
 }
 
 .category {
-  margin-top: 1rem;
+  margin: 1rem 0 1rem 0;
+}
+
+.empty {
+  margin-top: 2rem;
 }

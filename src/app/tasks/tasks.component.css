@@ -2,10 +2,8 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  margin: 2rem auto auto;
-  width: 34rem;
-  padding: 3rem;
-  border-radius: 25px;
-  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2),
-    15px 15px 10px rgba(90, 90, 90, 0.1);
+  margin: 5rem auto;
+  width: 60rem;
+  box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 4px 3px inset;
+  border-radius: 75px;
 }

@@ -20,6 +20,7 @@ import { DisplayService } from '../display.service';
 export class TasksComponent {
   private colorService = inject(ColorService);
   private displayService = inject(DisplayService);
+  showTasks = true;
 
   currentColor = this.colorService.colorAnimatedPrimary;
   display = this.displayService.displayLib;

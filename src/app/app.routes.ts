@@ -9,7 +9,7 @@ export const routes: Routes = [
     component: PomodoroComponent,
   },
   {
-    path: 'tasks',
+    path: '',
     component: TasksComponent,
     outlet: 'tasks',
   },
