@@ -1,5 +1,5 @@
 <div class="container">
-  <p class="timer" [class.running]="isRunning()">
+  <p class="timer">
     {{ time | async | minuteTime : "mm:ss" }}
   </p>
   <p class="interval">{{ curInterval() + " / " + maxInterval() }}</p>
