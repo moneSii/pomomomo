@@ -12,18 +12,13 @@ import { PomodoroService } from '../pomodoro.service';
 import { DisplayService } from '../../display.service';
 import { NumbersOnlyDirective } from './numbers-only.directive';
 import { LessThanDirective } from './less-than.directive';
-import { SelectDirective } from './select.directive';
+
 import { ColorService } from '../../color.service';
 
 @Component({
   selector: 'app-form',
   standalone: true,
-  imports: [
-    ReactiveFormsModule,
-    NumbersOnlyDirective,
-    LessThanDirective,
-    SelectDirective,
-  ],
+  imports: [ReactiveFormsModule, NumbersOnlyDirective, LessThanDirective],
   templateUrl: './form.component.html',
   styleUrls: [
     './form.component.css',

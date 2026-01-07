@@ -2,7 +2,6 @@ import { Component, inject } from '@angular/core';
 
 import { AsyncPipe } from '@angular/common';
 
-import { DisplayService } from '../../display.service';
 import { ColorService } from '../../color.service';
 import { PomodoroService } from '../pomodoro.service';
 

@@ -1,6 +1,6 @@
 import { Injectable, inject, signal, effect, DestroyRef } from '@angular/core';
 
-import { Subscription, BehaviorSubject, timer, map, iif } from 'rxjs';
+import { Subscription, BehaviorSubject, timer, map } from 'rxjs';
 
 import { pomodoro } from './pomodoro.model';
 
