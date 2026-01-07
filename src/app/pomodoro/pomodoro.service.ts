@@ -1,6 +1,6 @@
 import { Injectable, inject, signal, effect, DestroyRef } from '@angular/core';
 
-import { Subscription, BehaviorSubject, timer, map } from 'rxjs';
+import { Subscription, BehaviorSubject, timer, map, iif } from 'rxjs';
 
 import { pomodoro } from './pomodoro.model';
 
@@ -119,9 +119,9 @@ export class PomodoroService {
       .subscribe((val) => {
         if (val < 0) {
           this.cycleTimer();
+        } else {
+          this.timer.next(val);
         }
-
-        this.timer.next(val);
       });
   }
 
