@@ -43,33 +43,21 @@ export class ColorService {
   private firstInit = true;
 
   get colorAnimatedPrimary() {
-    return computed(() => {
-      return this.currentAnimationColor() + '-primary';
-    });
+    return computed(() => this.currentAnimationColor() + '-primary');
   }
   get colorAnimatedSecondary() {
-    return computed(() => {
-      return this.currentAnimationColor() + '-secondary';
-    });
+    return computed(() => this.currentAnimationColor() + '-secondary');
   }
   get colorAnimatedTertiary() {
-    return computed(() => {
-      return this.currentAnimationColor() + '-tertiary';
-    });
+    return computed(() => this.currentAnimationColor() + '-tertiary');
   }
   get colorStaticPrimary() {
-    return computed(() => {
-      return this.currentStaticColor() + '-primary';
-    });
+    return computed(() => this.currentStaticColor() + '-primary');
   }
   get colorStaticSecondary() {
-    return computed(() => {
-      return this.currentStaticColor() + '-secondary';
-    });
+    return computed(() => this.currentStaticColor() + '-secondary');
   }
   get colorStaticTertiary() {
-    return computed(() => {
-      return this.currentStaticColor() + '-tertiary';
-    });
+    return computed(() => this.currentStaticColor() + '-tertiary');
   }
 }
