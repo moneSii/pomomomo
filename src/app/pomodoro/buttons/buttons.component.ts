@@ -27,6 +27,11 @@ export class ButtonsComponent {
   currentColor = this.colorService.colorAnimatedSecondary;
   status = this.pomodoroService.curStatus;
 
+  buttonPlay = false;
+  buttonSkip = false;
+  buttonReset = false;
+  buttonForm = false;
+
   constructor() {
     const controlSubscription = toObservable(
       this.displayService.displayTimerControls
@@ -43,12 +48,15 @@ export class ButtonsComponent {
     } else {
       this.pomodoroService.pauseTimer();
     }
+    this.clearFocus();
   }
   onReset() {
     this.pomodoroService.resetTimer();
+    this.clearFocus();
   }
   onSkip() {
     this.pomodoroService.cycleTimer();
+    this.clearFocus();
   }
 
   onOpenForm() {
@@ -57,5 +65,14 @@ export class ButtonsComponent {
     } else {
       alert('Timer is still Running!');
     }
+    this.clearFocus();
+  }
+
+  clearFocus() {
+    setTimeout(() => {
+      if (document.activeElement instanceof HTMLElement) {
+        document.activeElement.blur();
+      }
+    }, 3000);
   }
 }
