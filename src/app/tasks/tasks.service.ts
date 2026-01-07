@@ -1,10 +1,11 @@
 import { Injectable, signal, computed } from '@angular/core';
 import { WritableSignal } from '@angular/core';
 
+import { BehaviorSubject } from 'rxjs';
+
 import { task } from './task.model';
 
 import { data } from '../dummydata/dummy-tasks';
-import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',

@@ -4,6 +4,8 @@
   justify-content: flex-end;
   margin: 5rem auto;
   width: 60rem;
+  max-width: 95%;
+  min-width: 56rem;
   box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 4px 3px inset;
   border-radius: 75px;
 }

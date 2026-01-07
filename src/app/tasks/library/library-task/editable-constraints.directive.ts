@@ -17,7 +17,7 @@ export class EditableContraintsDirective {
   oldVal = '';
   atLimit = false;
 
-  @HostListener('input', ['$event']) onInput() {
+  @HostListener('input') onInput() {
     const val = this.el.nativeElement.innerHTML;
     const newRange = document.createRange();
 
@@ -37,7 +37,7 @@ export class EditableContraintsDirective {
     this.caretOffset = this.range?.anchorOffset;
   }
 
-  @HostListener('click', ['$event']) onClick() {
+  @HostListener('click') onClick() {
     this.caretOffset = this.range?.anchorOffset;
   }
 }

@@ -2,9 +2,10 @@
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
+  position: relative;
+  top: -13px;
   width: 20rem;
-  margin: auto auto 2rem auto;
-  padding: 0.2rem;
+  margin: 0 auto 0 auto;
   border-radius: 25px;
 }
 
@@ -17,11 +18,11 @@ button {
   cursor: pointer;
   outline: none;
   border-radius: 25px;
+  transition: box-shadow 0.7s ease-out;
 }
 button:hover,
 button:focus {
-  box-shadow: rgba(50, 50, 93, 0.164) 0px 30px 60px -12px inset,
-    rgba(0, 0, 0, 0.116) 0px 18px 36px -18px inset;
+  box-shadow: rgba(50, 50, 93, 0.164) 0px 0px 15px 5px inset;
 }
 
 img {

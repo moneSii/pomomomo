@@ -23,13 +23,24 @@ export class OptionsComponent {
 
   onSettings() {
     this.displayService.alternateDisplayLibrary();
+    this.clearFocus();
   }
 
   onBack() {
     this.tasksService.cycleLeft();
+    this.clearFocus();
   }
 
   onForth() {
     this.tasksService.cycleRight();
+    this.clearFocus();
+  }
+
+  clearFocus() {
+    setTimeout(() => {
+      if (document.activeElement instanceof HTMLElement) {
+        document.activeElement.blur();
+      }
+    }, 3000);
   }
 }
