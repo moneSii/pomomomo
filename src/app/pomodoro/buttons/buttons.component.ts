@@ -6,6 +6,7 @@ import { toObservable } from '@angular/core/rxjs-interop';
 import { PomodoroService } from '../pomodoro.service';
 import { ColorService } from '../../color.service';
 import { DisplayService } from '../../display.service';
+
 @Component({
   selector: 'app-buttons',
   standalone: true,
@@ -26,11 +27,6 @@ export class ButtonsComponent {
   showButton = false;
   currentColor = this.colorService.colorAnimatedSecondary;
   status = this.pomodoroService.curStatus;
-
-  buttonPlay = false;
-  buttonSkip = false;
-  buttonReset = false;
-  buttonForm = false;
 
   constructor() {
     const controlSubscription = toObservable(
