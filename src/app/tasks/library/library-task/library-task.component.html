@@ -1,5 +1,5 @@
 <div class="handle" cdkDragHandle>
-  <img class="image-handle" src="/icons/draggable.png" />
+  <img class="image-handle" src="draggable.png" />
 </div>
 <p
   class="category"
@@ -25,9 +25,9 @@
   {{ task().title }}
 </h1>
 <div (click)="onClick('completed')" class="complete">
-  <img class="icon" src="/icons/checkmark.png" />
+  <img class="icon" src="checkmark.png" />
 </div>
 <div (click)="onClick('delete')" class="delete">
-  <img class="icon" src="/icons/cross.png" />
+  <img class="icon" src="cross.png" />
 </div>
 <input [(ngModel)]="task().completed" class="status" type="checkbox" />
