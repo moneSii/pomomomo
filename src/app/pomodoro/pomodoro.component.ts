@@ -14,7 +14,8 @@ import { DisplayService } from '../display.service';
   templateUrl: './pomodoro.component.html',
   styleUrls: [
     './pomodoro.component.css',
-    '../shared/styles/animations-primary-color.css',
+    '../shared/styles/animations-comp.css',
+    '../shared/styles/animations-secondary-color.css',
     '../shared/styles/static-colors.css',
   ],
 })
@@ -23,9 +24,9 @@ export class PomodoroComponent {
   private displayService = inject(DisplayService);
   firstInit = true;
 
-  currentColor = this.colorService.colorAnimatedPrimary;
+  currentColor = this.colorService.colorAnimatedSecondary;
 
-  buttonsControl(type: boolean) {
-    this.displayService.alternateDisplayControls(type);
+  buttonsControl() {
+    this.displayService.alternateDisplayControls();
   }
 }

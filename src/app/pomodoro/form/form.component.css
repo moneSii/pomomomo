@@ -5,6 +5,7 @@
   left: 0;
   width: 100%;
   height: 100%;
+  z-index: 98;
 }
 
 dialog {
@@ -15,6 +16,7 @@ dialog {
   border: none;
   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
   overflow: hidden;
+  z-index: 99;
 }
 
 h1 {
@@ -58,70 +60,33 @@ input[type="checkbox"] {
   border-radius: 5px;
 }
 
-.enter-dialog {
-  animation: slide-in-fade ease-out 0.3s;
-}
-
-.hidden-buttons {
+.button-group {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
-  width: 30rem;
-  height: 3rem;
+  position: relative;
+  top: 20px;
+  left: 282px;
+  transform: scale(0.7);
 }
 
 button {
-  margin-top: 0.5rem;
-  width: 1.1cm;
-  height: 1.1cm;
-  background-color: transparent;
-  border: none;
+  border: 1px solid rgb(209, 213, 219);
+  color: rgb(107, 107, 107);
+  border-radius: 0.5rem;
+  margin: 0.5rem;
+  box-sizing: border-box;
+  font-family: var(--main-font);
+  font-size: 0.875rem;
+  padding: 0.5rem 0.5rem;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   cursor: pointer;
-  outline: none;
-  border-radius: 25px;
 }
-button:hover,
+
+button:hover {
+  background-color: rgb(249, 250, 251);
+}
 button:focus {
-  box-shadow: rgba(50, 50, 93, 0.164) 0px 30px 60px -12px inset,
-    rgba(0, 0, 0, 0.116) 0px 18px 36px -18px inset;
-}
-
-@keyframes slide-in-fade {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.enter-backdrop {
-  animation: fade-in ease-out 0.2s;
-}
-@keyframes fade-in {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-.leave-dialog {
-  animation: fade-out ease-out 0.1s;
-}
-
-.leave-backdrop {
-  animation: fade-out ease-out 0.1s;
-}
-
-@keyframes fade-out {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  filter: brightness(1.2);
 }

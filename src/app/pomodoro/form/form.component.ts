@@ -22,6 +22,7 @@ import { ColorService } from '../../color.service';
   templateUrl: './form.component.html',
   styleUrls: [
     './form.component.css',
+    '../../shared/styles/animations-form.css',
     '../../shared/styles/static-colors.css',
     '../../shared/styles/static-colors.css',
   ],

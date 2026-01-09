@@ -1,7 +1,10 @@
 <div
   class="box"
-  (mouseenter)="buttonsControl(true)"
-  (mouseleave)="buttonsControl(false)"
+  [class]="currentColor()"
+  (mouseenter)="buttonsControl()"
+  (mouseleave)="buttonsControl()"
+  animate.enter="enter-comp"
+  animate.leave="leave-comp"
 >
   <app-buttons />
   <app-timer />

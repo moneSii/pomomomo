@@ -29,6 +29,7 @@ import { ColorService } from '../../color.service';
   templateUrl: './library.component.html',
   styleUrls: [
     './library.component.css',
+    '../../shared/styles/animations-form.css',
     '../../shared/styles/static-colors.css',
   ],
 })

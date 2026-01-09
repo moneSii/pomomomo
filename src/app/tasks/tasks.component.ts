@@ -13,7 +13,8 @@ import { DisplayService } from '../display.service';
   templateUrl: './tasks.component.html',
   styleUrls: [
     './tasks.component.css',
-    '../shared/styles/animations-primary-color.css',
+    '../shared/styles/animations-comp.css',
+    '../shared/styles/animations-secondary-color.css',
     '../shared/styles/static-colors.css',
   ],
 })
@@ -22,6 +23,6 @@ export class TasksComponent {
   private displayService = inject(DisplayService);
   showTasks = true;
 
-  currentColor = this.colorService.colorAnimatedPrimary;
+  currentColor = this.colorService.colorAnimatedSecondary;
   display = this.displayService.displayLib;
 }
